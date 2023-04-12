@@ -1,0 +1,82 @@
+# --- Navigation ---
+alias ..="cd .."
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+alias ~='cd ~'
+
+# --- Easy reports ---
+
+# List
+alias ls='ls -Fh --color=auto' 
+alias grep='grep --color=auto'
+alias l="ls -l"
+alias la="ls -lA"
+alias lr="ls -R"
+alias lf="ls -l | grep '^-'"
+alias l.f="ls -ld .* | grep '^-'"
+alias ld="ls -l | grep '^d'"
+alias l.d="ls -ld .* | grep '^d'}"
+
+# Disk Usage
+alias dud="du -d 1 -h" 
+alias duf="du -sh *"
+
+alias fdir="find . -type f -name"
+alias ff="find . -type f -name"
+
+alias h="history"
+alias hgrep="history | grep"
+alias lgrep="ls -l | grep"
+alias lagrep="ls -lA | grep"
+alias sgrep="grep -R -n -H -C 5 --exclude-dir={.git,.svn,node_modules,Trash,vendor}"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias ln="ln -iv"
+alias mkdir="mkdir -v"
+alias rm="rm -i"
+alias rmf="rm -rf"
+alias p='ps axo pid,user,pcpu,comm'
+alias preview='fzf --height=50% --layout=reverse --preview="bat --color=always {}"'
+
+# --- Bookmarks ---
+alias dl='cd ~/Downloads && ls -lA'
+alias doc='cd ~/Documents && ls -lA'
+alias tmp='cd ~/Temporary && ls -lA'
+
+# --- Shortcuts ---
+alias c='clear'
+alias cat='bat'
+alias e='exit'
+
+
+# --- Aliases ---
+
+alias vim="nvim"
+alias v="nvim"
+alias rm_modules="find . -name "node_modules" -type d -prune -exec rm -rf '{}' +"
+
+# --- Config ---
+
+alias config="vim ~/.zshrc"
+alias reload="source ~/.zshrc"
+alias vimconfig="cd ~/.config/nvim ; vim"
+
+# --- Applications ---
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+
+# --- pnpm ----
+
+# --- kubrenetes ---
+alias k="kubectl"
+
+# --- Typos ---
+alias :q='exit'
+alias help="man"
+alias quit="exit"
+
+# --- Tmux ---
+alias tnew='tmux new -s'
+alias tatt='tmux attach -t'
+alias tls='tmux ls'
