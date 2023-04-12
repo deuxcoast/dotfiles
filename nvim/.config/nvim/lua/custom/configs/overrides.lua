@@ -56,8 +56,9 @@ M.nvimtree = {
     ignore = false,
   },
   filters = {
-    custom = {".git", ".DS_Store"},
-    exclude = {".gitignore", "github", "github.com"}
+    custom = {"^\\.git", ".DS_Store"},
+    dotfiles = false,
+    exclude = { ".gitignore", "github", "github.com"}
   },
   view = {
     adaptive_size = false,
