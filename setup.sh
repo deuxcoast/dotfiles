@@ -78,30 +78,92 @@ install_brew fzf
 install_brew lazygit
 install_brew ripgrep
 install_brew node
+install_brew stow
 
+# ==========
+# Create backups of configs before creating symlinks
+# ==========
+
+if [ -d "$HOME"/.config/backup ]; then
+  yecho "creating backup directory"
+  mkdir -p "$HOME"/.config/backup
+else
+  cd "$HOME"/.config
+  tar -cf config-archive-$(date +"%d-%m-%Y") backup
+  rm -rf "$HOME"/.config/backup
+  mkdir -p "$HOME"/.config/backup
+  mv config-archive-$(date +"%d-%m-%Y") "$HOME"/.config/backup 
+  cd "$HOME"/.dotfiles
+fi
+
+# Backup and create directories for zsh config
+if [ -d "$HOME"/.zsh ]; then
+  mv "$HOME"/.zsh "$HOME"/.config/backup/.zsh
+fi  
+mkdir "$HOME"/.zsh
+
+if [ -e "$HOME"/.zshrc ]; then
+  mv "$HOME"/.zshrc "$HOME"/.config/backup/.zshrc  
+fi
+touch "$HOME"/.zshrc
+
+# Backup and create directories for tmux config
+if [ -e "$HOME"/.tmux.conf ]; then
+  mv "$HOME"/.tmux.conf "$HOME"/.config/backup/.tmux.conf  
+fi
+touch "$HOME"/.tmux.conf
+
+# Backup and create directories for git config
+if [ -e "$HOME"/.gitconfig ]; then
+  mv "$HOME"/.gitconfig "$HOME"/.config/backup/.gitconfig
+fi
+touch "$HOME"/.gitconfig
+
+mkdir "$HOME"/.config/git
+if [ -d "$HOME"/.config/git ]; then
+  mv "$HOME"/.config/git "$HOME"/.config/backup/git
+fi
+mkdir "$HOME"/.config/git
+
+# Backup and create directories for lazygit config
+if [ -d "$HOME"/.config/lazygit ]; then
+  mv "$HOME"/.config/lazygit "$HOME"/.config/backup/lazygit
+fi
+mkdir "$HOME"/.config/lazygit
+
+# Backup and create files for iterm
+if [ -d "$HOME"/.config/iterm2/profiles ]; then
+  mv "$HOME"/.config/iterm2/profiles "$HOME"/.config/backup/iterm2
+fi
+mkdir "$HOME"/.config/iterm2/profiles
+  
 # ==========
 # Setup NvChad
 # ==========
 
 # Check if there is already nvim configuration
-if [ -e $"HOME"/.configs/nvim ]; then
-  yecho "found a previous nvim configuration, backing up in:\n\t~/.configs/backup_nvim" >&2
+if [ -e "$HOME"/.config/nvim ]; then
+  yecho "found a previous nvim configuration, backing up in:\n~/.config/backup/nvim\n" >&2
 
   # Make backup of any previous nvim configuration
-  if [ ! -e "$HOME"/.configs/backup_nvim ]; then
+  if [ ! -d "$HOME"/.config/backup/nvim ]; then
 
-    mkdir "$HOME"/.configs/backup_nvim 
-    mv "$HOME"/.config/nvim "$HOME"/.config/backup_nvim 
-    mv "$HOME"/.local/share/nvim "$HOME"/.config/backup_nvim/plugins 
-    mv "$HOME"/.cache/nvim "$HOME"/.config/backup_nvim/cache 
+    mkdir -p "$HOME"/.config/backup/nvim
+    
+    mv "$HOME"/.config/nvim "$HOME"/.config/backup/nvim 
+    mv "$HOME"/.local/share/nvim "$HOME"/.config/backup/nvim/plugins 
+    mv "$HOME"/.cache/nvim "$HOME"/.config/backup/nvim/cache 
   else
-    mv -f "$HOME"/.config/nvim "$HOME"/.config/backup_nvim
-    mv -f "$HOME"/.local/share/nvim "$HOME"/.config/backup_nvim/plugins 
-    mv -f "$HOME"/.cache/nvim "$HOME"/.config/backup_nvim/cache 
+    mv -f "$HOME"/.config/nvim "$HOME"/.config/backup/nvim
+    mv -f "$HOME"/.local/share/nvim "$HOME"/.config/backup/nvim/plugins 
+    mv -f "$HOME"/.cache/nvim "$HOME"/.config/backup/nvim/cache 
   fi
+  # now that download is complete, delete `~/.config/nvim` to prep for NvChad installation
+  yecho "removing ~/.config/nvim"
 else
   gecho "no prior nvim configuration found" >&2
 fi
+
 
 # Install NvChad 
 # We want to overwrite the `~/.config/nvim/lua/custom` folder with our own
@@ -109,7 +171,10 @@ fi
 gecho "installing NvChad via git clone"
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
-make
+# ==========
+# Create symlinks for dotfiles by executing stow command in `.dotfiles` directory
+# ==========
+stow --verbose --target=$$HOME --restow */
 
 # ==========
 # Create a global Git ignore file

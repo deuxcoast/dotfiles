@@ -20,7 +20,7 @@ source $HOME/.zsh/.functions
 source $HOME/.zsh/.privaterc
 
 # --- Zsh Syntax Highlighting
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # --- Auto Jump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
