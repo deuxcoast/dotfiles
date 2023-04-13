@@ -65,7 +65,7 @@
 	      process = git-lfs filter-process
 
 [commit]
-      	template = /Users/conor/.config/git/commit_template
+      	template = ~/.config/git/commit_template
 
 [interactive]
 	diffFilter = delta --color-only
