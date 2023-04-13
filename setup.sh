@@ -79,6 +79,7 @@ install_brew lazygit
 install_brew ripgrep
 install_brew node
 install_brew stow
+install_brew autojump
 
 # ==========
 # Create backups of configs before creating symlinks
@@ -172,9 +173,36 @@ gecho "installing NvChad via git clone"
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
 
 # ==========
+# Install Oh-My-Zsh
+# ==========
+if [ ! -d "$HOME"/.oh-my-zsh]; then 
+  yecho "Oh-My-Zsh not found, installing..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+# Install Oh-My-Zsh plugins
+# Check if zsh-syntax-highlighting is present, install if not
+if [ ! -d "$HOME"/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting]; then 
+  yecho "zsh-syntax-highlighting plugin not found, installing..."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 
+else
+  gecho "found zsh-syntax-highlighting plugin"
+fi
+
+# Check if zsh-syntax-highlighting is present, install if not
+if [ ! -d "$HOME"/.oh-my-zsh/custom/plugins/zsh-autosuggestions]; then 
+  yecho "zsh-autosuggestions plugin not found, installing..."
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+else
+  gecho "found zsh-autosuggestions plugin"
+fi
+
+# ==========
 # Create symlinks for dotfiles by executing stow command in `.dotfiles` directory
 # ==========
 stow --verbose --target=$$HOME --restow */
+
+
 
 # ==========
 # Create a global Git ignore file
