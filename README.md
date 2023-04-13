@@ -1,5 +1,5 @@
 # Dotfiles Repo
-A collection of my dotfiles, managed with symlinks using Gnu Snow. Includes a
+A collection of my dotfiles, managed with symlinks using Gnu Stow. Includes a
 custom config built on top of 
 ## Instructions
 1. Clone this git repo into your home directory with the following command:
