@@ -1,4 +1,5 @@
 local present, null_ls = pcall(require, "null-ls")
+local on_attach = require("custom.configs.lsp.utils").on_attach
 
 if not present then
   return
@@ -6,11 +7,11 @@ end
 
 local b = null_ls.builtins
 
-local goimports = b.formatting.goimports
-local e = os.getenv "GOIMPORTS LOCAL"
-if e ~= nil then
-  goimports = goimports.with { extra_args = { "-local", e } }
-end
+-- local goimports = b.formatting.goimports
+-- local e = os.getenv "GOIMPORTS LOCAL"
+-- if e ~= nil then
+--   goimports = goimports.with { extra_args = { "-local", e } }
+-- end
 
 local sources = {
 
@@ -25,7 +26,7 @@ local sources = {
   b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 
   -- Formatting
-  goimports,
+  b.formatting.goimports,
   -- b.formatting.golines.with({
   --   extra_args = {
   --     "--max-len=180",
@@ -48,7 +49,8 @@ local sources = {
 -- table.insert(sources, gotest_codeaction)
 
 local options = {
-  debug = false,
+  on_attach = on_attach,
+  debug = true,
   sources = sources,
 }
 

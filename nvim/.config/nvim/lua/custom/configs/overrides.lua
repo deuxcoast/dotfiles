@@ -128,9 +128,13 @@ M.mason = {
     "deno",
     "prettier",
     "sqls",
+    "eslint_d",
 
     -- golang
     "gopls",
+    "goimports",
+    "gofumpt",
+    "gomodifytags",
 
     -- misc
     "dockerfile-language-server",

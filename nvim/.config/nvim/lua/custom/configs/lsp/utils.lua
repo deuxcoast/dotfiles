@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require "core.utils"
+
 M.autoformat = true
 
 function M.toggle()
@@ -23,11 +25,20 @@ function M.format()
   }
 end
 
-function M.on_attach(client, buf)
+function M.on_attach(client, bufnr)
+  utils.load_mappings("lspconfig", { buffer = bufnr })
+
+  if client.server_capabilities.signatureHelpProvider then
+    require("nvchad_ui.signature").setup(client)
+  end
+
+  if not utils.load_config().ui.lsp_semantic_tokens then
+    client.server_capabilities.semanticTokensProvider = nil
+  end
   if client.supports_method "textDocument/formatting" then
     vim.api.nvim_create_autocmd("BufWritePre", {
-      group = vim.api.nvim_create_augroup("LspFormat." .. buf, {}),
-      buffer = buf,
+      group = vim.api.nvim_create_augroup("LspFormat." .. bufnr, {}),
+      buffer = bufnr,
       callback = function()
         if M.autoformat then
           M.format()
