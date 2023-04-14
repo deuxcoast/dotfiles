@@ -40,6 +40,17 @@ alias rmf="rm -rf"
 alias p='ps axo pid,user,pcpu,comm'
 alias preview='fzf --height=50% --layout=reverse --preview="bat --color=always {}"'
 
+# --- Mkdir Aliases ---
+# Make a directory and cd into it
+alias mcd='mkdir -pv && cd'
+
+# Make a directory
+alias md='mkdir'
+
+# Make a directory with date
+alias mdd='mkdir -pv $(date +%Y%m%d)'
+
+
 # --- Bookmarks ---
 alias dl='cd ~/Downloads && ls -lA'
 alias doc='cd ~/Documents && ls -lA'
@@ -77,6 +88,20 @@ alias help="man"
 alias quit="exit"
 
 # --- Tmux ---
-alias tnew='tmux new -s'
-alias tatt='tmux attach -t'
-alias tls='tmux ls'
+# Attaches tmux to the last session; creates a new session if none exists
+# alias t = 'tmux attach || tmux new session'
+
+# Creates a new session
+alias tsn='tmux new -s'
+
+# Attaches tmux to a session
+alias tsa='tmux attach -t'
+
+# Lists all ongoing sessions
+alias tsl='tmux ls'
+
+# Kills a tmux session
+alias tsk='tmux kill-session -t'
+
+# Kills all tmux sessions
+alias tska='tmux kill-session -a'

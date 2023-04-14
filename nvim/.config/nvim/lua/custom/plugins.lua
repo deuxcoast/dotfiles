@@ -27,12 +27,58 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = overrides.mason
   },
+  {
+    "numToStr/Comment.nvim",
+    opts = overrides.comment,
+  },
+  -- Treesitter
 
   {
     "nvim-treesitter/nvim-treesitter",
     opts = overrides.treesitter,
+    dependencies = {
+      { "abecodes/tabout.nvim" },
+      {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+      },
+      { "nvim-treesitter/nvim-treesitter-context" },
+      { "mfussenegger/nvim-treehopper" },
+      { "JoosepAlviste/nvim-ts-context-commentstring" },
+      { "andymass/vim-matchup" },
+      { "windwp/nvim-ts-autotag" },
+    },
   },
-
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+  },
+  -- {
+  --   "abecodes/tabout.nvim",
+  --   opts = function()
+  --     require "custom.configs.tabout"
+  --   end,
+  --   config = function(opts)
+  --     require("tabout").setup(opts)
+  --   end,
+  -- },
+  {
+    "mfussenegger/nvim-treehopper",
+    config = function()
+      vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
+      vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
+    end,
+  },
+  {
+    "JoosepAlviste/nvim-ts-context-commentstring",
+  },
+  {
+    "andymass/vim-matchup",
+  },
+  {
+    "windwp/nvim-ts-autotag",
+  },
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
@@ -43,6 +89,32 @@ local plugins = {
     opts = overrides.gitsigns,
   },
   -- Install a plugin
+ --  {
+ --    "ray-x/go.nvim",
+ --    dependencies = {
+ --      "ray-x/guihua.lua",
+ --      "neovim/nvim-lspconfig",
+ --      "nvim-treesitter/nvim-treesitter",
+ --    },
+ --    event = {"CmdlineEnter"},
+ --    ft = {"go", "gomod"},
+ --    build = ':lua require("go.install").update_all_sync()',
+ --    init = function()
+	-- 	  vim.api.nvim_create_autocmd("BufWritePre", {
+	-- 		  pattern = { "*.go" },
+	-- 		  group = vim.api.nvim_create_augroup("OrganizeImports", {}),
+	-- 		  callback = function()
+	-- 			  vim.cmd("GoImport")
+	-- 	    end,
+	-- 	})
+	-- end,
+ --    opts = function()
+ --      require "custom.configs.go"
+ --    end,
+ --    config = function(opts)
+ --      require("go").setup(opts)
+ --    end,
+ --  },
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -78,19 +150,6 @@ local plugins = {
   },
 
   -- Editor Efficiency Plugins
-  -- Tabout
-  {
-    "abecodes/tabout.nvim",
-    lazy = true,
-    event = "BufEnter",
-    opts = function()
-      require "custom.configs.tabout"
-    end,
-    config = function(opts)
-      require("tabout").setup(opts)
-    end,
-  },
-
   {
     "phaazon/hop.nvim",
     lazy = true,
@@ -164,6 +223,7 @@ local plugins = {
   -- {
   --   "NvChad/nvim-colorizer.lua",
   --   enabled = false
+  -- },
   -- },
 
 }

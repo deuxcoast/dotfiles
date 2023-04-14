@@ -5,20 +5,11 @@ if not present then
 end
 
 local b = null_ls.builtins
-local nls_utils = require "null-ls.utils"
 
-local with_diagnostics_code = function(builtin)
-  return builtin.with {
-    diagnostics_format = "#{m} [#{c}]",
-  }
-end
-
-local with_root_file = function(builtin, file)
-  return builtin.with {
-    condition = function(utils)
-      return utils.root_has_file(file)
-    end,
-  }
+local goimports = b.formatting.goimports
+local e = os.getenv "GOIMPORTS LOCAL"
+if e ~= nil then
+  goimports = goimports.with { extra_args = { "-local", e } }
 end
 
 local sources = {
@@ -29,24 +20,36 @@ local sources = {
   b.code_actions.gitrebase,
 
   -- Diagnostics
+  b.diagnostics.revive,
   b.diagnostics.tsc,
-  with_root_file(b.diagnostics.selene, "selene.toml"),
-  with_diagnostics_code(b.diagnostics.shellcheck),
-
+  b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
 
   -- Formatting
-  -- b.formatting.goimports,
+  goimports,
+  -- b.formatting.golines.with({
+  --   extra_args = {
+  --     "--max-len=180",
+  --     "--base-formatter=gofumpt",
+  --   },
+  -- }),
+
   b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
   b.formatting.deno_fmt, -- choosed deno for ts/js files cuz its very fast!
   b.formatting.fixjson,
-  with_root_file(b.formatting.stylua, "stylua.toml"),
+  b.formatting.shfmt,
 }
 
-null_ls.setup {
-  debug = true,
-  debounce = 150,
-  save_after_format = false,
-  -- on_attach = opts.on_attach,
+-- for go.nvim
+-- local gotest = require("go.null_ls").gotest()
+-- local gotest_codeaction = require("go.null_ls").gotest_action()
+-- local golangci_lint = require("go.null_ls").golangci_lint()
+-- table.insert(sources, gotest)
+-- table.insert(sources, golangci_lint)
+-- table.insert(sources, gotest_codeaction)
+
+local options = {
+  debug = false,
   sources = sources,
-  -- root_dir = nls_utils.root_pattern ".git",
 }
+
+return options
