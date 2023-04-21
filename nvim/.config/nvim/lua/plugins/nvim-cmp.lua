@@ -144,9 +144,19 @@ return {
                 ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
                 ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
                 ["<C-Space>"] = cmp.mapping({ i = toggle_popup, c = toggle_popup }),
-                ["<C-y>"] = cmp.config.disable,        -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+                ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
                 ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+                ["<CR>"] = cmp.mapping.confirm({
+                    i = function(fallback)
+                        if cmp.visible() and cmp.get_active_entry() then
+                            cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                        else
+                            fallback()
+                        end
+                    end,
+                    s = cmp.mapping.confirm({ select = true }),
+                    c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+                }),
                 ["<C-n>"] = cmp.mapping(select_next()),
                 ["<Down>"] = cmp.mapping(select_next()),
                 ["<C-p>"] = cmp.mapping(select_prev()),
@@ -174,16 +184,40 @@ return {
                     fallback()
                 end
             end, { "i" }), ]]
+                -- OLD TAB / S-TAB configuration
+                --[[ ["<Tab>"] = cmp.mapping(function(fallback) ]]
+                --[[     if cmp.visible() then ]]
+                --[[         cmp.select_next_item() ]]
+                --[[     else ]]
+                --[[         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`. ]]
+                --[[     end ]]
+                --[[ end, { "i", "s" }), ]]
+                --[[ ["<S-Tab>"] = cmp.mapping(function() ]]
+                --[[     if cmp.visible() then ]]
+                --[[         cmp.select_prev_item() ]]
+                --[[     end ]]
+                --[[ end, { "i", "s" }), ]]
+
                 ["<Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
+                        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+                        -- they way you will only jump inside the snippet region
+                    elseif ls.expand_or_jumpable() then
+                        ls.expand_or_jump()
+                    elseif has_words_before() then
+                        cmp.complete()
                     else
-                        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                        fallback()
                     end
                 end, { "i", "s" }),
-                ["<S-Tab>"] = cmp.mapping(function()
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
                     if cmp.visible() then
                         cmp.select_prev_item()
+                    elseif ls.jumpable(-1) then
+                        ls.jump(-1)
+                    else
+                        fallback()
                     end
                 end, { "i", "s" }),
             },
@@ -237,14 +271,17 @@ return {
                     max_item_count = 20,
                 },
                 --[[ { name = "fish" }, ]]
-                { name = "npm",                    keyword_length = 4 },
+                { name = "npm",     keyword_length = 4 },
                 {
                     name = "luasnip", --[[ , max_item_count = 10 ]]
                 },
                 { name = "nvim_lua" },
                 { name = "path" },
-                { name = "buffer",                 keyword_length = 4, max_item_count = 10 },
-                { name = "nvim_lsp_signature_help" },
+                { name = "buffer",  keyword_length = 4, max_item_count = 10 },
+                -- nvim_lsp_signature help will show the parameter name as autocomplete
+                -- I have setup signature help to show in a popup window in the upper right hand
+                -- corner instead, so this was not too helpful.
+                --[[ { name = "nvim_lsp_signature_help" }, ]]
             },
             experimental = {
                 ghost_text = true,
