@@ -1,0 +1,34 @@
+colors:
+  bright:
+    black: "#393939"
+    blue: "#33b1ff"
+    cyan: "#3ddbd9"
+    green: "#42be65"
+    magenta: "#ff7eb6"
+    red: "#ee5396"
+    white: "#ffffff"
+    yellow: "#ffe97b"
+  normal:
+    black: "#161616"
+    blue: "#33b1ff"
+    cyan: "#3ddbd9"
+    green: "#42be65"
+    magenta: "#ff7eb6"
+    red: "#ee5396"
+    white: "#dde1e6"
+    yellow: "#ffe97b"
+  primary:
+    background: "#161616"
+    foreground: "#ffffff"
+  search:
+    footer_bar:
+      background: "#262626"
+      foreground: "#ffffff"
+    matches:
+      background: "#ee5396"
+      foreground: CellBackground
+font:
+  normal:
+    family: SauceCodePro Nerd Font
+
+  size: 14.0

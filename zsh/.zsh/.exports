@@ -1,5 +1,4 @@
 # Initialize $PATH with system and user binaries
-
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
@@ -9,6 +8,11 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH" 
 export DOOM="$HOME/.emacs.d/bin/doom:$PATH"
 export PATH="/usr/local/protobuf/bin:$PATH"
+
+
+# Source zsh-completions plugin
+# This must be run before `source "$ZSH/oh-my-zsh.sh"`
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 # Locale 
 export LANG="en_US.UTF-8"
