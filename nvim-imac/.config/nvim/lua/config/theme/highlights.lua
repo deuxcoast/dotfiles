@@ -29,6 +29,7 @@ M.colors = {
 }
 --[[ util.highlight("Normal", { bg = colors.black }) ]]
 util.highlight("NvimTreeNormal", { bg = M.colors.background })
+util.highlight("NvimTreeEndOfBuffer", { fg = M.colors.background })
 --[[ util.highlight("SignColumn", { bg = colors.black }) ]]
 --[[ util.highlight("FloatBorder", { fg = colors.base05 }) ]]
 util.highlight("ColorColumn", { fg = "#000000" })

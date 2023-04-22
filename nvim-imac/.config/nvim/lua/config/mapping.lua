@@ -49,11 +49,11 @@ vim.keymap.set("i", "<C-b>", "<ESC>^i")
 -- unhighlight
 vim.keymap.set("n", "<leader>uh", ":noh <CR>")
 
-vim.keymap.set("v", "p", '"_dP"')           -- don't yank replaced text
+vim.keymap.set("v", "p", '"_dP"') -- don't yank replaced text
 
 vim.keymap.set("n", "<leader>we", ":x<CR>") -- save and close
-vim.keymap.set("n", "<leader>w", ":w<CR>")  -- save
-vim.keymap.set("n", "<A-q>", ":q!<CR>")     -- close w/o saving
+vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
+vim.keymap.set("n", "<A-q>", ":q!<CR>") -- close w/o saving
 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
@@ -88,7 +88,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<F8>", function()
-    require("null-ls").toggle("cspell")
+	require("null-ls").toggle("cspell")
 end)
 
 -- Center screen after vertical movements
@@ -117,10 +117,15 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
+map("n", "<C-j>", "<Plug>(unimpaired-move-down)", { desc = "move current line down" })
+map("n", "<C-k>", "<Plug>(unimpaired-move-up)", { desc = "move current line down" })
+map("n", "<A-k>", "<Plug>(unimpaired-blank-up)", { desc = "insert blank line above current line" })
+map("n", "<A-j>", "<Plug>(unimpaired-blank-down)", { desc = "insert blank line below current line" })
+
 -- save and source
 vim.keymap.set("n", "<leader>cx", function()
-    vim.cmd("w")
-    vim.cmd("so %")
+	vim.cmd("w")
+	vim.cmd("so %")
 end)
 
 -- aerial
@@ -138,9 +143,9 @@ end)
 
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "qf", "dap-float" },
-    callback = function()
-        vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
-        vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
-    end,
+	pattern = { "qf", "dap-float" },
+	callback = function()
+		vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
+		vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
+	end,
 })
