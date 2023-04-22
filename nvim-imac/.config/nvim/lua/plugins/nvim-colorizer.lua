@@ -33,4 +33,7 @@ return {
 			"!prompt",
 		},
 	},
+	config = function()
+		require("colorizer").setup()
+	end,
 }

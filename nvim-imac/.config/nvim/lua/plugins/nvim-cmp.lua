@@ -21,6 +21,10 @@ return {
         local present_cmp_npm, npm = pcall(require, "cmp-npm")
         local lspkind = require("lspkind")
 
+        local winhighlight = {
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+        }
+
         vim.cmd("highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080")
         vim.cmd("highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6")
         vim.cmd("highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6")
@@ -222,8 +226,8 @@ return {
                 end, { "i", "s" }),
             },
             window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+                completion = cmp.config.window.bordered(winhighlight),
+                documentation = cmp.config.window.bordered(winhighlight),
             },
             formatting = {
                 fields = {

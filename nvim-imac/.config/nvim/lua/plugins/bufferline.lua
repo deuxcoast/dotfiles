@@ -20,32 +20,32 @@ return {
 	end,
 	config = function()
 		require("bufferline").setup({
-			highlights = {
-				fill = {
-					bg = colors.black,
-				},
-				background = {
-					fg = colors.white,
-					bg = colors.black,
-				},
-				buffer_selected = {
-					fg = colors.green,
-					bg = colors.black,
-				},
-				indicator_selected = {
-					fg = colors.green,
-					bg = colors.black,
-				},
-				close_button_selected = {
-					bg = colors.black,
-					fg = colors.green,
-				},
-			},
+			--[[ highlights = { ]]
+			--[[ 	fill = { ]]
+			--[[ 		bg = colors.black, ]]
+			--[[ 	}, ]]
+			--[[ 	background = { ]]
+			--[[ 		fg = colors.white, ]]
+			--[[ 		bg = colors.black, ]]
+			--[[ 	}, ]]
+			--[[ 	buffer_selected = { ]]
+			--[[ 		fg = colors.green, ]]
+			--[[ 		bg = colors.black, ]]
+			--[[ 	}, ]]
+			--[[ 	indicator_selected = { ]]
+			--[[ 		fg = colors.green, ]]
+			--[[ 		bg = colors.black, ]]
+			--[[ 	}, ]]
+			--[[ 	close_button_selected = { ]]
+			--[[ 		bg = colors.black, ]]
+			--[[ 		fg = colors.green, ]]
+			--[[ 	}, ]]
+			--[[ }, ]]
 			options = {
 				offsets = {
 					{
 						filetype = "NvimTree",
-						highlight = "Directory",
+						--[[ highlight = "Directory", ]]
 					},
 				},
 			},

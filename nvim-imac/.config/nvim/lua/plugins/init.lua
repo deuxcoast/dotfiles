@@ -1,6 +1,7 @@
 return {
-    { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } }, -- select entire buffer
-    { "kana/vim-textobj-line",   dependencies = { "kana/vim-textobj-user" } }, -- select entire line
+    { "bluz71/vim-moonfly-colors", name = "moonfly",                          lazy = false, priority = 1000 },
+    { "kana/vim-textobj-entire",   dependencies = { "kana/vim-textobj-user" } }, -- select entire buffer
+    { "kana/vim-textobj-line",     dependencies = { "kana/vim-textobj-user" } }, -- select entire line
     {
         "kazhala/close-buffers.nvim",
         config = function()

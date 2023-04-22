@@ -1,34 +1,46 @@
 local util = require("config.theme.util")
-local colors = {
-	base00 = "#161616",
-	base01 = "#262626",
-	base02 = "#393939",
-	base03 = "#525252",
-	base04 = "#dde1e6",
-	base05 = "#f2f4f8",
-	base06 = "#ffffff",
-	base07 = "#08bdba",
-	base08 = "#3ddbd9",
-	base09 = "#78a9ff",
-	base10 = "#ffe97b",
-	base0A = "#ee5396",
-	base0B = "#33b1ff",
-	base0C = "#ff7eb6",
-	base0D = "#42be65",
-	base0E = "#be95ff",
-	base0F = "#82cfff",
-}
+--[[ local colors = { ]]
+--[[     black = "#080808" ]]
+--[[ } ]]
+local M = {}
 
-util.highlight("FloatBorder", { fg = colors.base05 })
+M.colors = {
+    background = "#080808",
+    foreground = "#b2b2b2",
+    cursor = "#9e9e9e",
+    color0 = "#323437",
+    color1 = "#ff5454",
+    color2 = "#8cc85f",
+    color3 = "#e3c78a",
+    color4 = "#80a0ff",
+    color5 = "#cf87e8",
+    color6 = "#79dac8",
+    color7 = "#c6c6c6",
+    color8 = "#949494",
+    color9 = "#ff5189",
+    color10 = "#36c692",
+    color11 = "#c2c292",
+    color12 = "#74b2ff",
+    color13 = "#ae81ff",
+    color14 = "#85dc85",
+    color15 = "#e4e4e4",
+    selection_background = "#b2ceee",
+    selection_foreground = "#080808",
+}
+--[[ util.highlight("Normal", { bg = colors.black }) ]]
+util.highlight("NvimTreeNormal", { bg = M.colors.background })
+--[[ util.highlight("SignColumn", { bg = colors.black }) ]]
+--[[ util.highlight("FloatBorder", { fg = colors.base05 }) ]]
 util.highlight("ColorColumn", { fg = "#000000" })
 
 -- GitSigns
-util.highlight("DiffAdd", { fg = colors.base0D })
-util.highlight("DiffChange", { fg = colors.base0E })
-util.highlight("DiffChangeDelete", { fg = colors.base10 })
-util.highlight("DiffDelete", { fg = colors.base0A })
-util.highlight("GitSignsAdd", { fg = colors.base0B })
-
+util.highlight("DiffAdd", { fg = M.colors.color14 })
+util.highlight("DiffChange", { fg = M.colors.color13 })
+util.highlight("DiffChangeDelete", { fg = M.colors.color1 })
+util.highlight("DiffDelete", { fg = M.colors.color1 })
+util.highlight("GitSignsAdd", { fg = M.colors.color4 })
 -- Diagnostics
-util.highlight("DiagnosticSignWarn", { fg = colors.base10 })
-util.highlight("DiagnosticSignError", { fg = colors.base0A })
+--[[ util.highlight("DiagnosticSignWarn", { fg = colors.base10 }) ]]
+--[[ util.highlight("DiagnosticSignError", { fg = colors.base0A }) ]]
+--
+return M
