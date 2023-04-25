@@ -12,6 +12,11 @@ return {
 		})
 	end,
 	config = function()
-		require("go").setup()
+		require("go").setup({
+			comment_placeholder = "", -- comment_placeholder your cool placeholder e.g. ﳑ
+			verbose = false, -- output loginf in messages
+			textobjects = true, -- enable default text jobects through treesittter-text-objects
+			test_runner = "go", -- richgo, go test, richgo, dlv, ginkgo
+		})
 	end,
 }

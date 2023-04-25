@@ -28,6 +28,7 @@ return {
     event = "VimEnter",
     dependencies = {
         "kyazdani42/nvim-web-devicons",
+        "SmiteshP/nvim-navic",
     },
     config = function()
         local navic = require("nvim-navic")

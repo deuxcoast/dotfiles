@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+local map = vim.api.nvim_set_keymap
 
 -- closing  and quitting
 -- vim.keymap.set("n", "<leader>q"
@@ -6,6 +7,9 @@ vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>Q", ":qall <CR>")
 -- Close the current window
 vim.keymap.set("n", "<leader>qw", ":close<CR>")
+
+-- Revert to last save
+map("n", "U", ":earlier 1f", { desc = "Revert file to last write" })
 
 -- Splits
 vim.keymap.set("n", "<leader>sv", "<C-w>v")
@@ -49,20 +53,20 @@ vim.keymap.set("i", "<C-b>", "<ESC>^i")
 -- unhighlight
 vim.keymap.set("n", "<leader>uh", ":noh <CR>")
 
-vim.keymap.set("v", "p", '"_dP"')           -- don't yank replaced text
+vim.keymap.set("v", "p", '"_dP"') -- don't yank replaced text
 
 vim.keymap.set("n", "<leader>we", ":x<CR>") -- save and close
-vim.keymap.set("n", "<leader>w", ":w<CR>")  -- save
-vim.keymap.set("n", "<A-q>", ":q!<CR>")     -- close w/o saving
+vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
+vim.keymap.set("n", "<A-q>", ":q!<CR>") -- close w/o saving
 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Vim-eft
-vim.keymap.set("n", "f", "<Plug>(eft-f)")
-vim.keymap.set("n", "F", "<Plug>(eft-F)")
-vim.keymap.set("n", "t", "<Plug>(eft-t)")
-vim.keymap.set("n", "T", "<Plug>(eft-T)")
+vim.keymap.set("n", "f", "<Plug>(eft-f-repeatable)")
+vim.keymap.set("n", "F", "<Plug>(eft-F-repeatable)")
+vim.keymap.set("n", "t", "<Plug>(eft-t-repeatable)")
+vim.keymap.set("n", "T", "<Plug>(eft-T-repeatable)")
 
 -- Nvim-Tree
 vim.keymap.set("n", "<leader>e", "<CMD> NvimTreeFocus <CR>")
@@ -88,7 +92,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<F8>", function()
-    require("null-ls").toggle("cspell")
+	require("null-ls").toggle("cspell")
 end)
 
 -- Center screen after vertical movements
@@ -100,8 +104,6 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Better up/down
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-
-local map = vim.api.nvim_set_keymap
 
 -- Resize window using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
@@ -117,15 +119,15 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
-map("n", "<C-j>", "<Plug>(unimpaired-move-down)", { desc = "move current line down" })
-map("n", "<C-k>", "<Plug>(unimpaired-move-up)", { desc = "move current line down" })
-map("n", "<leader>jj", "<Plug>(unimpaired-blank-down)", { desc = "insert blank line above current line" })
-map("n", "<leader>kk", "<Plug>(unimpaired-blank-up)", { desc = "insert blank line above current line" })
+map("n", "<leader>]", "<Plug>(unimpaired-move-down)", { desc = "Move current line down" })
+map("n", "<leader>[", "<Plug>(unimpaired-move-up)", { desc = "Move current line down" })
+map("n", "<leader>jj", "<Plug>(unimpaired-blank-down)", { desc = "Insert blank line above current line" })
+map("n", "<leader>kk", "<Plug>(unimpaired-blank-up)", { desc = "Insert blank line above current line" })
 
 -- save and source
 vim.keymap.set("n", "<leader>cx", function()
-    vim.cmd("w")
-    vim.cmd("so %")
+	vim.cmd("w")
+	vim.cmd("so %")
 end)
 
 -- aerial
@@ -143,9 +145,9 @@ end)
 
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "qf", "dap-float" },
-    callback = function()
-        vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
-        vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
-    end,
+	pattern = { "qf", "dap-float" },
+	callback = function()
+		vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
+		vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
+	end,
 })
