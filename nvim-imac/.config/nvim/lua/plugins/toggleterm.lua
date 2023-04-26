@@ -5,12 +5,13 @@ return {
             -- size can be a number or function which is passed the current terminal
             size = function(term)
                 if term.direction == "horizontal" then
-                    return 15
+                    return 21
                 elseif term.direction == "vertical" then
                     return vim.o.columns * 0.4
                 end
             end,
-            --[[ open_mapping = [[<c-\>]]
+            open_mapping = "<C-t>",
+            terminal_mappings = true,
             -- -- on_open = fun(t: Terminal), -- function to run when the terminal opens
             -- -- on_close = fun(t: Terminal), -- function to run when the terminal closes
             hide_numbers = true, -- hide the number column in toggleterm buffers
