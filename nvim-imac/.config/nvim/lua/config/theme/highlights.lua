@@ -1,7 +1,4 @@
 local util = require("config.theme.util")
---[[ local colors = { ]]
---[[     black = "#080808" ]]
---[[ } ]]
 local M = {}
 
 M.colors = {
@@ -28,6 +25,7 @@ M.colors = {
     selection_foreground = "#080808",
 }
 --[[ util.highlight("Normal", { bg = colors.black }) ]]
+--[[ vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = M.colors.background }) ]]
 util.highlight("NvimTreeNormal", { bg = M.colors.background })
 util.highlight("NvimTreeEndOfBuffer", { fg = M.colors.background })
 --[[ util.highlight("SignColumn", { bg = colors.black }) ]]

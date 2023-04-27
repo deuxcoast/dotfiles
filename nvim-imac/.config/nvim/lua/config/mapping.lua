@@ -1,7 +1,12 @@
 vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
 
+vim.keymap.set("c", "<S-Enter>", function()
+	require("noice").redirect(vim.fn.getcmdline())
+end, { desc = "Redirect Cmdline" })
+
 -- closing  and quitting
+--
 -- vim.keymap.set("n", "<leader>q"
 -- Quit vim
 vim.keymap.set("n", "<leader>Q", ":qall <CR>")
@@ -12,8 +17,8 @@ vim.keymap.set("n", "<leader>qw", ":close<CR>")
 map("n", "U", ":earlier 1f", { desc = "Revert file to last write" })
 
 -- Splits
-vim.keymap.set("n", "<leader>sv", "<C-w>v")
 vim.keymap.set("n", "<leader>sh", "<C-w>s")
+vim.keymap.set("n", "<leader>sv", "<C-w>v")
 
 --- CLIPBOARD
 -- paste to a new line
@@ -45,11 +50,11 @@ vim.keymap.set("i", "<C-b>", "<ESC>^i")
 -- unhighlight
 vim.keymap.set("n", "<leader>uh", ":noh <CR>")
 
-vim.keymap.set("v", "p", '"_dP"')           -- don't yank replaced text
+vim.keymap.set("v", "p", '"_dP"') -- don't yank replaced text
 
 vim.keymap.set("n", "<leader>we", ":x<CR>") -- save and close
-vim.keymap.set("n", "<leader>w", ":w<CR>")  -- save
-vim.keymap.set("n", "<A-q>", ":q!<CR>")     -- close w/o saving
+vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
+vim.keymap.set("n", "<A-q>", ":q!<CR>") -- close w/o saving
 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
@@ -84,12 +89,12 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<F8>", function()
-    require("null-ls").toggle("cspell")
+	require("null-ls").toggle("cspell")
 end)
 
 -- Center screen after vertical movements
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
+--[[ vim.keymap.set("n", "<C-u>", "<C-u>zz") ]]
+--[[ vim.keymap.set("n", "<C-d>", "<C-d>zz") ]]
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
@@ -111,17 +116,40 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
-map("n", "<leader>]", "<Plug>(unimpaired-move-down)", { desc = "Move current line down" })
-map("n", "<leader>[", "<Plug>(unimpaired-move-up)", { desc = "Move current line down" })
-map("n", "<leader>jj", "<Plug>(unimpaired-blank-down)", { desc = "Insert blank line above current line" })
-map("n", "<leader>kk", "<Plug>(unimpaired-blank-up)", { desc = "Insert blank line above current line" })
+--[[ vim.keymap.set("n", "<M-j>", "<Plug>(unimpaired-move-down)", { desc = "Move current line down" }) ]]
+--[[ vim.keymap.set("n", "<M-k>", "<Plug>(unimpaired-move-up)", { desc = "Move current line up" }) ]]
+local movelineOpts = { noremap = true, silent = true }
+vim.keymap.set("n", "<M-j>", ":MoveLine(1)<CR>", movelineOpts)
+vim.keymap.set("n", "<M-k>", ":MoveLine(-1)<CR>", movelineOpts)
+vim.keymap.set("v", "<A-j>", ":MoveBlock(1)<CR>", movelineOpts)
+vim.keymap.set("v", "<A-k>", ":MoveBlock(-1)<CR>", movelineOpts)
+
+vim.keymap.set("n", "<leader>jj", "<Plug>(unimpaired-blank-down)", { desc = "Insert blank line above current line" })
+vim.keymap.set("n", "<leader>kk", "<Plug>(unimpaired-blank-up)", { desc = "Insert blank line above current line" })
+
+-- Navigate easily in terminal mode
+map("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Navigate up" })
+map("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Navigate down" })
+map("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Navigate left" })
+map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Navigate right" })
+
+-- Escape key goes from Terminal Mode to Normal Mode
+map("t", "<ESC>", "<C-><C-n>", { desc = "Insert Mode" })
+
+-- Open links in browser
+map(
+	"n",
+	"gx",
+	'<Cmd>call jobstart(["open", expand("<cfile>")], {"detach": v:true})<CR>',
+	{ desc = "Open link in web browser" }
+)
 
 --[[ map("n", "<C-t>", '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 --[[ map("i", "<C-t>", '<ESC><Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 -- save and source
 vim.keymap.set("n", "<leader>cx", function()
-    vim.cmd("w")
-    vim.cmd("so %")
+	vim.cmd("w")
+	vim.cmd("so %")
 end)
 
 -- aerial
@@ -139,9 +167,9 @@ end)
 
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "qf", "dap-float" },
-    callback = function()
-        vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
-        vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
-    end,
+	pattern = { "qf", "dap-float" },
+	callback = function()
+		vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
+		vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
+	end,
 })

@@ -90,12 +90,6 @@ return {
         event = "InsertEnter",
     },
     { "kyazdani42/nvim-web-devicons" },
-    -- THEMES
-    {
-        "nyoom-engineering/oxocarbon.nvim",
-        lazy = false,
-        priority = 1000,
-    },
     { "lukas-reineke/indent-blankline.nvim" }, -- indentation guides
     { "RishabhRD/nvim-cheat.sh",            dependencies = "RishabhRD/popfix" },
     --[[ { "nanotee/sqls.nvim",                  ft = "sql" }, ]]
@@ -135,14 +129,16 @@ return {
     { "theHamsta/nvim-dap-virtual-text", config = true },
     { "leoluz/nvim-dap-go" },
     { "mxsdev/nvim-dap-vscode-js",       dependencies = { "mfussenegger/nvim-dap" } },
-    {
-        "microsoft/vscode-js-debug",
-        opt = true,
-        build = "npm install --legacy-peer-deps && npm run compile",
-    },
-    { "preservim/vim-markdown", lazy = true },
-    { "mattn/emmet-vim",        lazy = true, event = "BufEnter" },
-    { "b0o/SchemaStore.nvim",   lazy = true },
+    --[[ { ]]
+    --[[     "microsoft/vscode-js-debug", ]]
+    --[[     opt = true, ]]
+    --[[     build = "npm install --legacy-peer-deps && npm run compile", ]]
+    --[[ }, ]]
+    { "preservim/vim-markdown",          lazy = true },
+    { "mattn/emmet-vim",                 lazy = true,                               event = "BufEnter" },
+    { "b0o/SchemaStore.nvim",            lazy = true },
+    { "fedepujol/move.nvim",             lazy = true,                               event = "BufEnter" },
+    { "vim-scripts/ReplaceWithRegister", lazy = true,                               event = "BufEnter" },
     --[[ { ]]
     --[[     "Exafunction/codeium.vim", ]]
     --[[     init = function() ]]

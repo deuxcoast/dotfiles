@@ -1,3 +1,4 @@
+print("filetypes being read")
 vim.filetype.add({
     extension = {
         h = function()

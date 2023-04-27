@@ -9,21 +9,21 @@ opt.clipboard = "unnamedplus"
 opt.cursorline = true
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
-vim.g.navic_silence = true -- supress error messages thrown by navic
+vim.g.navic_silence = true                          -- supress error messages thrown by navic
 opt.completeopt = { "menu", "menuone", "noselect" } -- better autocomplete options
-opt.cmdheight = 1 -- only one line for commands
+opt.cmdheight = 1                                   -- only one line for commands
 opt.encoding = "UTF-8"
-opt.ignorecase = true -- case insensitive search. Use \C to enable case sensitive.
+opt.ignorecase = true                               -- case insensitive search. Use \C to enable case sensitive.
 opt.inccommand = "nosplit"
 opt.incsearch = true
 opt.mouse = "a"
-opt.backup = false -- don't create backup files
+opt.backup = false      -- don't create backup files
 opt.writebackup = false -- don't create backup files
 opt.signcolumn = "yes"
-opt.splitright = true -- splits to the right
-opt.splitbelow = true -- splits below
+opt.splitright = true   -- splits to the right
+opt.splitbelow = true   -- splits below
 opt.updatetime = 300
-opt.undofile = true -- persists undo tree
+opt.undofile = true     -- persists undo tree
 opt.relativenumber = true
 opt.colorcolumn = "80"
 
@@ -54,27 +54,32 @@ opt.number = true
 opt.numberwidth = 2
 opt.ruler = false
 
---[[ opt.scrolloff = 4 ]]
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Dont list quickfix buffers
 autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.opt_local.buflisted = false
-	end,
+    pattern = "qf",
+    callback = function()
+        vim.opt_local.buflisted = false
+    end,
 })
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank({ timeout = 200 })
-	end,
+    callback = function()
+        vim.highlight.on_yank({ timeout = 200 })
+    end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+    pattern = "TelescopePreviewerLoaded",
+    command = "setlocal wrap",
+})
+
 
 -- disable some default providers
 for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
-	vim.g["loaded_" .. provider .. "_provider"] = 0
+    vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
 -- get italic highlights to work with tmux // causing problems with

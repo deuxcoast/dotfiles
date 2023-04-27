@@ -8,7 +8,6 @@ end
 require("config.debug.dap_config")
 local h = require("config/debug/debug_helpers")
 
-
 local sign = vim.fn.sign_define
 
 -- catppuccin colors
@@ -19,13 +18,13 @@ sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl =
 
 local set = vim.keymap.set
 
-set("n", "<A-k>", function()
+set("n", "<A-p>", function()
 	dap.step_out()
 end)
-set("n", "<A-l>", function()
+set("n", "<A-n>", function()
 	dap.step_into()
 end)
-set("n", "<A-j>", function()
+set("n", "<A-i>", function()
 	dap.step_over()
 end)
 

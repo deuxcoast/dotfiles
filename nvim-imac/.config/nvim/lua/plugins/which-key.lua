@@ -13,7 +13,6 @@ return {
 				g = "Telescope live grep",
 				G = "Telescope grep string",
 				o = "Telescope file browser",
-				t = "Telescope builtins",
 				l = {
 					name = "+LSP",
 					s = "Workspace Symbols",
@@ -107,14 +106,14 @@ return {
 
 		wk.setup({
 			plugins = {
-				marks = false,
-				registers = false,
-				spelling = { enabled = false },
+				marks = true,
+				registers = true,
+				spelling = { enabled = true },
 				presets = {
 					operators = false,
 					motions = false,
 					text_objects = false,
-					windows = true,
+					windows = false,
 					z = true,
 					g = true,
 				},
@@ -128,7 +127,7 @@ return {
 				group = "+",
 			},
 			window = {
-				border = "none",
+				border = "single",
 				position = "bottom",
 				margin = { 0, 0, 0, 0 },
 				padding = { 4, 2, 4, 2 },

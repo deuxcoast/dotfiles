@@ -80,6 +80,7 @@ return {
             command_palette = true, -- position the cmdline and popupmenu together
             long_message_to_split = true, -- long messages will be sent to a split
             lsp_doc_border = true, -- add a border to hover docs and signature help
+            cmdline_output_to_split = true,
         },
         --[[ popupmenu = { ]]
         --[[ 	enabled = true, -- enables the Noice popupmenu UI ]]
@@ -88,7 +89,6 @@ return {
         --[[ 	---@type NoicePopupmenuItemKind|false ]]
         --[[ 	-- Icons for completion item kinds (see defaults at noice.config.icons.kinds) ]]
         --[[ 	kind_icons = {}, -- set to `false` to disable icons ]]
-        --[[ }, ]]
         --[[ }, ]]
     },
 }
