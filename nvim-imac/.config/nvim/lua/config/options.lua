@@ -1,65 +1,53 @@
 --- Default Neovim Options
-local opt = vim.opt
 local g = vim.g
 
-opt.laststatus = 3 -- use global statusline
-opt.showmode = false -- Statusline does this for me
-opt.showcmd = false -- don't show extra info at the end of hte command line
-opt.clipboard = "unnamedplus" -- use '+' register for all yanks, and deletes, sync with system clipboard
-opt.confirm = true -- confirm to save changes before closing modified buffer
-opt.cursorline = true -- highlight current line
 g.loaded_netrw = 1 -- don't load netrw. interferes with nvimtree ( setting this here might be redundant with nvimtree config)
 g.loaded_netrwPlugin = 1 -- don't load netrw
-vim.g.navic_silence = true -- supress error messages thrown by navic
-opt.completeopt = { "menu", "menuone", "noselect" } -- better autocomplete options
+g.navic_silence = true -- supress error messages thrown by navic
+
+local opt = vim.opt
+
+opt.backup = false -- don't create backup files
+opt.clipboard = "unnamedplus" -- use '+' register for all yanks, and deletes, sync with system clipboard
 opt.cmdheight = 1 -- only one line for commands
+opt.colorcolumn = "80" -- highlight colorcolumn in line 80 with hl-ColorColumn
+opt.completeopt = { "menu", "menuone", "noselect" } -- better autocomplete options
+opt.confirm = true -- confirm to save changes before closing modified buffer
+opt.cursorline = true -- highlight current line
 opt.encoding = "UTF-8"
+opt.expandtab = true -- always use spaces instead of tabs
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevelstart = 99 -- start unfolded
 opt.ignorecase = true -- case insensitive search. Use \C to enable case sensitive.
 opt.inccommand = "nosplit" -- line preview of :s results
 opt.incsearch = true -- do incremental searching
-opt.mouse = "a" -- automatically enable mouse usage
-opt.backup = false -- don't create backup files
-opt.writebackup = false -- don't create backup files
---[[ opt.signcolumn = "yes" ]]
-opt.signcolumn = "number" -- always show sign column. currently there is a visual desync when this is auto. (#14195)
-opt.splitright = true -- open vertical splits right of the current one
-opt.splitbelow = true -- open horizontal splits below the current one
-opt.smartcase = true -- use case sensitive search if capital letter is present
-opt.smarttab = true -- <tab><bs> indent/deindent in leading whitespace
-opt.updatetime = 300
-opt.undofile = true -- persists undo tree
-opt.relativenumber = true -- show relative line numbers by default
-opt.colorcolumn = "80" -- highlight colorcolumn in line 80 with hl-ColorColumn
-opt.ttyfast = true -- let vim know that I am using a fast term
-
--- disable nvim intro
-opt.shortmess:append("sI") -- avoid "Hit Enter" messages.
--- flag s: don't give "search hit BOTTOM, continuing at TOP" etc messages.
--- flag I: don't give intro message when starting Vim
--- :help shortmess for more flags
-
--- opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
---[[ opt.foldcolumn = "1" ]]
---[[ opt.foldlevel = 99 ]]
-opt.foldlevelstart = 99 -- start unfolded
---[[ opt.foldenable = true ]]
---[[ opt.foldmethod = "expr" ]]
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.shell = "zsh" -- zsh as default shell
-opt.termguicolors = true -- use 24 bit colors in tui
+opt.laststatus = 3 -- use global statusline
 opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<,space:␣"
-
-opt.wrap = false -- do not wrap text automatically
-opt.whichwrap:append("<>[]hl")
-opt.tabstop = 4 -- spaces per tab as editor default
-opt.shiftwidth = 4 -- spaces per tab (when shifting)
-opt.smartindent = true
-opt.expandtab = true -- always use spaces instead of tabs
-opt.timeoutlen = 300 -- number of ms to wait for a mapped sequence to complete
-
+opt.mouse = "a" -- automatically enable mouse usage
 opt.number = true -- show numbers by default
 opt.numberwidth = 2 -- minimal number of columns to use for line number column
+opt.relativenumber = true -- show relative line numbers by default
 opt.ruler = false -- don't show line, column number. status line does this for me
+opt.shell = "zsh" -- zsh as default shell
+opt.shiftwidth = 4 -- spaces per tab (when shifting)
+opt.shortmess:append("sI") -- avoid vim intro messages and search messages
+opt.showcmd = false -- don't show extra info at the end of hte command line
+opt.showmode = false -- Statusline does this for me
+opt.signcolumn = "number" -- always show sign column. currently there is a visual desync when this is auto. (#14195)
+opt.smartcase = true -- use case sensitive search if capital letter is present
+opt.smartindent = true
+opt.smarttab = true -- <tab><bs> indent/deindent in leading whitespace
+opt.splitbelow = true -- open horizontal splits below the current one
+opt.splitright = true -- open vertical splits right of the current one
+opt.tabstop = 4 -- spaces per tab as editor default
+opt.termguicolors = true -- use 24 bit colors in tui
+opt.timeoutlen = 300 -- number of ms to wait for a mapped sequence to complete
+opt.ttyfast = true -- let vim know that I am using a fast term
+opt.undofile = true -- persists undo tree
+opt.updatetime = 300
+opt.whichwrap:append("<>[]hl")
+opt.wrap = false -- do not wrap text automatically
+opt.writebackup = false -- don't create backup files
 
 local autocmd = vim.api.nvim_create_autocmd
 
