@@ -1,6 +1,7 @@
 require("config.mapping")
 require("config.lazy-nvim")
 require("config.theme")
+require("config.autocmds")
 require("config.options")
 require("config.filetypes")
 require("config.lsp")

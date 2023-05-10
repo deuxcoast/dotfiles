@@ -55,16 +55,16 @@ return {
 				},
 			},
 		},
-		views = {
-			split = {
-				enter = true,
-				position = "bottom",
-				size = "100%",
-				close = {
-					keys = { "<C-c>" },
-				},
-			},
-		},
+		-- views = {
+		-- 	split = {
+		-- 		enter = true,
+		-- 		position = "bottom",
+		-- 		size = "20%",
+		-- 		close = {
+		-- 			keys = { "<C-c>" },
+		-- 		},
+		-- 	},
+		-- },
 		routes = {
 			{
 				-- don't show messages when buffer is written
@@ -103,7 +103,7 @@ return {
 			command_palette = true, -- position the cmdline and popupmenu together
 			long_message_to_split = true, -- long messages will be sent to a split
 			lsp_doc_border = true, -- add a border to hover docs and signature help
-			-- cmdline_output_to_split = true, -- this is nice when I want to have a full split to browse on, but also it makes a split for just :w
+			cmdline_output_to_split = true, -- this is nice when I want to have a full split to browse on, but also it makes a split for just :w
 		},
 		--[[ popupmenu = { ]]
 		--[[ 	enabled = true, -- enables the Noice popupmenu UI ]]

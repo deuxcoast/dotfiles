@@ -7,6 +7,9 @@ g.navic_silence = true -- supress error messages thrown by navic
 
 local opt = vim.opt
 
+opt.autoindent = true -- maintain indent of current line
+opt.breakindent = true -- continue indent visually
+opt.belloff = "all" -- SILENCE the bell. eternally
 opt.backup = false -- don't create backup files
 opt.clipboard = "unnamedplus" -- use '+' register for all yanks, and deletes, sync with system clipboard
 opt.cmdheight = 1 -- only one line for commands
@@ -14,71 +17,103 @@ opt.colorcolumn = "80" -- highlight colorcolumn in line 80 with hl-ColorColumn
 opt.completeopt = { "menu", "menuone", "noselect" } -- better autocomplete options
 opt.confirm = true -- confirm to save changes before closing modified buffer
 opt.cursorline = true -- highlight current line
-opt.encoding = "UTF-8"
 opt.expandtab = true -- always use spaces instead of tabs
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart = 99 -- start unfolded
+opt.grepformat = "%f:%l:%c:%m"
+opt.grepprg = "rg --vimgrep" -- use ripgrep with vimgrep flag
+opt.hidden = true -- allows you to hide buffers with unsaved changes without being prompted
 opt.ignorecase = true -- case insensitive search. Use \C to enable case sensitive.
-opt.inccommand = "nosplit" -- line preview of :s results
+opt.inccommand = "nosplit" -- show effects of :s incrementally in buffer
 opt.incsearch = true -- do incremental searching
+-- opt.joinspaces = true -- don't autoinsert two spaces after '.', '?', '!' for join command
 opt.laststatus = 3 -- use global statusline
-opt.listchars = "eol:$,tab:>-,trail:~,extends:>,precedes:<,space:␣"
+opt.linebreak = true -- wrap long lines at characters in 'breakat'
+-- opt.list = true -- show whitespace
+opt.modelines = 5 -- scan this many lines looking for modeline
 opt.mouse = "a" -- automatically enable mouse usage
 opt.number = true -- show numbers by default
 opt.numberwidth = 2 -- minimal number of columns to use for line number column
 opt.relativenumber = true -- show relative line numbers by default
 opt.ruler = false -- don't show line, column number. status line does this for me
-opt.shell = "zsh" -- zsh as default shell
+opt.scrolloff = 3 -- start scrolling 3 lines before the edge of the viewport
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" } -- what to store in the mksession command
+-- opt.shell = "zsh" -- zsh as default shell
+opt.shiftround = true -- always indent by multiple of shiftwidth
 opt.shiftwidth = 4 -- spaces per tab (when shifting)
 opt.shortmess:append("sI") -- avoid vim intro messages and search messages
+opt.showbreak = "↳ " -- downwards arrow with tip rightwards(U+21B3, UTF-8: E2 86 B3)
 opt.showcmd = false -- don't show extra info at the end of hte command line
 opt.showmode = false -- Statusline does this for me
 opt.signcolumn = "number" -- always show sign column. currently there is a visual desync when this is auto. (#14195)
+opt.sidescrolloff = 8 -- same as 'scrolloff' but for columns
 opt.smartcase = true -- use case sensitive search if capital letter is present
 opt.smartindent = true
 opt.smarttab = true -- <tab><bs> indent/deindent in leading whitespace
+opt.softtabstop = -1 -- use 'shiftwidth' for tab/bs at end of line
+opt.spellcapcheck = "" -- don't check for capital letters at teh start of sentences
 opt.splitbelow = true -- open horizontal splits below the current one
 opt.splitright = true -- open vertical splits right of the current one
+opt.switchbuf = "usetab" -- try to reuse windows/tabs when switching buffers
+opt.synmaxcol = 200 -- don't bother syntax highlighting long lines
 opt.tabstop = 4 -- spaces per tab as editor default
 opt.termguicolors = true -- use 24 bit colors in tui
+opt.textwidth = 120 -- automatically hard wrap at 120 columns by default
 opt.timeoutlen = 300 -- number of ms to wait for a mapped sequence to complete
+opt.title = false -- the title of the window to 'titlestring'
 opt.ttyfast = true -- let vim know that I am using a fast term
+opt.virtualedit = "block" -- allow cursor to move where there is no text in visual block mode
+opt.visualbell = false -- stop beeping for non-errors
+opt.wildmenu = true -- show options as list when switching buffers etc
 opt.undofile = true -- persists undo tree
+opt.undolevels = 10000
 opt.updatetime = 300
-opt.whichwrap:append("<>[]hl")
-opt.wrap = false -- do not wrap text automatically
+-- opt.whichwrap:append("<>[]hl")
+-- opt.wrap = false -- do not wrap text automatically
 opt.writebackup = false -- don't create backup files
 
-local autocmd = vim.api.nvim_create_autocmd
+opt.formatoptions = opt.formatoptions -- :help fo-table
+	- "a" -- dont autoformat
+	- "t" -- dont autoformat my code, have linters for that
+	+ "c" -- auto wrap comments using textwith
+	+ "q" -- formmating of comments w/ `gq`
+	+ "l" -- long lines are not broken up
+	+ "j" -- remove comment leader when joning comments
+	+ "r" -- continue comment with enter
+	- "o" -- but not w/ o and o, dont continue comments
+	+ "n" -- smart auto indenting inside numbered lists
+	- "2" -- this is not grade school anymore
 
--- Dont list quickfix buffers
-autocmd("FileType", {
-	pattern = "qf",
-	callback = function()
-		vim.opt_local.buflisted = false
-	end,
-})
+-- opt.listchars = opt.listchars
+-- 	+ "nbsp:⦸" -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
+-- 	+ "tab:▷┅" -- WHITE RIGHT-POINTING TRIANGLE (U+25B7, UTF-8: E2 96 B7)
+-- 	+ "extends:»" -- RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00BB, UTF-8: C2 BB)
+-- 	+ "precedes:«" -- LEFT-POINTING DOUBLE ANGLE QUOTATION MARK (U+00AB, UTF-8: C2 AB)
+-- 	+ "trail:•" -- BULLET (U+2022, UTF-8: E2 80 A2)
 
--- Highlight yanked text
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank({ timeout = 200 })
-	end,
-})
+opt.shortmess = opt.shortmess
+	+ "A" -- ignore annoying swapfile messages
+	+ "I" -- no spash screen
+	-- 	+ "O" -- file-read message overwrites previous
+	-- 	+ "T" -- truncate non-file messages in middle
+	-- 	+ "W" -- dont echo '[w]/[written]' when writing
+	-- 	+ "a" -- use abbreviations in message '[ro]' instead of '[readonly]'
+	-- 	-- + "o" -- overwrite file-written mesage
+	+ "t" -- truncate file messages at start
+	+ "c" -- dont show matching messages
 
--- wrap text in telescope previewer
--- ideally don't want this to be a global command, but only for specific previewers
--- such as :Telescope noice
-vim.api.nvim_create_autocmd("User", {
-	pattern = "TelescopePreviewerLoaded",
-	command = "setlocal wrap",
-})
+opt.whichwrap = opt.whichwrap -- crossing line boundaries
+	+ "b" -- <BS> N & V
+	+ "s" -- <Space> N & V
+	+ "h" -- `h` N & V
+	+ "l" -- `l` N & V
+	+ "<" -- <Left> N & V
+	+ ">" -- <Right> N & V
+	+ "[" -- <Left> I & R
+	+ "]" -- <Right> I & R
 
--- disable some default providers
-for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
-	vim.g["loaded_" .. provider .. "_provider"] = 0
-end
-
--- get italic highlights to work with tmux // causing problems with
--- bufferline plugin.
--- https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722
+opt.wildmode = { -- shell-like autocomplete to unambiguous portions
+	"longest",
+	"list",
+	"full",
+}

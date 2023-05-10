@@ -20,7 +20,7 @@ M.setup = function(on_attach, capabilities)
 		--[[         on_attach(client, bufnr) ]]
 		--[[     end, ]]
 		--[[ }, ]]
-		sumneko_lua = require("config.lsp.servers.sumneko_lua")(on_attach),
+		lua_ls = require("config.lsp.servers.lua_ls")(on_attach),
 		html = { init_options = { provideFormatter = false } },
 		astro = {
 			init_options = {
