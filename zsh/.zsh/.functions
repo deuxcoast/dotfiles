@@ -64,3 +64,4 @@ git-remove-all-commit() {
             ;;
     esac
 }
+

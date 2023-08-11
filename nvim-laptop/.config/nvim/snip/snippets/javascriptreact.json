@@ -1,7 +1,0 @@
-{
-  "snippet": {
-    "prefix": ["cn"],
-    "body": ["className=\"$0\""],
-    "description": "React FC"
-  }
-}

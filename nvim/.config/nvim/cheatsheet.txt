@@ -1,0 +1,24 @@
+## follow-links @url-browser @website
+Open link in browser (or system default for filetype) | gx
+
+:
+
+## vim-native
+Unhighlight / remove highlight | <leader>uh
+Increase window pane width horizontally | <C-Right>
+Decrease window pane width horizontally | <C-Left>
+Increase window pane height vertically | <C-Up>
+Decrease window pane height vertically | <C-Down>
+
+## luasnip @snippets @expansion
+Expand snippet | <M-n>
+Jump to next node in snippet | <M-n>
+Jump back to previous snippet node | <M-p>
+Change selection on choice node | <C-e>
+Resource luasnip config | <leader>s
+
+## nvim-cmp @completion @auto-complete-lsp
+Select next item | <C-n>
+Select previous item | <C-p>
+Scroll down in floating window | <C-f>
+Scroll up in floating window | <C-d>

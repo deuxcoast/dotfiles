@@ -1,5 +1,5 @@
 all:
-	stow --verbose --target=$$HOME --restow nvim-imac
+	stow --verbose --target=$$HOME --restow nvim
 	stow --verbose --target=$$HOME --restow alacritty
 	stow --verbose --target=$$HOME --restow iterm
 	stow --verbose --target=$$HOME --restow git

@@ -22,8 +22,7 @@ source $HOME/.zsh/.aliases
 
 # --- Functions
 source $HOME/.zsh/.functions
+source $HOME/.zsh/functions/_alacritty
 
 # --- Private config
 source $HOME/.zsh/.privaterc
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

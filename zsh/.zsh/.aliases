@@ -50,6 +50,17 @@ alias md='mkdir'
 # Make a directory with date
 alias mdd='mkdir -pv $(date +%Y%m%d)'
 
+# Homebrew for Intel // Rosetta
+alias ibrew='arch -x86_64 /usr/local/bin/brew'
+alias x86='arch -x86_64'
+
+# GCC
+alias gcc="gcc-12"
+alias g++="g++-12"
+alias cc="cc-12"
+alias c++="c++-12"
+alias igcc="arch -x86_64 /usr/local/bin/gcc-13"
+
 
 # --- Bookmarks ---
 alias dl='cd ~/Downloads && ls -lA'
@@ -105,3 +116,7 @@ alias tsk='tmux kill-session -t'
 
 # Kills all tmux sessions
 alias tska='tmux kill-session -a'
+
+# --- ssh ---
+# Connect to the raspsberry pi server
+alias 'sduexpi'='ssh -i ~/.ssh/id_pi -p 2221 conorney@duex-pi.local'
