@@ -3,6 +3,7 @@ local g = vim.g
 
 g.loaded_netrw = 1 -- don't load netrw. interferes with nvimtree ( setting this here might be redundant with nvimtree config)
 g.loaded_netrwPlugin = 1 -- don't load netrw
+g.netrw_nogx = 1 -- just to be thorough
 g.navic_silence = true -- supress error messages thrown by navic
 
 local opt = vim.opt

@@ -141,14 +141,6 @@ vim.keymap.set("t", "jk", "<C-\\><C-n>", movelineOpts)
 -- Escape key goes from Terminal Mode to Normal Mode
 -- map("t", "<ESC>", "<C-><C-n>", { desc = "Insert Mode" })
 
--- Open links in browser
-map(
-	"n",
-	"gx",
-	'<Cmd>call jobstart(["open", expand("<cfile>")], {"detach": v:true})<CR>',
-	{ desc = "Open link in web browser" }
-)
-
 --[[ map("n", "<C-t>", '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 --[[ map("i", "<C-t>", '<ESC><Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 -- save and source
