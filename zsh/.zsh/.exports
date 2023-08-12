@@ -5,14 +5,14 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
 
-# Uncommenting this will cause the shell to be unable to load zsh
-# export PATH="/local/bin/brew"
 
 export PATH="$HOME/.npm-global/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH" 
 export DOOM="$HOME/.emacs.d/bin/doom:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/protobuf/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 
 # Source zsh-completions plugin

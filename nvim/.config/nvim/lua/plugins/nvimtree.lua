@@ -8,7 +8,7 @@ return {
 			hijack_netrw = true,
 			hijack_cursor = true,
 			hijack_unnamed_buffer_when_opening = false,
-			open_on_setup = true,
+			-- open_on_setup = true,
 			sync_root_with_cwd = true,
 			update_focused_file = {
 				enable = true,

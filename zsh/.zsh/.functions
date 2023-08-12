@@ -65,3 +65,11 @@ git-remove-all-commit() {
     esac
 }
 
+function tmuxx()
+{
+    if [[ $# == 0 ]] && command tmux ls >& /dev/null; then
+        command tmux attach \; choose-tree -s
+    else
+        command tmux "$@"
+    fi
+}
