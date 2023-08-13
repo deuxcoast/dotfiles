@@ -17,7 +17,14 @@ vim.keymap.set("n", "<leader>qw", ":close<CR>", { desc = "Close the current wind
 map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
 
 -- Jump to new line in insert mode while in middle of line
-vim.keymap.set("i", "<S-CR>", "<ESC>o")
+-- This is working due to a remap of the terminal keycodes in my alacritty config.
+-- Typically, the terminal would be unable to interpret <S-CR> or <C-CR>
+-- https://stackoverflow.com/questions/16359878/how-to-map-shift-enter/42461580#42461580
+vim.keymap.set("i", "<S-return>", "<ESC>o", { desc = "Enter new line below without breaking" })
+vim.keymap.set("i", "<C-return>", "<ESC>O", { desc = "Enter new line above without breaking" })
+
+nnoremap <silent> gj :let _=&lazyredraw<CR>:set lazyredraw<CR>/\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>
+nnoremap <silent> gk :let _=&lazyredraw<CR>:set lazyredraw<CR>?\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>
 
 -- Splits
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Create a horizontal split" })
@@ -27,7 +34,7 @@ vim.keymap.set("n", "<leader>sf", ":source %<CR>", { desc = "Source the current 
 
 --- CLIPBOARD
 -- paste to a new line
--- vim.keymap.set("n", "<leader>p", "o<ESC>p")
+vim.keymap.set("n", "<leader>p", "o<ESC>p")
 vim.keymap.set("n", "<leader>P", "O<ESC>p")
 
 -- Toggle comment

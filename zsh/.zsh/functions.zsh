@@ -1,3 +1,10 @@
+# Create a symlink for the provided files in ~/.local/bin
+binify() {
+  for arg; do
+    ln -s "$PWD/$arg" "$HOME/.local/bin/$arg"
+  done
+}
+
 # Create a new directory and enter it
 mkd() {
     mkdir -p "$@" && cd "$@"
