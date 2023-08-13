@@ -3,12 +3,13 @@ Open link in browser (or system default for filetype) | gx
 
 :
 
-## vim-native
+## vim-native @buffers @default
 Unhighlight / remove highlight | <leader>uh
 Increase window pane width horizontally | <C-Right>
 Decrease window pane width horizontally | <C-Left>
 Increase window pane height vertically | <C-Up>
 Decrease window pane height vertically | <C-Down>
+Toggle maximize current window | <leader>mm
 
 ## luasnip @snippets @expansion
 Expand snippet | <M-n>
@@ -22,3 +23,20 @@ Select next item | <C-n>
 Select previous item | <C-p>
 Scroll down in floating window | <C-f>
 Scroll up in floating window | <C-d>
+
+## motions-treesitter @select @movement
+Inside function: interior only | if
+Outside function: name and brackets included | af
+Class inner | ic
+Class outter | ac
+Container gradual expansion: repeatable | VISUAL .
+Outer container | VISUAL ;
+Goto next function outter start | ]f  
+Goto prev function outter start | [f
+Goto next function outter end | ]F  
+Goto prev function outter end | [F  
+Hop ts nodes in visual mode | VISUAL m
+
+## text @movement @manipualtion
+Move text up
+

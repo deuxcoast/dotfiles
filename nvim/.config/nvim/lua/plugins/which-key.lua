@@ -4,29 +4,6 @@ return {
 		local wk = require("which-key")
 
 		wk.register({
-			f = {
-				name = "+Telescope",
-				["<space>"] = "Telescope git_files",
-				["/"] = "Telescope current_buffer_fuzzy_find",
-				b = "Telescope list open buffers",
-				f = "Telescope find files",
-				g = "Telescope live grep",
-				G = "Telescope grep string",
-				o = "Telescope file browser",
-				l = {
-					name = "+LSP",
-					s = "Workspace Symbols",
-				},
-				n = {
-					name = "+NPM",
-					s = "Show package versions",
-					c = "Hide package versions",
-					u = "Update package on line",
-					d = "Delete package on line",
-					r = "Reinstall",
-					p = "Install a different package version",
-				},
-			},
 			c = {
 				a = "Code Actions",
 			},

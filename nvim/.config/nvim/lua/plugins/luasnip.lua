@@ -38,7 +38,7 @@ return {
 		-- vim.keymap.set("i", "<C-u>", require("luasnip.extras.select_choice"))
 
 		-- shorcut to source my luasnips file again, which will reload my snippets
-		vim.keymap.set("n", "<leader>ss", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>")
+		-- vim.keymap.set("n", "<leader>ss", "<cmd>source ~/.config/nvim/lua/plugins/luasnip.lua<CR>")
 	end,
 	config = function()
 		local present, luasnip = pcall(require, "luasnip")

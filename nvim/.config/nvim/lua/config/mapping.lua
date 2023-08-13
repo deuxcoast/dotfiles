@@ -9,9 +9,9 @@ end, { desc = "Redirect Cmdline" })
 --
 -- vim.keymap.set("n", "<leader>q"
 -- Quit vim
-vim.keymap.set("n", "<leader>Q", ":qall <CR>")
+vim.keymap.set("n", "<leader>Q", ":qall <CR>", { desc = "Quit vim, unless there is modified buffers" })
 -- Close the current window
-vim.keymap.set("n", "<leader>qw", ":close<CR>")
+vim.keymap.set("n", "<leader>qw", ":close<CR>", { desc = "Close the current window" })
 
 -- Revert to last save
 map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
@@ -20,8 +20,10 @@ map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
 vim.keymap.set("i", "<S-CR>", "<ESC>o")
 
 -- Splits
-vim.keymap.set("n", "<leader>sh", "<C-w>s")
-vim.keymap.set("n", "<leader>sv", "<C-w>v")
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Create a horizontal split" })
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Create a vertical split" })
+
+vim.keymap.set("n", "<leader>sf", ":source %<CR>", { desc = "Source the current file" })
 
 --- CLIPBOARD
 -- paste to a new line
@@ -59,8 +61,8 @@ vim.keymap.set("n", "<leader>we", ":x<CR>") -- save and close
 vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
 vim.keymap.set("n", "<A-q>", ":q!<CR>") -- close w/o saving
 
-vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move current line down one" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move current line up one" })
 
 -- Vim-eft
 vim.keymap.set("n", "f", "<Plug>(eft-f-repeatable)")
@@ -69,10 +71,10 @@ vim.keymap.set("n", "t", "<Plug>(eft-t-repeatable)")
 vim.keymap.set("n", "T", "<Plug>(eft-T-repeatable)")
 
 -- Nvim-Tree
-vim.keymap.set("n", "<leader>e", "<CMD> NvimTreeFocus <CR>")
-vim.keymap.set("n", "<C-m>", "<CMD> NvimTreeToggle <CR>")
+vim.keymap.set("n", "<leader>e", "<CMD> NvimTreeFocus <CR>", { desc = "Nvimtree focus" })
+vim.keymap.set("n", "<C-m>", "<CMD> NvimTreeToggle <CR>", { desc = "Nvimtree toggle" })
 -- Tree Hopper for visual selection by treesitter nodes
-vim.keymap.set("v", "m", ":lua require('tsht').nodes()<CR>")
+vim.keymap.set("v", "m", ":lua require('tsht').nodes()<CR>", { desc = "Hop treesitter nodes in visual mode" })
 -- Navigate windows
 -- vim.keymap.set("n", "<C-l>")
 

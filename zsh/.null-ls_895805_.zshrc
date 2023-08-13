@@ -4,7 +4,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1 # Should improve zsh-autosuggestions performance
 DISABLE_LS_COLORS=true
 
 # --- Environment variables
-source $HOME/.zsh/exports.zsh
+source $HOME/.zsh/.exports
 
 # --- Oh My Zsh
 # These plugins may or not be installed on the system already. If not installed,
@@ -23,10 +23,10 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
 fi
 
 # --- Aliases
-source $HOME/.zsh/aliases.zsh
+source $HOME/.zsh/.aliases
 
 # --- Functions
-source $HOME/.zsh/functions.zsh
+source $HOME/.zsh/.functions
 source $HOME/.zsh/functions/_alacritty
 
 # --- Private config

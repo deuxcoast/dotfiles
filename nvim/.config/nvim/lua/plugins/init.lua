@@ -19,6 +19,7 @@ return {
 	{ "mg979/vim-visual-multi" },
 	{ "lambdalisue/suda.vim" },
 	{ "sindrets/diffview.nvim", opts = { file_panel = { win_config = { position = "left" } } } },
+	-- { "psliwka/vim-smoothie" },
 	{
 		"rhysd/accelerated-jk",
 		lazy = true,
@@ -54,6 +55,7 @@ return {
 	-- FINALLY: configures lua_ls to behave appropriately with my nvim config
 	-- codebase. Folke died for my sins so I didn't have to.
 	{ "folke/neodev.nvim", opts = {} },
+	{ "mfussenegger/nvim-treehopper" },
 	{
 		"natecraddock/workspaces.nvim",
 		lazy = true,

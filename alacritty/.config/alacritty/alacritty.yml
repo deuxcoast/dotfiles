@@ -79,7 +79,11 @@ bell:
 
 font:
   normal:
-    family: SauceCodePro Nerd Font
+    family: Hasklug Nerd Font
+  bold:
+    family: Hasklug Nerd Font
+  italic:
+    family: Hasklug Nerd Font
 
   size: 14.0
 
