@@ -19,6 +19,7 @@ return {
 	{ "mg979/vim-visual-multi" },
 	{ "lambdalisue/suda.vim" },
 	{ "sindrets/diffview.nvim", opts = { file_panel = { win_config = { position = "left" } } } },
+	{ "jbyuki/one-small-step-for-vimkind" }, -- debug adapter for nvim lua
 	-- { "psliwka/vim-smoothie" },
 	{
 		"rhysd/accelerated-jk",

@@ -9,3 +9,7 @@ all:
 
 delete:
 	stow --verbose --target=$$HOME --delete */
+
+clean-link:
+	delete
+	all

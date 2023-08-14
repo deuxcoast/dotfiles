@@ -23,9 +23,6 @@ map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
 vim.keymap.set("i", "<S-return>", "<ESC>o", { desc = "Enter new line below without breaking" })
 vim.keymap.set("i", "<C-return>", "<ESC>O", { desc = "Enter new line above without breaking" })
 
-nnoremap <silent> gj :let _=&lazyredraw<CR>:set lazyredraw<CR>/\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>
-nnoremap <silent> gk :let _=&lazyredraw<CR>:set lazyredraw<CR>?\%<C-R>=virtcol(".")<CR>v\S<CR>:nohl<CR>:let &lazyredraw=_<CR>
-
 -- Splits
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Create a horizontal split" })
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Create a vertical split" })

@@ -1,3 +1,7 @@
+-- TODO: install nvim lua DAP
+-- Maybe this could be a good reference:
+-- https://github.com/ibhagwan/nvim-lua/blob/main/lua/plugins/dap/lua.lua
+
 --- mfussenegger/nvim-dap
 local present_dap, dap = pcall(require, "dap")
 

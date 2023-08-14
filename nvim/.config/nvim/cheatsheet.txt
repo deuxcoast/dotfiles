@@ -1,15 +1,17 @@
 ## follow-links @url-browser @website
 Open link in browser (or system default for filetype) | gx
 
-:
-
-## vim-native @buffers @default
+## misc @default @native-vim
 Unhighlight / remove highlight | <leader>uh
+
+## windows @buffers @tabs
 Increase window pane width horizontally | <C-Right>
 Decrease window pane width horizontally | <C-Left>
 Increase window pane height vertically | <C-Up>
 Decrease window pane height vertically | <C-Down>
 Toggle maximize current window | <leader>mm
+Go to last viewed buffer | <C-^>
+
 
 ## luasnip @snippets @expansion
 Expand snippet | <M-n>
@@ -38,5 +40,6 @@ Goto prev function outter end | [F
 Hop ts nodes in visual mode | VISUAL m
 
 ## text @movement @manipualtion
-Move text up
+Move current line up one line | <M-k>
+Move current line down one line | <M-j>
 

@@ -1,0 +1,50 @@
+#!/bin/sh
+#
+# Open a workspace for editing config files in tmux based upon the argument passed.
+
+if [ -z "$1" ]; then
+	echo "Please provide a program to configure: tmux, nvim, alacritty, git, lazygit"
+	return 1
+fi
+
+# tmux="/opt/homebrew/Cellar/tmux"
+
+SESSION_NAME="$1 config"
+
+not_in_tmux() {
+	[ -z "$TMUX" ]
+}
+
+session_exists() {
+	tmux has-session -t "=$SESSION_NAME"
+}
+
+create_detatched_session() {
+	(TMUX='' tmux new-session -Ad -s "$SESSION_NAME")
+}
+
+create_if_needed_and_attach() {
+	if not_in_tmux; then
+		tmux new-session -As "$SESSION_NAME"
+	else
+		if ! session_exists; then
+			create_detatched_session
+		fi
+		tmux switch-client -t "$SESSION_NAME"
+	fi
+}
+
+case "$1" in
+tmux)
+	tmuxinator start tmux-config
+	;;
+nvim)
+	tmuxinator start nvim-config
+	;;
+alacritty)
+	tmuxinator start alacritty-config
+	;;
+zsh)
+	tmuxinator start zsh-config
+	;;
+esac
