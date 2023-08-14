@@ -105,8 +105,8 @@ end)
 -- Center screen after vertical movements
 --[[ vim.keymap.set("n", "<C-u>", "<C-u>zz") ]]
 --[[ vim.keymap.set("n", "<C-d>", "<C-d>zz") ]]
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- vim.keymap.set("n", "n", "nzzzv")
+-- vim.keymap.set("n", "N", "Nzzzv")
 
 -- Better up/down
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -143,30 +143,6 @@ map("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Navigate down" })
 map("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Navigate left" })
 map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Navigate right" })
 vim.keymap.set("t", "jk", "<C-\\><C-n>", movelineOpts)
-
--- Escape key goes from Terminal Mode to Normal Mode
--- map("t", "<ESC>", "<C-><C-n>", { desc = "Insert Mode" })
-
---[[ map("n", "<C-t>", '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
---[[ map("i", "<C-t>", '<ESC><Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
--- save and source
-vim.keymap.set("n", "<leader>cx", function()
-	vim.cmd("w")
-	vim.cmd("so %")
-end)
-
--- aerial
-
--- toggle foldmethod
--- vim.keymap.set("n", "yof", function()
--- 	if vim.opt.foldmethod:get() == "expr" then
--- 		vim.cmd([[set foldmethod=manual]])
--- 		print("set foldmethod=manual")
--- 	else
--- 		vim.cmd([[set foldmethod=expr]])
--- 		print("set foldmethod=expr")
--- 	end
--- end)
 
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
