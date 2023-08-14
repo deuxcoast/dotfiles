@@ -83,7 +83,8 @@ determine the destination of the symlinks.
 
 ## Additional Setup
 
-Of course there's more to do.
+Of course there's more to do. I'm mostly writing this all down so I have everything
+in one place when I get around to writing the automated script.
 
 ### Mac Os Settings
 
