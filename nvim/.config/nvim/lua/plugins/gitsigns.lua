@@ -49,7 +49,7 @@ return {
 				vim.keymap.set(
 					"n",
 					"<leader>tb",
-					":Gitsigns toggle_current_line_blame",
+					":Gitsigns toggle_current_line_blame<CR>",
 					{ desc = "Toggle git current line blame" }
 				)
 			end,
