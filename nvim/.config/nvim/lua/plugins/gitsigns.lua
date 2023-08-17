@@ -10,14 +10,6 @@ return {
 				changedelete = { hl = "DiffChangeDelete", text = "", numhl = "GitSignsChangeNr" },
 				untracked = { hl = "GitSignsAdd", text = "▎", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
 			},
-			current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-			current_line_blame_opts = {
-				virt_text = true,
-				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-				delay = 500,
-				ignore_whitespace = false,
-			},
-			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 			on_attach = function(bufnr)
 				local function map(mode, lhs, rhs, opts)
 					opts = vim.tbl_extend("force", { noremap = true, silent = true }, opts or {})
