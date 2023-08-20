@@ -10,6 +10,24 @@ return {
 			end)
 		end,
 	},
+	-- {
+	-- 	"j-hui/fidget.nvim",
+	-- 	tag = "legacy",
+	-- 	event = "LspAttach",
+	-- 	config = function()
+	-- 		require("fidget").setup({
+	-- 			-- 	sources = {
+	-- 			-- 		["null-ls"] = {
+	-- 			-- 			ignore = true,
+	-- 			-- 		},
+	-- 			-- 	},
+	-- 		})
+	-- 	end,
+	-- 	opts = {
+	-- 		-- options
+	-- 	},
+	-- },
+	--
 	{ "nvim-lua/plenary.nvim" }, -- useful lua functions
 	{ "nvim-lua/popup.nvim" },
 	{ "tpope/vim-fugitive" },

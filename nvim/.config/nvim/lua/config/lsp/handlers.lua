@@ -73,7 +73,9 @@ M.on_attach = function(client, bufnr)
     lsp_keymaps.set_default_keymaps(client, bufnr)
 
     format.isEnabled = true
-    format.createAutocmd(client, bufnr)
+    -- BUG: When this is set, a message gets written to noice on the 
+    -- bottom of the screen at least in every Go file. 
+    -- format.createAutocmd(client, bufnr)
 end
 
 local present_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
