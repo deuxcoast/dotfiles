@@ -9,7 +9,7 @@ alias ~='cd ~'
 # --- Easy reports ---
 
 # List
-alias ls='ls -Fh --color=auto' 
+alias ls='ls -Fh --color=auto'
 alias grep='grep --color=auto'
 alias l="ls -l"
 alias la="ls -lA"
@@ -20,7 +20,7 @@ alias ld="ls -l | grep '^d'"
 alias l.d="ls -ld .* | grep '^d'}"
 
 # Disk Usage
-alias dud="du -d 1 -h" 
+alias dud="du -d 1 -h"
 alias duf="du -sh *"
 
 alias fdir="find . -type f -name"
@@ -51,14 +51,19 @@ alias md='mkdir'
 alias mdd='mkdir -pv $(date +%Y%m%d)'
 
 # Homebrew for Intel // Rosetta
+# With this command I can download binaries for Intel Macs onto the M1 laptop
+# using homebrew
 alias ibrew='arch -x86_64 /usr/local/bin/brew'
 alias x86='arch -x86_64'
 
-# GCC
-alias gcc="gcc-12"
-alias g++="g++-12"
+# GCC - by default MacOS has a binary /usr/bin/gcc that just runs Clang
+# These are so we can use gcc when we want to
+alias gcc="gcc-13"
+alias g++="g++-13"
 alias cc="cc-12"
-alias c++="c++-12"
+alias c++="c++-13"
+# This command allows me to produce x86 assembly on the M1 mac. Use this
+# for following along with CS:APP textbook
 alias igcc="arch -x86_64 /usr/local/bin/gcc-13"
 
 
@@ -88,9 +93,7 @@ alias vimconfig="cd ~/.config/nvim ; vim"
 # --- Applications ---
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
-# --- pnpm ----
-
-# --- kubrenetes ---
+# --- Kubernetes ---
 alias k="kubectl"
 
 # --- Typos ---
