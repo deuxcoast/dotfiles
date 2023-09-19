@@ -15,4 +15,5 @@ function util.highlight(group, colors)
 	end
 end
 
+-- function util.custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", )
 return util
