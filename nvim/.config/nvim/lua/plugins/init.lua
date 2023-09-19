@@ -56,11 +56,11 @@ return {
 	-- codebase. Folke died for my sins so I didn't have to.
 	{ "folke/neodev.nvim", opts = {} },
 	{ "mfussenegger/nvim-treehopper" },
-	{
-		"natecraddock/workspaces.nvim",
-		lazy = true,
-		opts = { hooks = { open = { "NvimTreeOpen", "Telescope find_files" } } },
-	},
+	-- {
+	-- 	"natecraddock/workspaces.nvim",
+	-- 	lazy = true,
+	-- 	opts = { hooks = { open = { "NvimTreeOpen", "Telescope find_files" } } },
+	-- },
 	{
 		"gabrielpoca/replacer.nvim",
 		init = function()
