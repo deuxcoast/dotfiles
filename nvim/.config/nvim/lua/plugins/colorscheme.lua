@@ -6,6 +6,14 @@ return {
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
+				flavor = "mocha",
+				color_overrides = {
+					mocha = {
+						base = "#000000",
+						mantle = "#000000",
+						crust = "#000000",
+					},
+				},
 				no_italic = true,
 				no_bold = true,
 				integrations = {
