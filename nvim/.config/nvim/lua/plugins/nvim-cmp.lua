@@ -40,36 +40,37 @@ return {
 		vim.cmd("highlight! CmpItemKindSnippet guibg=NONE guifg=#42be65")
 		vim.cmd("highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4")
 		vim.cmd("highlight! CmpItemKindFile guibg=NONE guifg=#be95ff")
+		require("cmp.types")
 
 		local types = require("cmp.types")
 		local str = require("cmp.utils.str")
 
 		local icons = {
-			Text = "",
-			Method = "",
-			Function = "",
-			Constructor = "⌘",
-			Field = "ﰠ",
-			Variable = "",
-			Class = "ﴯ",
+			Text = "",
+			Method = "󰆧",
+			Function = "󰊕",
+			Constructor = "",
+			Field = "󰇽",
+			Variable = "󰂡",
+			Class = "󰠱",
 			Interface = "",
-			Module = "",
-			Property = "ﰠ",
-			Unit = "塞",
-			Value = "",
+			Module = "",
+			Property = "󰜢",
+			Unit = "",
+			Value = "󰎠",
 			Enum = "",
-			Keyword = "廓",
-			Snippet = "",
-			Color = "",
-			File = "",
-			Reference = "",
-			Folder = "",
+			Keyword = "󰌋",
+			Snippet = "",
+			Color = "󰏘",
+			File = "󰈙",
+			Reference = "",
+			Folder = "󰉋",
 			EnumMember = "",
-			Constant = "",
-			Struct = "פּ",
+			Constant = "󰏿",
+			Struct = "",
 			Event = "",
-			Operator = "",
-			TypeParameter = "",
+			Operator = "󰆕",
+			TypeParameter = "󰅲",
 		}
 
 		if not presentCmp or not present_lua_snip then
@@ -151,14 +152,14 @@ return {
 					maxwidth = 60,
 					before = function(entry, vim_item)
 						vim_item.menu = ({
-							nvim_lsp = "ﲳ",
+							nvim_lsp = "󰊷",
 							nvim_lua = "",
 							treesitter = "",
-							path = "ﱮ",
-							buffer = "﬘",
+							path = "󰨣",
+							buffer = "",
 							zsh = "",
 							vsnip = "",
-							npm = "暈",
+							npm = "",
 						})[entry.source.name]
 
 						-- Get the full snippet (and only keep first line)
@@ -180,8 +181,8 @@ return {
 				}),
 			},
 			sources = {
-				{ name = "nvim_lua" },
 				{ name = "nvim_lsp" },
+				{ name = "nvim_lua" },
 				--[[ { name = "npm", keyword_length = 4 }, ]]
 				{ name = "luasnip" },
 				{ name = "path" },

@@ -5,7 +5,6 @@ return {
 		"nvim-treesitter/playground",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"RRethy/nvim-treesitter-textsubjects",
-		"p00f/nvim-ts-rainbow",
 		"windwp/nvim-ts-autotag",
 		-- [[ "nvim-treesitter/nvim-tree-docs", ]]
 		"abecodes/tabout.nvim",
@@ -70,10 +69,11 @@ return {
 			-- RRethy/nvim-treesitter-textsubjects
 			textsubjects = {
 				enable = true,
-				prev_selection = ",", -- (Optional) keymap to select the previous selection
+				prev_selection = "<S-CR>", -- (Optional) keymap to select the previous selection
 				keymaps = {
-					["."] = "textsubjects-smart",
+					["<CR>"] = "textsubjects-smart",
 					[";"] = "textsubjects-container-outer",
+                    ['i;'] = 'textsubjects-container-inner',
 				},
 			},
 			-- nvim-treesitter/nvim-treesitter-textobjects
@@ -111,39 +111,39 @@ return {
 					},
 				},
 			},
-			playground = {
-				enable = false,
-				disable = {},
-				updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-				persist_queries = false, -- Whether the query persists across vim sessions
-				keybindings = {
-					toggle_query_editor = "o",
-					toggle_hl_groups = "i",
-					toggle_injected_languages = "t",
-					toggle_anonymous_nodes = "a",
-					toggle_language_display = "I",
-					focus_language = "f",
-					unfocus_language = "F",
-					update = "R",
-					goto_node = "<cr>",
-					show_help = "?",
-				},
-			},
+			-- playground = {
+			-- 	enable = false,
+			-- 	disable = {},
+			-- 	updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+			-- 	persist_queries = false, -- Whether the query persists across vim sessions
+			-- 	keybindings = {
+			-- 		toggle_query_editor = "o",
+			-- 		toggle_hl_groups = "i",
+			-- 		toggle_injected_languages = "t",
+			-- 		toggle_anonymous_nodes = "a",
+			-- 		toggle_language_display = "I",
+			-- 		focus_language = "f",
+			-- 		unfocus_language = "F",
+			-- 		update = "R",
+			-- 		goto_node = "<cr>",
+			-- 		show_help = "?",
+			-- 	},
+			-- },
 			-- https://github.com/p00f/nvim-ts-rainbow
-			rainbow = {
-				enable = true,
-				-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-				extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-				max_file_lines = nil, -- Do not enable for files with more than n lines, int
-				colors = {
-					"#33b1ff",
-					"#42be65",
-					"#ff7eb6",
-					"#ffe97b",
-					"#3ddbd9",
-					"#ff5189",
-				},
-			},
+			-- rainbow = {
+			-- 	enable = true,
+			-- 	-- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+			-- 	extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+			-- 	max_file_lines = nil, -- Do not enable for files with more than n lines, int
+			-- 	colors = {
+			-- 		"#33b1ff",
+			-- 		"#42be65",
+			-- 		"#ff7eb6",
+			-- 		"#ffe97b",
+			-- 		"#3ddbd9",
+			-- 		"#ff5189",
+			-- 	},
+			-- },
 		})
 	end,
 }

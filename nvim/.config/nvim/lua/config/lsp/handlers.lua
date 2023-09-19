@@ -25,7 +25,8 @@ M.setup = function()
             active = signs,
         },
         update_in_insert = false,
-        underline = true,
+        -- underline = true,
+        underline = false,
         severity_sort = true,
         float = {
             focusable = true,
@@ -75,7 +76,7 @@ M.on_attach = function(client, bufnr)
     format.isEnabled = true
     -- BUG: When this is set, a message gets written to noice on the 
     -- bottom of the screen at least in every Go file. 
-    -- format.createAutocmd(client, bufnr)
+    format.createAutocmd(client, bufnr)
 end
 
 local present_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")

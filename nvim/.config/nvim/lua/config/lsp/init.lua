@@ -40,7 +40,7 @@ local servers = {
 	--[[ "ltex-ls", ]]
 
 	-- DAP
-	"delve",
+	-- "delve",
 	-- "node-debug2-adapter",
 	"firefox-debug-adapter",
 	"chrome-debug-adapter",
@@ -70,7 +70,8 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 	opts = opts or {}
 	opts.border = opts.border or "single"
 	opts.max_width = opts.max_width or 95
-	return orig_util_open_floating_preview(contents, syntax, opts, ...) end
+	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 -- This gets lines between code blocks in the floating preview window
 --[[ local orig_stylize_markdown = vim.lsp.util.stylize_markdown ]]

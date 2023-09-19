@@ -4,6 +4,7 @@ local M = {}
 M.setup = function(on_attach, capabilities)
 	local configs = {
 		cssls = require("config.lsp.servers.cssls"),
+		clangd = require("config.lsp.servers.clangd"),
 		jsonls = require("config.lsp.servers.jsonls"),
 		gopls = {
 			settings = { gopls = { env = { GOFLAGS = "-tags=windows,linux,unittest" } } },

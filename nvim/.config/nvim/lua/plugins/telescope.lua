@@ -8,6 +8,7 @@ return {
 		"nvim-telescope/telescope-file-browser.nvim",
 		"nvim-telescope/telescope-dap.nvim",
 		"nvim-telescope/telescope-live-grep-args.nvim",
+		-- "nvim-telescope/telescope-hop.nvim", -- TEST: Is this downloaded by Lazy? Do I need to provide it elsewhere?
 		"folke/trouble.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"natecraddock/workspaces.nvim",
@@ -15,7 +16,7 @@ return {
 		"tknightz/telescope-termfinder.nvim",
 	},
 	init = function()
-		vim.keymap.set("n", "<leader><space>", ":Telescope git_files<CR>", { desc = " Git files" })
+		vim.keymap.set("n", "<leader><leader>", ":Telescope git_files<CR>", { desc = " Git files" })
 		vim.keymap.set(
 			"n",
 			"<leader>f/",
@@ -28,8 +29,6 @@ return {
 			":Telescope current_buffer_fuzzy_find<CR>",
 			{ desc = " Current buffer fzf" }
 		)
-		-- [[ vim.keymap.set("n", "<leader>/", ":Telescope current_buffer_fuzzy_find<CR>", { desc = " Current buffer
-		-- fzf"}) ]]
 		vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = " Buffers" })
 		vim.keymap.set("n", "<leader>b", ":Telescope buffers<CR>", { desc = " Buffers" })
 		vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = " Project files" })
@@ -50,7 +49,9 @@ return {
 		vim.keymap.set("n", "<leader>fM", ":Telescope make<CR>", { desc = " Makefile" })
 		vim.keymap.set("n", "<leader>ft", ":Telescope termfinder find<CR>", { desc = " Terminals" })
 		vim.keymap.set("n", "<leader>fm", ":Telescope noice<CR>", { desc = " Messages" })
-		vim.keymap.set("n", "<leader>fk", ":Telescope ", { desc = " Insert picker" })
+		vim.keymap.set("n", "<leader>fk", ":Telescope man_pages sections=ALL<CR>", { desc = " Man pages" })
+		vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = " Help tags" })
+		vim.keymap.set("n", "<leader>fs", ":Telescope colorscheme<CR>", { desc = " Color schemes" })
 	end,
 	config = function()
 		local telescope = require("telescope")
@@ -59,31 +60,6 @@ return {
 		if not trouble_present then
 			print("trouble is not installed")
 		end
-
-		local telescope_actions = require("telescope.actions.set")
-
-		-- https://www.reddit.com/r/neovim/comments/t5qizd/awesome_telescope_nvimtree_mapping/
-		-- local open_in_nvim_tree = function(prompt_bufnr)
-		-- 	local action_state = require("telescope.actions.state")
-		-- 	local Path = require("plenary.path")
-		-- 	local actions = require("telescope.actions")
-		--
-		-- 	local entry = action_state.get_selected_entry()[1]
-		-- 	local entry_path = Path:new(entry):parent():absolute()
-		-- 	actions._close(prompt_bufnr, true)
-		-- 	entry_path = Path:new(entry):parent():absolute()
-		-- 	entry_path = entry_path:gsub("\\", "\\\\")
-		--
-		-- 	vim.cmd("NvimTreeClose")
-		-- 	vim.cmd("NvimTreeOpen " .. entry_path)
-		--
-		-- 	file_name = nil
-		-- 	for s in string.gmatch(entry, "[^/]+") do
-		-- 		file_name = s
-		-- 	end
-		--
-		-- 	vim.cmd("/" .. file_name)
-		-- end
 
 		telescope.setup({
 			extensions = {
@@ -99,19 +75,14 @@ return {
 			},
 			defaults = {
 				mappings = {
-					i = {
-						["<c-a>"] = trouble.open_with_trouble,
-						["<c-s>"] = open_in_nvim_tree,
-					},
 					n = {
-						["<c-a>"] = trouble.open_with_trouble,
-						["<c-s>"] = open_in_nvim_tree,
 						["<c-c>"] = require("telescope.actions").close,
 					},
 				},
 			},
 		})
 
+		telescope.load_extension("fzf")
 		telescope.load_extension("file_browser")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("workspaces")

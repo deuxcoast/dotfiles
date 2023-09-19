@@ -1,6 +1,7 @@
 require("duex.globals")
 require("config.mapping")
 require("config.lazy-nvim")
+-- require("config.colors")
 require("config.theme")
 require("config.autocmds")
 require("config.options")

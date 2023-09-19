@@ -2,6 +2,14 @@ return {
 	"akinsho/toggleterm.nvim",
 	config = function()
 		require("toggleterm").setup({
+			highlights = {
+				Normal = { link = "Normal" },
+				NormalFloat = { link = "Normal" }, -- also using NormalFloat here makes the border weird
+				-- FloatBorder = { link = "FloatBorder" },
+				-- SignColumn = { link = "SignColumn" },
+				StatusLine = { link = "StatusLine" },
+				StatusLineNC = { link = "StatusLineNC" },
+			},
 			-- size can be a number or function which is passed the current terminal
 			size = function(term)
 				if term.direction == "horizontal" then
@@ -34,10 +42,10 @@ return {
 				--   width = number,
 				--   height = number,
 				winblend = 0,
-				highlights = {
-					border = "Normal",
-					background = "Normal",
-				},
+				-- highlights = {
+				-- 	border = "Normal",
+				-- 	background = "Normal",
+				-- },
 			},
 		})
 

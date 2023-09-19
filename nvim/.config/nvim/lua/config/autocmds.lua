@@ -76,6 +76,13 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- vim.api.nvim_create_autocmd("ColorScheme", {
+--     pattern = "moonfly",
+--     callback = function ()
+--         vim.api.nvim_set_hl(0, )
+--     end
+-- })
+
 -- disable some default providers
 for _, provider in ipairs({ "node", "perl", "python3", "ruby" }) do
 	vim.g["loaded_" .. provider .. "_provider"] = 0

@@ -1,7 +1,8 @@
 return {
-	{ "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+	{ dir = "~/duexcoast/plugins/stackmap.nvim" },
 	{ "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } }, -- select entire buffer
 	{ "kana/vim-textobj-line", dependencies = { "kana/vim-textobj-user" } }, -- select entire line
+	{ "HiPhish/rainbow-delimiters.nvim" },
 	{
 		"kazhala/close-buffers.nvim",
 		config = function()
@@ -10,35 +11,15 @@ return {
 			end)
 		end,
 	},
-	-- {
-	-- 	"j-hui/fidget.nvim",
-	-- 	tag = "legacy",
-	-- 	event = "LspAttach",
-	-- 	config = function()
-	-- 		require("fidget").setup({
-	-- 			-- 	sources = {
-	-- 			-- 		["null-ls"] = {
-	-- 			-- 			ignore = true,
-	-- 			-- 		},
-	-- 			-- 	},
-	-- 		})
-	-- 	end,
-	-- 	opts = {
-	-- 		-- options
-	-- 	},
-	-- },
-	--
 	{ "nvim-lua/plenary.nvim" }, -- useful lua functions
 	{ "nvim-lua/popup.nvim" },
 	{ "tpope/vim-fugitive" },
 	{ "tpope/vim-rhubarb" },
 	{ "tpope/vim-unimpaired" },
-	{ "machakann/vim-sandwich" }, -- vim surround alternative
 	{ "mg979/vim-visual-multi" },
 	{ "lambdalisue/suda.vim" },
 	{ "sindrets/diffview.nvim", opts = { file_panel = { win_config = { position = "left" } } } },
 	{ "jbyuki/one-small-step-for-vimkind" }, -- debug adapter for nvim lua
-	-- { "psliwka/vim-smoothie" },
 	{
 		"rhysd/accelerated-jk",
 		lazy = true,
@@ -86,27 +67,19 @@ return {
 			vim.api.nvim_set_keymap("n", "<Leader>gr", ':lua require("replacer").run()<cr>', { silent = true })
 		end,
 	},
-	--[[ { ]]
-	--[[ 	"RRethy/vim-illuminate", ]]
-	--[[ 	config = function() ]]
-	--[[ 		require("illuminate").configure({}) ]]
-	--[[ 	end, ]]
-	--[[ }, ]]
 	{
 		"mbbill/undotree",
 		lazy = true,
 		event = "BufEnter",
 	},
-	-- Treesitter Components
 	{
 		"mfussenegger/nvim-treehopper",
 		lazy = true,
 		event = "InsertEnter",
 	},
-	{ "kyazdani42/nvim-web-devicons" },
-	{ "lukas-reineke/indent-blankline.nvim" }, -- indentation guides
+	{ "nvim-tree/nvim-web-devicons" },
+	-- { "lukas-reineke/indent-blankline.nvim" }, -- indentation guides
 	{ "RishabhRD/nvim-cheat.sh", dependencies = "RishabhRD/popfix" },
-	--[[ { "nanotee/sqls.nvim",                  ft = "sql" }, ]]
 	{ "weilbith/nvim-code-action-menu" },
 	{
 		"williamboman/mason.nvim",
@@ -117,7 +90,6 @@ return {
 	{ "jose-elias-alvarez/typescript.nvim" },
 	{ "jose-elias-alvarez/null-ls.nvim" },
 	{ "ThePrimeagen/refactoring.nvim", config = true },
-	--[[ { "m4xshen/autoclose.nvim", opts = { {} } }, ]]
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -143,32 +115,10 @@ return {
 	{ "theHamsta/nvim-dap-virtual-text", config = true },
 	{ "leoluz/nvim-dap-go" },
 	{ "mxsdev/nvim-dap-vscode-js", dependencies = { "mfussenegger/nvim-dap" } },
-	--[[ { ]]
-	--[[     "microsoft/vscode-js-debug", ]]
-	--[[     opt = true, ]]
-	--[[     build = "npm install --legacy-peer-deps && npm run compile", ]]
-	--[[ }, ]]
 	{ "preservim/vim-markdown", lazy = true },
 	{ "mattn/emmet-vim", lazy = true, event = "BufEnter" },
 	{ "b0o/SchemaStore.nvim", lazy = true },
 	{ "fedepujol/move.nvim", lazy = true, event = "BufEnter" },
 	{ "vim-scripts/ReplaceWithRegister", lazy = true, event = "BufEnter" },
 	{ "christoomey/vim-tmux-navigator", lazy = true, event = "BufEnter" },
-	--[[ { ]]
-	--[[     "Exafunction/codeium.vim", ]]
-	--[[     init = function() ]]
-	--[[         vim.keymap.set("i", "<c-.>", function() ]]
-	--[[             return vim.fn["codeium#CycleCompletions"](1) ]]
-	--[[         end, { expr = true }) ]]
-	--[[         vim.keymap.set("i", "<c-,>", function() ]]
-	--[[             return vim.fn["codeium#CycleCompletions"](-1) ]]
-	--[[         end, { expr = true }) ]]
-	--[[         vim.keymap.set("i", "<c-x>", function() ]]
-	--[[             return vim.fn["codeium#Clear"]() ]]
-	--[[         end, { expr = true }) ]]
-	--[[         vim.keymap.set("i", "<c-cr>", function() ]]
-	--[[             return vim.fn["codeium#Accept"]() ]]
-	--[[         end, { expr = true }) ]]
-	--[[     end, ]]
-	--[[ }, ]]
 }
