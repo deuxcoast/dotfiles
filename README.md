@@ -17,9 +17,11 @@ is a bit of manual labor involved. Hard work builds character.
 git clone https://github.com/duexcoast/dotfiles ~/.dotfiles --depth 1
 ```
 
+
 > :warning: These configs were written on Macs, and have not taken other OS's into
 > account. That being said, they should work on both the newer M1 arm64 architecture,
 > as well as older Intel-based Macs.
+
 
 2.  There are a number of programs required in order for these programs to operate
     correctly. An incomplete list off the top of my head, starting with (obviously) a
