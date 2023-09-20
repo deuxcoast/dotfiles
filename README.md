@@ -48,8 +48,8 @@ git clone https://github.com/duexcoast/dotfiles ~/.dotfiles --depth 1
     ohmyzsh. They can be installed using the ohmyzsh plugin manager, by following
     the instructions on the pages below:
 
-        - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh)
-        - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+- [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md#oh-my-zsh)
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
 
 ### Using Stow for Symlinks
 
