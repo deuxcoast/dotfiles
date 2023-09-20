@@ -1,11 +1,9 @@
-require("duex.globals")
-require("config.mapping")
-require("config.lazy-nvim")
--- require("config.colors")
-require("config.theme")
-require("config.autocmds")
-require("config.options")
-require("config.filetypes")
--- require("config.lsp")
-require("config.debug")
-require("neovide")
+require "duex.globals"
+require "config.mapping"
+require "config.lazy-nvim"
+require "config.theme"
+require "config.autocmds"
+require "config.options"
+require "config.filetypes"
+require "config.debug"
+require "neovide"
