@@ -42,12 +42,12 @@ return {
 							warnings = { "italic" },
 							information = { "italic" },
 						},
-						underlines = {
-							errors = { "underline" },
-							hints = { "underline" },
-							warnings = { "underline" },
-							information = { "underline" },
-						},
+						-- underlines = {
+						-- 	errors = { "underline" },
+						-- 	hints = { "underline" },
+						-- 	warnings = { "underline" },
+						-- 	information = { "underline" },
+						-- },
 						inlay_hints = {
 							background = true,
 						},

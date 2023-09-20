@@ -1,97 +1,82 @@
-local lsp_keymaps = require("config.lsp.lsp-keymaps")
-local present_aerial, aerial = pcall(require, "aerial")
-local present_navic, navic = pcall(require, "nvim-navic")
-local format = require("config.lsp.format")
+-- Jump directly to the first available definition every time.
+vim.lsp.handlers["textDocument/definition"] = function(_, result)
+	if not result or vim.tbl_isempty(result) then
+		print("[LSP] Could not find definition")
+		return
+	end
+
+	if vim.tbl_islist(result) then
+		vim.lsp.util.jump_to_location(result[1], "utf-8")
+	else
+		vim.lsp.util.jump_to_location(result, "utf-8")
+	end
+end
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] =
+	vim.lsp.with(vim.lsp.handlers["textDocument/publishDiagnostics"], {
+		signs = {
+			severity_limit = "Error",
+		},
+        underline = false,
+		-- underline = {
+		-- 	severity_limit = "Warning",
+		-- },
+		virtual_text = true,
+	})
+
+vim.lsp.handlers["window/showMessage"] = require("config.lsp.show_message")
 
 local M = {}
 
-M.setup = function()
-    local signs = {
-        { name = "DiagnosticSignError", text = "" },
-        { name = "DiagnosticSignWarn",  text = "" },
-        { name = "DiagnosticSignHint",  text = "" },
-        { name = "DiagnosticSignInfo",  text = "" },
-    }
+M.implementation = function()
+	local params = vim.lsp.util.make_position_params()
 
-    for _, sign in ipairs(signs) do
-        vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
+	vim.lsp.buf_request(0, "textDocument/implementation", params, function(err, result, ctx, config)
+		local bufnr = ctx.bufnr
+		local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
 
-    local config = {
-        virtual_text = false,
-        -- this will only show virtual text for Error diagnostics.
-        --[[ virtual_text = { severity = 1 }, ]]
-        signs = {
-            active = signs,
-        },
-        update_in_insert = false,
-        -- underline = true,
-        underline = false,
-        severity_sort = true,
-        float = {
-            focusable = true,
-            border = "rounded",
-            source = "always",
-            header = "",
-            prefix = "",
-        },
-    }
+		-- In go code, I do not like to see any mocks for impls
+		if ft == "go" then
+			local new_result = vim.tbl_filter(function(v)
+				return not string.find(v.uri, "mock_")
+			end, result)
 
-    vim.diagnostic.config(config)
+			if #new_result > 0 then
+				result = new_result
+			end
+		end
 
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
-    })
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "single",
-    })
+		vim.lsp.handlers["textDocument/implementation"](err, result, ctx, config)
+		vim.cmd([[normal! zz]])
+	end)
 end
 
--- local present_lsp_status, lsp_status = pcall(require, "lsp-status")
+vim.lsp.codelens.display = require("gl.codelens").display
+
+--[[
+|| brrr brrr brrr.... running test...
+|| {
+||   arguments = { "file:///home/tjdevries/plugins/green_light.nvim/test/green_light/example_test.go", { "TestExample" }, vim.NIL },
+||   command = "gopls.test",
+||   title = "run test"
+|| }
+|| {
+||   bufnr = 1,
+||   client_id = 1
+|| }
+--]]
+-- vim.lsp.commands["gopls.test"] = function(command, context)
+--   local TestRun = require("gl.test").TestRun
 --
--- if present_lsp_status then
--- 	lsp_status.register_progress()
--- 	lsp_status.config({
--- 		diagnostics = false,
--- 	})
+--   local test_pattern = command.arguments[2][1]
+--   print("test pattern:", test_pattern)
+--
+--   TestRun
+--     :new({
+--       file_pattern = "/home/tjdevries/plugins/green_light.nvim/test/green_light/...",
+--       test_pattern = "^" .. test_pattern .. "$",
+--     })
+--     :run()
 -- end
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-M.on_attach = function(client, bufnr)
-    -- if present_lsp_status then
-    -- 	lsp_status.on_attach(client, bufnr)
-    -- end
-
-    if present_aerial then
-        aerial.on_attach(client, bufnr)
-    end
-
-    if client.server_capabilities.documentSymbolProvider then
-        navic.attach(client, bufnr)
-    end
-
-    lsp_keymaps.set_default_keymaps(client, bufnr)
-
-    format.isEnabled = true
-    -- BUG: When this is set, a message gets written to noice on the 
-    -- bottom of the screen at least in every Go file. 
-    format.createAutocmd(client, bufnr)
-end
-
-local present_cmp_nvim_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-if present_cmp_nvim_lsp then
-    capabilities = cmp_nvim_lsp.default_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-end
-
--- if present_lsp_status then
--- 	capabilities = vim.tbl_deep_extend("keep", capabilities, lsp_status.capabilities)
--- end
-
-M.capabilities = capabilities
 
 return M
