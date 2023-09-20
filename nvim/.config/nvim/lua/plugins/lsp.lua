@@ -1,12 +1,13 @@
 return {
     {
         "neovim/nvim-lspconfig",
-        config = function ()
+        config = function()
             require "config.lsp"
-        end
+        end,
     },
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         config = function()
@@ -25,6 +26,4 @@ return {
     "folke/neodev.nvim",
     "jose-elias-alvarez/nvim-lsp-ts-utils",
     "b0o/schemastore.nvim",
-    -- Formatting plugin
-    "stevearc/conform.nvim",
 }
