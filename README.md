@@ -25,24 +25,24 @@ git clone https://github.com/duexcoast/dotfiles ~/.dotfiles --depth 1
     correctly. An incomplete list off the top of my head, starting with (obviously) a
     package manager:
 
-        - [homebrew](https://brew.sh/)
-        - [stow](https://github.com/aspiers/stow)
-        - [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
-        - [nvim](https://github.com/neovim/neovim)
-        - [tmux](https://github.com/tmux/tmux)
-        - [tmuxinator](https://formulae.brew.sh/formula/tmuxinator)
-        - [bat](https://github.com/sharkdp/bat)
-        - [fzf](https://github.com/junegunn/fzf)
-        - [ripgrep](https://github.com/BurntSushi/ripgrep)
-        - [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
-        - [lazygit](https://github.com/jesseduffield/lazygit)
-        - [delta](https://github.com/dandavison/delta)
-        - [nodejs](https://github.com/nodejs/node)
-        - [autojump](https://github.com/wting/autojump)
-        - [glow](https://github.com/charmbracelet/glow)
-        - [go](https://github.com/golang/go)
-        - [go tools](https://github.com/golang/tools)
-        - [nodejs](https://nodejs.org/en/download/current)
+- [homebrew](https://brew.sh/)
+- [stow](https://github.com/aspiers/stow)
+- [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)
+- [nvim](https://github.com/neovim/neovim)
+- [tmux](https://github.com/tmux/tmux)
+- [tmuxinator](https://formulae.brew.sh/formula/tmuxinator)
+- [bat](https://github.com/sharkdp/bat)
+- [fzf](https://github.com/junegunn/fzf)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [the_silver_searcher](https://github.com/ggreer/the_silver_searcher)
+- [lazygit](https://github.com/jesseduffield/lazygit)
+- [delta](https://github.com/dandavison/delta)
+- [nodejs](https://github.com/nodejs/node)
+- [autojump](https://github.com/wting/autojump)
+- [glow](https://github.com/charmbracelet/glow)
+- [go](https://github.com/golang/go)
+- [go tools](https://github.com/golang/tools)
+- [nodejs](https://nodejs.org/en/download/current)
 
 3.  You will also need to install certain additonal zsh plugins not provided by
     ohmyzsh. They can be installed using the ohmyzsh plugin manager, by following
@@ -138,7 +138,7 @@ We also need to download Debug Adapters in order to use DAP. Download instructio
 for various languages can be found [here](https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation).
 Most importantly:
 
-    - [Delve](https://github.com/go-delve/delve/tree/master/Documentation/installation) for debugging) Go code.
+- [Delve](https://github.com/go-delve/delve/tree/master/Documentation/installation) for debugging) Go code.
 
 There will be other things that arise.
 
