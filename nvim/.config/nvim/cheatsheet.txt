@@ -31,15 +31,60 @@ Inside function: interior only | if
 Outside function: name and brackets included | af
 Class inner | ic
 Class outter | ac
-Container gradual expansion: repeatable | VISUAL .
-Outer container | VISUAL ;
+Container gradual expansion: repeatable | V_.
+Outer container | V_;
 Goto next function outter start | ]f  
 Goto prev function outter start | [f
 Goto next function outter end | ]F  
 Goto prev function outter end | [F  
-Hop ts nodes in visual mode | VISUAL m
+Hop ts nodes in visual mode | V_m
+Text object - Entire document | V_ae
+Text object - Entire line inner | V_il
+Text object - Entire line outer | V_al
 
 ## text @movement @manipualtion
 Move current line up one line | <M-k>
 Move current line down one line | <M-j>
 
+## markdown @browser @preview
+Preview markdown document in browser | <leader>zp 
+
+## trouble @diagnostics @errors
+Toggle trouble | <leader>lo  
+Toggle workspace diagnostics | <leader>lw
+Toggle document diagnostics | <leader>ld
+Toggle quickfix | <leader>lq
+Toggle loclist | <leader>ll
+
+## toggleterm @terminal @shell
+Toggle floating terminal | <C-o>
+Toggle horizontal terminal | <C-t>
+Toggle horizontal terminal n, where n is int | n<C-t> 
+Telescope search for terminal | <leader>ft
+
+## nvim-surround @vim-sandwich @pairs
+Surround selection (e.g. (selection) ) in visual mode | V_S)
+
+## dap @delve @debug
+"Continue (next breakpoint)" | <leader>dn
+"Toggle breakpoint" | <leader>db
+"Set conditional breakpoint" | <leader>dB
+"Terminate" | <leader>ds
+"Up" | <leader>dk
+"Down" |<leader>dj
+"Set exception breakpoint" | <leader>de
+"Open REPL" | <leader>dr
+"Attach" | <leader>da
+"Attach to remote" | <leader>dA
+"Dap ui Widgets: hover" | <leader>di
+"Dap-go: Debug test" | <leader>dt
+"Telescope: dap frames" | <leader>df
+"Telescope: dap commands" | <leader>dc
+"Telescope: dap list_breakpoints" | <leader>dl
+"Dap step out" | <A-k>
+"Dap step into" | <A-l>
+"Dap step over" | <A-j>
+
+## lsp
+"Rename variable" | <leader>cr
+"Code actions" | <leader>ca

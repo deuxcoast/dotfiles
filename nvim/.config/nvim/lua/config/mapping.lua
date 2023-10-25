@@ -2,11 +2,9 @@ vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
 
 vim.keymap.set("c", "<S-Enter>", function()
-	require("noice").redirect(vim.fn.getcmdline())
+    require("noice").redirect(vim.fn.getcmdline())
 end, { desc = "Redirect Cmdline" })
 
--- closing  and quitting
---
 -- vim.keymap.set("n", "<leader>q"
 -- Quit vim
 vim.keymap.set("n", "<leader>Q", ":qall <CR>", { desc = "Quit vim, unless there is modified buffers" })
@@ -15,6 +13,8 @@ vim.keymap.set("n", "<leader>qw", ":close<CR>", { desc = "Close the current wind
 
 -- Revert to last save
 map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
+
+vim.keymap.set("v", "y", "y']")
 
 -- Jump to new line in insert mode while in middle of line
 -- This is working due to a remap of the terminal keycodes in my alacritty config.
@@ -99,7 +99,7 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 vim.keymap.set("n", "<F8>", function()
-	require("null-ls").toggle("cspell")
+    require("null-ls").toggle "cspell"
 end)
 
 -- Center screen after vertical movements
@@ -151,8 +151,8 @@ vim.keymap.set("t", "jk", "<C-\\><C-n>", movelineOpts)
 --[[ map("i", "<C-t>", '<ESC><Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 -- save and source
 vim.keymap.set("n", "<leader>cx", function()
-	vim.cmd("w")
-	vim.cmd("so %")
+    vim.cmd "w"
+    vim.cmd "so %"
 end)
 
 -- aerial
@@ -170,9 +170,9 @@ end)
 
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "qf", "dap-float" },
-	callback = function()
-		vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
-		vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
-	end,
+    pattern = { "qf", "dap-float" },
+    callback = function()
+        vim.keymap.set("n", "q", "<cmd>close!<CR>", { silent = true, buffer = true })
+        vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
+    end,
 })

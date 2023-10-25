@@ -1,4 +1,4 @@
 # My Neovim config
 
-Built from the dotfiles of:
-https://github.com/flytaly/nvim-config
+I carry this burden with me every waking moment of my life.
+

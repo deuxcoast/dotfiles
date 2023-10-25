@@ -6,6 +6,10 @@ all:
 	stow --verbose --target=$$HOME --restow lazygit
 	stow --verbose --target=$$HOME --restow tmux
 	stow --verbose --target=$$HOME --restow zsh
+	stow --verbose --target=$$HOME --restow skhd
+	stow --verbose --target=$$HOME --restow yabai
+	stow --verbose --target=$$HOME --restow sketchybar
+	stow --verbose --target=$$HOME --restow anki
 
 delete:
 	stow --verbose --target=$$HOME --delete */

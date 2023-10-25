@@ -44,8 +44,8 @@ font:
     family: Hasklug Nerd Font
   # bold:
   #   family: Hasklug Nerd Font
-  italic:
-    family: Hasklug Nerd Font
+  # italic:
+    # family: Hasklug Nerd Font
 
   size: 14.0
 
@@ -73,13 +73,13 @@ debug:
   #   - INFO
   #   - DEBUG
   #   - TRACE
-  log_level: OFF
+  log_level: Off
 
   # Print all received window events.
   print_events: false
 
   # Record all characters and escape sequences as test data.
-  ref_test: false
+  # ref_test: false
 
 # Live config reload (changes require restart)
 live_config_reload: true

@@ -43,7 +43,12 @@ return {
                 { desc = " File browser" }
             )
             vim.keymap.set("n", "<leader>fT", ":Telescope builtin<CR>", { desc = " Telescope meta" })
-            vim.keymap.set("n", "<leader>fs", ":Telescope lsp_document_symbols<CR>", { desc = " LSP document symbols" })
+            vim.keymap.set(
+                "n",
+                "<leader>fs",
+                ":Telescope lsp_document_symbols<CR>",
+                { desc = " LSP document symbols" }
+            )
             vim.keymap.set("n", "<leader>fc", ":Telescope git_bcommits<CR>", { desc = " Buffer git commit history" })
             vim.keymap.set("n", "<leader>fC", ":Telescope git_commits<CR>", { desc = " Project git commit history" })
             vim.keymap.set("n", "<leader>fw", ":Telescope workspaces<CR>", { desc = " Workspaces" })
@@ -53,16 +58,17 @@ return {
             vim.keymap.set("n", "<leader>fk", ":Telescope man_pages sections=ALL<CR>", { desc = " Man pages" })
             vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = " Help tags" })
             vim.keymap.set("n", "<leader>fs", ":Telescope colorscheme<CR>", { desc = " Color schemes" })
+            vim.keymap.set("n", "<leader>fa", ":Cheatsheet<CR>", { desc = " Cheatsheet keymaps" })
         end,
         config = function()
-            local telescope = require("telescope")
+            local telescope = require "telescope"
 
             local trouble_present, trouble = pcall(require, "trouble.providers.telescope")
             if not trouble_present then
-                print("trouble is not installed")
+                print "trouble is not installed"
             end
 
-            telescope.setup({
+            telescope.setup {
                 extensions = {
                     file_browser = {
                         theme = "ivy",
@@ -81,28 +87,27 @@ return {
                         },
                     },
                 },
-            })
+            }
 
-            telescope.load_extension("fzf")
-            telescope.load_extension("file_browser")
-            telescope.load_extension("ui-select")
-            telescope.load_extension("workspaces")
-            telescope.load_extension("live_grep_args")
-            telescope.load_extension("make")
-            telescope.load_extension("termfinder")
-            telescope.load_extension("noice")
+            telescope.load_extension "fzf"
+            telescope.load_extension "file_browser"
+            telescope.load_extension "ui-select"
+            telescope.load_extension "workspaces"
+            telescope.load_extension "live_grep_args"
+            telescope.load_extension "make"
+            telescope.load_extension "termfinder"
+            telescope.load_extension "noice"
         end,
     },
     {
         "sopa0/telescope-makefile",
         config = function()
-            require("telescope-makefile").setup({
+            require("telescope-makefile").setup {
                 -- The path where to search the makefile in the priority order
                 makefile_priority = { ".", "build/" },
                 default_target = "[DEFAULT]", -- nil or string : Name of the default target | nil will disable the default_target
                 make_bin = "make", -- Custom makefile binary path, uses system make by def
-            })
+            }
         end,
-
-    }
+    },
 }
