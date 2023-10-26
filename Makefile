@@ -11,8 +11,11 @@ all:
 	stow --verbose --target=$$HOME --restow sketchybar
 	stow --verbose --target=$$HOME --restow anki
 
+	$(shell ./bootstrap.sh)
 delete:
 	stow --verbose --target=$$HOME --delete */
+
+	$(shell ./cleanup.sh)
 
 clean-link:
 	delete
