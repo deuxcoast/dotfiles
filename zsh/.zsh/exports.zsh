@@ -1,8 +1,14 @@
+# PATH env vars are exported from ~/.zshenv
+# This file is for sourcing and exporting env vars for various CLI tools
 
-# Locale
-# I have locale set in the alacritty config.
-# export LANG="en_US.UTF-8"
-# export LANGUAGE="en_US.UTF-8"
+# Source zsh-completions plugin
+# This must be run before `source "$ZSH/oh-my-zsh.sh"`
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+# Add
+fpath+=${HOME}/.zsh/functions/
+
+# Source FZF keybindings and functions
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # FZF Catppucin Mocha Colorscheme
 export FZF_DEFAULT_OPTS=" \
@@ -12,7 +18,7 @@ export FZF_DEFAULT_OPTS=" \
 
 
 # ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/config"
 
 # Less
 export LESS="--RAW-CONTROL-CHARS"
