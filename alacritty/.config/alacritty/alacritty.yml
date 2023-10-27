@@ -74,10 +74,10 @@ debug:
   #   - INFO
   #   - DEBUG
   #   - TRACE
-  log_level: Debug
+  log_level: Off
 
   # Print all received window events.
-  print_events: true
+  print_events: false
 
   # Record all characters and escape sequences as test data.
   ref_test: true
