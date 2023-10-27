@@ -4,14 +4,15 @@ draw_bold_text_with_bright_colors: true
 
 # Environment variables
 env:
-  TERM: xterm-256color
+  # TERM: xterm-256color
   LC_ALL: en_US.UTF-8
   LANG: en_US.UTF-8
 shell:
   program: /bin/zsh
   # Mac M1 ARM path to homebrew packages
   # program: /opt/homebrew/bin/tmux
-  # args:
+  args:
+  - --login
   #   - new
   #   - -A
   #   - -s main
@@ -73,13 +74,13 @@ debug:
   #   - INFO
   #   - DEBUG
   #   - TRACE
-  log_level: Off
+  log_level: Debug
 
   # Print all received window events.
-  print_events: false
+  print_events: true
 
   # Record all characters and escape sequences as test data.
-  # ref_test: false
+  ref_test: true
 
 # Live config reload (changes require restart)
 live_config_reload: true

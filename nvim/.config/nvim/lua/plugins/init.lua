@@ -56,5 +56,5 @@ return {
     { "mattn/emmet-vim", lazy = true, event = "BufEnter" },
     { "fedepujol/move.nvim", lazy = true, event = "BufEnter" },
     { "vim-scripts/ReplaceWithRegister", lazy = true, event = "BufEnter" },
-    { "christoomey/vim-tmux-navigator", lazy = true, event = "BufEnter" },
+    { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
 }

@@ -11,11 +11,13 @@ all:
 	stow --verbose --target=$$HOME --restow sketchybar
 	stow --verbose --target=$$HOME --restow anki
 
+	# setup modular tmux config
 	$(shell ./bootstrap.sh)
 delete:
 	stow --verbose --target=$$HOME --delete */
 
-	$(shell ./cleanup.sh)
+	# Change the tmux configuration back to the base minimal config
+	echo 'source-file ~/.config/tmux/minimal.conf' > ~/.dotfiles/tmux/.config/tmux/tmux.conf
 
 clean-link:
 	delete

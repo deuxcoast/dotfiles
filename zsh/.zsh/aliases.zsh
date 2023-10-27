@@ -23,9 +23,11 @@ alias l.d="ls -ld .* | grep '^d'}"
 alias dud="du -d 1 -h"
 alias duf="du -sh *"
 
-alias fdir="find . -type f -name"
+alias fdir="find . -type f -name" # this is wrong?
 alias ff="find . -type f -name"
 
+# copy the current working directory to the system clipboard
+alias cwd="pwd | pbcopy"
 alias h="history"
 alias hgrep="history | grep"
 alias lgrep="ls -l | grep"
