@@ -56,16 +56,15 @@ yabai -m config                                 \
     mouse_drop_action            swap
 
 yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 
 # Predefined Workspaces
-yabai -m rule --add app="^Google Chrome|Firefox$" space=1
-yabai -m rule --add app="^Alacritty" space=2
-yabai -m rule --add app="^Anki" space=3
-yabai -m rule --add app="^Preview" space=4
-yabai -m rule --add app="^Brave Browser" space=5
-yabai -m rule --add app="^PureVPN" space=6
-
+yabai -m rule --add app="^Google Chrome|Firefox$" space=^1
+yabai -m rule --add app="^Alacritty" space=^2
+yabai -m rule --add app="^Anki" space=^3
+yabai -m rule --add app="^Preview" space=^4
+yabai -m rule --add app="^Brave Browser" space=^5
+yabai -m rule --add app="^PureVPN" space=^6
 
 echo "yabai configuration loaded.."
-
 
