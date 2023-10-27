@@ -4,7 +4,7 @@ draw_bold_text_with_bright_colors: true
 
 # Environment variables
 env:
-  # TERM: xterm-256color
+  TERM: xterm-256color
   LC_ALL: en_US.UTF-8
   LANG: en_US.UTF-8
 shell:

@@ -12,12 +12,13 @@ all:
 	stow --verbose --target=$$HOME --restow anki
 
 	# setup modular tmux config
-	$(shell ./bootstrap.sh)
+	# apparently this is not needed and is now breaking the ARM Macbook???
+	# $(shell ./bootstrap.sh)
 delete:
 	stow --verbose --target=$$HOME --delete */
 
 	# Change the tmux configuration back to the base minimal config
-	echo 'source-file ~/.config/tmux/minimal.conf' > ~/.dotfiles/tmux/.config/tmux/tmux.conf
+	# echo 'source-file ~/.config/tmux/minimal.conf' > ~/.dotfiles/tmux/.config/tmux/tmux.conf
 
 clean-link:
 	delete
