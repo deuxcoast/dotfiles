@@ -47,4 +47,6 @@ alacritty)
 zsh)
 	tmuxinator start zsh-config
 	;;
+alux)
+    tmuxinator start alux-config
 esac
