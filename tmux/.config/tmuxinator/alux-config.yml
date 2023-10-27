@@ -45,7 +45,7 @@ root: ~/.dotfiles/tmux/.config/tmux/
 # attach: false
 
 windows:
-  - config: nvim -O tmux.conf ~/.dotfiles/alacritty/.config/alacritty.yml
+  - config: nvim -O tmux.conf ~/.dotfiles/alacritty/.config/alacritty/alacritty.yml
   - zsh:
       - zsh
       - clear
