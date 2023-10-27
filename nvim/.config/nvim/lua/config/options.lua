@@ -42,7 +42,7 @@ opt.scrolloff = 8 -- start scrolling 3 lines before the edge of the viewport
 -- opt.shell = "zsh" -- zsh as default shell
 opt.shiftround = true -- always indent by multiple of shiftwidth
 opt.shiftwidth = 4 -- spaces per tab (when shifting)
-opt.shortmess:append("sI") -- avoid vim intro messages and search messages
+opt.shortmess:append "sI" -- avoid vim intro messages and search messages
 opt.showbreak = "↳ " -- downwards arrow with tip rightwards(U+21B3, UTF-8: E2 86 B3)
 opt.showcmd = false -- don't show extra info at the end of hte command line
 opt.showmode = false -- Statusline does this for me
@@ -74,16 +74,16 @@ opt.updatetime = 300
 opt.writebackup = false -- don't create backup files
 
 opt.formatoptions = opt.formatoptions -- :help fo-table
-	- "a" -- dont autoformat
-	- "t" -- dont autoformat my code, have linters for that
-	+ "c" -- auto wrap comments using textwith
-	+ "q" -- formmating of comments w/ `gq`
-	+ "l" -- long lines are not broken up
-	+ "j" -- remove comment leader when joning comments
-	+ "r" -- continue comment with enter
-	- "o" -- but not w/ o and o, dont continue comments
-	+ "n" -- smart auto indenting inside numbered lists
-	- "2" -- this is not grade school anymore
+    - "a" -- dont autoformat
+    - "t" -- dont autoformat my code, have linters for that
+    + "c" -- auto wrap comments using textwith
+    + "q" -- formmating of comments w/ `gq`
+    + "l" -- long lines are not broken up
+    + "j" -- remove comment leader when joning comments
+    + "r" -- continue comment with enter
+    - "o" -- but not w/ o and o, dont continue comments
+    + "n" -- smart auto indenting inside numbered lists
+    - "2" -- this is not grade school anymore
 
 -- opt.listchars = opt.listchars
 -- 	+ "nbsp:⦸" -- CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
@@ -93,28 +93,28 @@ opt.formatoptions = opt.formatoptions -- :help fo-table
 -- 	+ "trail:•" -- BULLET (U+2022, UTF-8: E2 80 A2)
 
 opt.shortmess = opt.shortmess
-	+ "A" -- ignore annoying swapfile messages
-	+ "I" -- no spash screen
-	-- 	+ "O" -- file-read message overwrites previous
-	-- 	+ "T" -- truncate non-file messages in middle
-	-- 	+ "W" -- dont echo '[w]/[written]' when writing
-	-- 	+ "a" -- use abbreviations in message '[ro]' instead of '[readonly]'
-	-- 	-- + "o" -- overwrite file-written mesage
-	+ "t" -- truncate file messages at start
-	+ "c" -- dont show matching messages
+    + "A" -- ignore annoying swapfile messages
+    + "I" -- no spash screen
+    -- 	+ "O" -- file-read message overwrites previous
+    -- 	+ "T" -- truncate non-file messages in middle
+    -- 	+ "W" -- dont echo '[w]/[written]' when writing
+    -- 	+ "a" -- use abbreviations in message '[ro]' instead of '[readonly]'
+    -- 	-- + "o" -- overwrite file-written mesage
+    + "t" -- truncate file messages at start
+    + "c" -- dont show matching messages
 
 opt.whichwrap = opt.whichwrap -- crossing line boundaries
-	+ "b" -- <BS> N & V
-	+ "s" -- <Space> N & V
-	+ "h" -- `h` N & V
-	+ "l" -- `l` N & V
-	+ "<" -- <Left> N & V
-	+ ">" -- <Right> N & V
-	+ "[" -- <Left> I & R
-	+ "]" -- <Right> I & R
+    + "b" -- <BS> N & V
+    + "s" -- <Space> N & V
+    + "h" -- `h` N & V
+    + "l" -- `l` N & V
+    + "<" -- <Left> N & V
+    + ">" -- <Right> N & V
+    + "[" -- <Left> I & R
+    + "]" -- <Right> I & R
 
 opt.wildmode = { -- shell-like autocomplete to unambiguous portions
-	"longest",
-	"list",
-	"full",
+    "longest",
+    "list",
+    "full",
 }

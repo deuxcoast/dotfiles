@@ -24,5 +24,3 @@ configuration.
 - `$ZDOTDIR/.zlogout`
 
 
-
-
