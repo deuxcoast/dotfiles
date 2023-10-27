@@ -45,12 +45,12 @@ vim.keymap.set("i", "<C-j>", "<C-o>j")
 vim.keymap.set("i", "<C-h>", "<C-o>h")
 
 -- switch between windows
-vim.keymap.set("n", "<C-h>", "<C-w>h")
-vim.keymap.set("n", "<C-j>", "<C-w>j")
-vim.keymap.set("n", "<C-k>", "<C-w>k")
-vim.keymap.set("n", "<C-l>", "<C-w>l")
+-- vim.keymap.set("n", "<C-h>", "<C-w>h")
+-- vim.keymap.set("n", "<C-j>", "<C-w>j")
+-- vim.keymap.set("n", "<C-k>", "<C-w>k")
+-- vim.keymap.set("n", "<C-l>", "<C-w>l")
 
--- go  to beginning / end in insert mode
+-- go to beginning / end in insert mode
 -- TODO: These mappings are not working. Looks like the terminal is not
 -- properly interpreting the escape codes.
 vim.keymap.set("i", "<C-e>", "<end>")
