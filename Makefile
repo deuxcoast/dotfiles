@@ -1,4 +1,8 @@
-all:
+.PHONY: all, clean, link
+
+all: clean link
+	
+link:
 	stow --verbose --target=$$HOME --restow nvim
 	stow --verbose --target=$$HOME --restow alacritty
 	stow --verbose --target=$$HOME --restow iterm
@@ -11,9 +15,9 @@ all:
 	stow --verbose --target=$$HOME --restow sketchybar
 	stow --verbose --target=$$HOME --restow anki
 
-delete:
-	stow --verbose --target=$$HOME --delete */
+	# We don't want to track the plugins in our dotfiles repo, but
+	# we want to ensure the custom dir they are installed to exists
+	[[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins/ 
 
-clean-link:
-	delete
-	all
+clean:
+	stow --verbose --target=$$HOME --delete */
