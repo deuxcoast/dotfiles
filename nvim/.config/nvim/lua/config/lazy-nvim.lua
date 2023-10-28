@@ -54,7 +54,7 @@ opts = {
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = "~/duexcoast/nvim-plugins",
+        path = "~/duexcoast/nvim-plugins-local",
     },
 }
 
