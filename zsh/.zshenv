@@ -19,8 +19,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # Rust
 source "$HOME/.cargo/env"
 
-# remove duplicate entries from $PATH
-# zsh uses $path array along with $PATH 
+# This removes duplicate entries from $PATH
 typeset -U PATH path
 
 

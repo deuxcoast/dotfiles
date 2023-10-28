@@ -4,7 +4,6 @@
 # Source zsh-completions plugin
 # This must be run before `source "$ZSH/oh-my-zsh.sh"`
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-# Add
 fpath+=${HOME}/.zsh/functions/
 
 # Source FZF keybindings and functions
