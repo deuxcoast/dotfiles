@@ -23,6 +23,10 @@ configuration.
 - `$ZDOTDIR/.zlogin`
 - `$ZDOTDIR/.zlogout`
 
+### References
+- [Zsh Reference Card](https://www.bash2zsh.com/zsh_refcard/refcard.pdf)
+- [Zsh Lovers Man Page](https://grml.org/zsh/zsh-lovers.html)
+
 
 
 ## tmux and terminfo

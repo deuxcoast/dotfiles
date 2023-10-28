@@ -23,8 +23,8 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
 
-# --- Change keybinding for autosuggestion expansion
-bindkey '^ ' autosuggest-accept # <C-space>
+# # --- Change keybinding for autosuggestion expansion
+# bindkey '^ ' autosuggest-accept # <C-space>
 
 # --- Aliases
 source ${HOME}/.zsh/aliases.zsh
@@ -37,3 +37,5 @@ source ${HOME}/.zsh/setopt.zsh
 
 # --- Private config
 source ${HOME}/.zsh/privaterc.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

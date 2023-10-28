@@ -6,8 +6,11 @@
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 fpath+=${HOME}/.zsh/functions/
 
-# Source FZF keybindings and functions
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Uncomment if adding zsh-vi-mode plugin
+# This prevents a conflict between zsh-vi-mode and FZF CTRL-R history keybinding
+# ZVM_INIT_MODE=sourcing
+
+export FZF_DEFAULT_COMMAND="fd --type f --color=never --hidden"
 
 # FZF Catppucin Mocha Colorscheme
 export FZF_DEFAULT_OPTS=" \
