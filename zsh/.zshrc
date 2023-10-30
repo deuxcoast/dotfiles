@@ -12,7 +12,15 @@ source ${HOME}/.zsh/exports.zsh
 # --- Oh My Zsh
 # Plugins must be defined before sourcing oh-my-zsh
 # zsh-autosuggestions plugin must be sourced last
-plugins=(git sudo golang autojump zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(
+    git 
+    sudo 
+    golang 
+    autojump 
+    fzf-tab 
+    zsh-syntax-highlighting 
+    zsh-autosuggestions
+)
 
 source ${ZSH}/oh-my-zsh.sh
 
@@ -40,3 +48,5 @@ source ${HOME}/.zsh/privaterc.zsh
 
 # Enable fzf keybindings and completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+eval "$(atuin init zsh)"

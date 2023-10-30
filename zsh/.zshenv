@@ -7,14 +7,19 @@
 # variables, but should not include commands that produce output or assume
 # the shell is attached to a tty.
 
-export ZSH=$HOME/.oh-my-zsh
-export VISUAL=nvim
+export ZSH="$HOME/.oh-my-zsh"
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+
+# NOTE: Something to watch out for... This might break applications
+# that already have configs set in "/Library/Application\ Support/"
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Rust
 source "$HOME/.cargo/env"

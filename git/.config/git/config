@@ -1,13 +1,13 @@
 [user]
-	      name = duexcoast
-	      email = conor.ux@gmail.com
+	    name = duexcoast
+	    email = conor.ux@gmail.com
 
 [init]
-	      defautlBranch = main
-	      defaultBranch = main
+	    defautlBranch = main
+	    defaultBranch = main
 
 [core]
-
+        pager = delta
         editor = nvim
 
 [diff]
@@ -30,26 +30,49 @@
         prompt = false
 
 [mergetool "nvimdiff4"]
-  cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+        cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [filter "lfs"]
-	      required = true
-	      clean = git-lfs clean -- %f
-	      smudge = git-lfs smudge -- %f
-	      process = git-lfs filter-process
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+	    process = git-lfs filter-process
 
 [commit]
       	template = ~/.config/git/commit_template
 
 [interactive]
-	diffFilter = delta --color-only
+        diffFilter = delta --color-only --features=interactive
 
 [delta]
-	features = side-by-side line-numbers decorations
-	navigate = true
-	whitespace-error-style = 22 reverse
+        ; features = decorations
+        syntax-theme = "Catppuccin-mocha"
+        true-color = auto
+        zero-style = black
+        file-decoration-style = black ul
+	    file-style = black
+    	line-numbers = true
+	    line-numbers-left-format = {nm:>3}│
+	    line-numbers-left-style = black
+	    line-numbers-minus-style = black
+	    line-numbers-plus-style = black
+	    line-numbers-right-format = {np:>3}│
+	    line-numbers-right-style = black
+	    line-numbers-zero-style = black
+	    minus-emph-style = red bold
+	    minus-empty-line-marker-style = omit
+	    minus-style = red
+	    navigate = false
+	    plus-emph-style = green bold
+	    plus-empty-line-marker-style = omit
+	    plus-style = green
+	    side-by-side = false
+	    hunk-header-decoration-style = black box
+	    hunk-header-line-number-style = black
+        ; zero-style = 'syntax' 
+        ; plus-style = 'syntax green' 
+        ; minus-style = 'syntax red'
+	    ; features = side-by-side line-numbers decorations
+	    ; navigate = true
+	    ; whitespace-error-style = 22 reverse
 
-[delta "decorations"]
-	commit-decoration-style = bold yellow box ul
-	file-style = bold yellow ul
-	file-decoration-style = none

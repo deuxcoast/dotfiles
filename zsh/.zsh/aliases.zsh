@@ -10,6 +10,7 @@ alias ~='cd ~'
 
 # List
 alias ls='ls -Fh --color=auto'
+alias exa='exa --classify --all'
 alias grep='grep --color=auto'
 alias l="ls -l"
 alias la="ls -lA"
