@@ -1,11 +1,23 @@
 vim.g.mapleader = " "
 local map = vim.api.nvim_set_keymap
 
+-- function for toggling vim.opt settings
+local function vim_opt_toggle(opt, on, off, name)
+    local message = name
+    if vim.opt[opt]:get() == off then
+        vim.opt[opt] = on
+        message = message .. " Enabled"
+    else
+        vim.opt[opt] = off
+        message = message .. " Disabled"
+    end
+    vim.notify(message)
+end
+
 vim.keymap.set("c", "<S-Enter>", function()
     require("noice").redirect(vim.fn.getcmdline())
 end, { desc = "Redirect Cmdline" })
 
--- vim.keymap.set("n", "<leader>q"
 -- Quit vim
 vim.keymap.set("n", "<leader>Q", ":qall <CR>", { desc = "Quit vim, unless there is modified buffers" })
 -- Close the current window
@@ -15,6 +27,16 @@ vim.keymap.set("n", "<leader>qw", ":close<CR>", { desc = "Close the current wind
 map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
 
 vim.keymap.set("v", "y", "y']")
+
+vim.keymap.set("n", "<leader>tc", function()
+    local default_value = { 80 }
+    local value = vim.inspect(vim.opt.colorcolumn:get())
+    if value == "{}" then
+        vim.opt.colorcolumn = default_value
+    else
+        vim.opt.colorcolumn = {}
+    end
+end)
 
 -- Jump to new line in insert mode while in middle of line
 -- This is working due to a remap of the terminal keycodes in my alacritty config.
