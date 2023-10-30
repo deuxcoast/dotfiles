@@ -1,3 +1,8 @@
+# This prevents a conflict between zsh-vi-mode and FZF CTRL-R history keybinding
+function zvm_after_init() {
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+}
+
 # Man without options will use fzf to select a page
 # function man(){
 # 	MAN="/usr/bin/man"

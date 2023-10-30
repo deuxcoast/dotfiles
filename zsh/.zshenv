@@ -17,8 +17,6 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
-# NOTE: Something to watch out for... This might break applications
-# that already have configs set in "/Library/Application\ Support/"
 export XDG_CONFIG_HOME="$HOME/.config"
 
 # Rust

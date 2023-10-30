@@ -8,9 +8,7 @@ fpath+=${HOME}/.zsh/functions/
 
 export LS_COLORS=$(vivid generate catppuccin-mocha)
 
-# Uncomment if adding zsh-vi-mode plugin
-# This prevents a conflict between zsh-vi-mode and FZF CTRL-R history keybinding
-# ZVM_INIT_MODE=sourcing
+export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
 
 export FZF_DEFAULT_COMMAND="fd --type f --color=never --hidden"
 export FZF_DEFAULT_OPTS="--no-height "
