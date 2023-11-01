@@ -9,7 +9,7 @@ fpath+=${HOME}/.zsh/functions/
 export LS_COLORS=$(vivid generate catppuccin-mocha)
 
 export FZF_DEFAULT_COMMAND="fd --type f --color=never --hidden"
-export FZF_DEFAULT_OPTS="--no-height "
+export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}' --height=50%"

@@ -1,24 +1,3 @@
-# `Ctrl-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-bindkey '^h' fzf-man-widget
-zle -N fzf-man-widget
-# Icon used is nerdfont
-
-# This prevents a conflict between zsh-vi-mode and FZF CTRL-R history keybinding
-function zvm_after_init() {
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-}
-
-# Man without options will use fzf to select a page
-# function man(){
-# 	MAN="/usr/bin/man"
-# 	if [ -n "$1" ]; then
-# 		$MAN "$@"
-# 		return $?
-# 	else
-# 		$MAN -k . | fzf --reverse --preview="echo {1,2} | sed 's/ (/./' | sed -E 's/\)\s*$//' | xargs $MAN" | awk '{print $1 "." $2}' | tr -d '()' | xargs -r $MAN
-# 		return $?
-# 	fi
-# }
 # Create a symlink for the provided files in ~/.local/bin
 binify() {
   for arg; do

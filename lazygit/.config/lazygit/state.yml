@@ -1,6 +1,7 @@
 lastupdatecheck: 0
 recentrepos:
-- /Users/conor/.dotfiles
+- /Users/conorney/.dotfiles
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false
+ignorewhitespaceindiffview: false

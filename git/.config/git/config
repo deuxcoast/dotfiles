@@ -46,18 +46,25 @@
         diffFilter = delta --color-only --features=interactive
 
 [delta]
-        ; features = zebra-dark 
-        ; features =Monokai Extended 
-        syntax-theme = Catppuccin-mocha
-        minus-style = "#000000" "#F5C2E7"
-        minus-emph-style = "#000000" "#f38ba8"
-        plus-style = "#000000" "#b4befe"
-        plus-emph-style = "#000000" "#89B4FA"
-        map-styles = \
-           bold purple => syntax "#feecf7", \
-           bold blue => syntax "#e5dff6", \
-           bold cyan => syntax "#d8fdf6", \
-           bold yellow => syntax "#f4ffe0"
-        zero-style = syntax
-        whitespace-error-style = "#aaaaaa"
+        ; features = gruvmax-fang
+        ; syntax-theme = Catppuccin-mocha
+        line-numbers = true
+        line-numbers-left-style = "#45475A"
+        line-numbers-right-style = "#45475A"
+        line-numbers-minus-style = "#f38ba8"
+        line-numbers-plus-style = "#b4befe"
+        line-numbers-zero-style = "#45475A"
+        line-numbers-left-format = " {nm:>3} │"
+        line-numbers-right-format = " {np:>3} │"
 
+        minus-style = "#191919" "#F5C2E7"
+        minus-emph-style = "#191919" "#f38ba8"
+        plus-style = "#191919" "#b4befe"
+        plus-emph-style = "#191919" "#89B4FA"
+        map-styles = \
+           bold purple => "#191919" "#feecf7", \
+           bold blue => "#191919" "#e5dff6", \
+           bold cyan => "#191919" "#d8fdf6", \
+           bold yellow => "#191919" "#f4ffe0"
+        zero-style = ""
+        whitespace-error-style = "#aaaaaa"
