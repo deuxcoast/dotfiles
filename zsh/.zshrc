@@ -13,7 +13,6 @@ source ${HOME}/.zsh/exports.zsh
 # Plugins must be defined before sourcing oh-my-zsh
 # zsh-autosuggestions plugin must be sourced last
 plugins=(
-    autojump 
     fd
     gh
     git 
@@ -22,7 +21,6 @@ plugins=(
     mosh
     ripgrep
     sudo 
-    zsh-vi-mode
     zsh-syntax-highlighting 
     zsh-autosuggestions
 )
@@ -36,8 +34,6 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
 
-# --- Change keybinding for autosuggestion expansion
-bindkey '^ ' autosuggest-accept # <C-space>
 
 # --- Aliases
 source ${HOME}/.zsh/aliases.zsh
@@ -54,4 +50,9 @@ source ${HOME}/.zsh/privaterc.zsh
 # Enable fzf keybindings and completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# --- Change keybinding for autosuggestion expansion
+bindkey '^ ' autosuggest-accept # <C-space>
+
 eval "$(atuin init zsh)"
+eval "$(zoxide init --cmd j zsh)"
+eval "$(starship init zsh)"

@@ -9,13 +9,13 @@ alias ~='cd ~'
 # --- Easy reports ---
 
 # List
-alias ls='ls -Fh --color=auto'
-alias exa='exa --classify --all'
+alias ls='exa --classify'
+alias lsa='exa --classify --all'
 alias grep='grep --color=auto'
-alias l="ls -l"
-alias la="ls -lA"
-alias lr="ls -R"
+alias l="exa --classify -l"
+alias la="ls -la"
 alias lf="ls -l | grep '^-'"
+alias lr="ls -R"
 alias l.f="ls -ld .* | grep '^-'"
 alias ld="ls -l | grep '^d'"
 alias l.d="ls -ld .* | grep '^d'}"

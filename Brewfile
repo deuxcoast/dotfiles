@@ -1,76 +1,77 @@
 #!/bin/bash
 
 # cli tools
-brew zsh
-brew neovim
-brew hub
-brew mosh
-brew the_silver_searcher
-brew tree
-brew tmux
-brew wget
-brew fzf
-brew git-delta
-brew ripgrep
-brew bat
-brew autojump
-brew tmuxinator
-brew lazygit
-brew rsync
-brew jq
-brew gh
-brew kubectl
-brew docker
-brew mysql
-brew mongocli
-brew coreutils
 brew archey4
-brew htop
-brew osx-cpu-temp
-brew most
-brew zzz
 brew atuin
-brew glow
-brew vivid
-brew mosh
+brew bat
+brew btop
+brew coreutils
+brew docker
 brew exa
 brew fd
+brew fzf
+brew gh
+brew git-delta
+brew glow
+brew htop
+brew hub
+brew jq
+brew kubectl
+brew lazygit
+brew mongocli
+brew mosh
+brew mosh
+brew most
+brew mysql
+brew neovim
+brew osx-cpu-temp
+brew ripgrep
+brew rsync
+brew the_silver_searcher
+brew tmux
+brew tmuxinator
+brew tree
+brew vivid
+brew wget
+brew zoxide
+brew zsh
+brew zzz
 
 
 
 # databases / key-value stores
+brew elasticsearch, restart_service: :changed
 brew mongodb, restart_service: :changed
 brew mysql, restart_service: :changed
-brew postgresql, restart_service: :changed
 brew postgis
+brew postgresql, restart_service: :changed
 brew redis, restart_service: :changed
-brew elasticsearch, restart_service: :changed
 
 # dev gui apps
 cask alacritty unless File.directory?("/Applications/Alacritty.app/")
 cask docker unless File.directory?("/Applications/Docker.app/")
-cask postman
-cask wireshark
-cask vagrant
 cask ngrok
 cask pgadmin4
+cask postman
 cask tailscale
+cask vagrant
+cask wireshark
 
 # non-dev gui apps
-cask google-chrome
-cask firefox
-cask the-unarchiver
-cask vlc
-cask figma
+cask anki
+cask bitwarden
 cask caffeine # turns off auto-sleep
 cask dropbox
+cask figma
+cask firefox
+cask google-chrome
 cask google-drive-file-stream
 cask hyperswitch # fixes alt-tab
 cask kap         # screen capture
 cask slack
-cask anki
+cask the-unarchiver
+cask vlc
 cask zoom
-cask bitwarden
 
 # quicklook plugins
 # https://github.com/sindresorhus/quick-look-plugins
@@ -80,20 +81,20 @@ cask bitwarden
 # To remove quarantine attributes, run:
 # xattr -d -r com.apple.quarantine ~/Library/QuickLook
 cask qlcolorcode
-cask qlstephen
-cask qlmarkdown
-cask quicklook-json
 cask qlimagesize
-cask suspicious-package
-cask quicklookase
+cask qlmarkdown
+cask qlstephen
 cask qlvideo
+cask quicklook-json
+cask quicklookase
+cask suspicious-package
 
 # programming languages & package managers
 brew golang
 brew node
 brew nvm
-brew yarn
 brew pnpm
+brew yarn
 
 echo "Copy and paste the following to install oh-my-zsh:"
 echo "\$ sh -c \"\$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\""

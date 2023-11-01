@@ -8,8 +8,6 @@ fpath+=${HOME}/.zsh/functions/
 
 export LS_COLORS=$(vivid generate catppuccin-mocha)
 
-export ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-
 export FZF_DEFAULT_COMMAND="fd --type f --color=never --hidden"
 export FZF_DEFAULT_OPTS="--no-height "
 

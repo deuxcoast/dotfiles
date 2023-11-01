@@ -14,6 +14,15 @@ return {
                         crust = "#000000",
                     },
                 },
+                highlight_overrides = {
+                    mocha = function(mocha)
+                        return {
+                            GitSignsAdd = { fg = mocha.blue },
+                            GitSignsDelete = { fg = mocha.pink },
+                            GitSignsChange = { fg = mocha.yellow },
+                        }
+                    end,
+                },
                 no_italic = true,
                 no_bold = true,
                 integrations = {
