@@ -5,11 +5,10 @@ return {
         event = "VimEnter",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope-ui-select.nvim",
+            -- "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-dap.nvim",
             "nvim-telescope/telescope-live-grep-args.nvim",
-            -- "nvim-telescope/telescope-hop.nvim", -- TEST: Is this downloaded by Lazy? Do I need to provide it elsewhere?
             "folke/trouble.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
             "natecraddock/workspaces.nvim",
@@ -43,6 +42,14 @@ return {
                 { desc = " File browser" }
             )
             vim.keymap.set("n", "<leader>fT", ":Telescope builtin<CR>", { desc = " Telescope meta" })
+            vim.keymap.set("n", "<leader>fr", ":Telescope lsp_references<CR>", { desc = " symbol references" })
+            vim.keymap.set("n", "<leader>fl", ":Telescope loclist<CR>", { desc = " loclist" })
+            vim.keymap.set(
+                "n",
+                "<leader>fi",
+                ":Telescope lsp_implementations<CR>",
+                { desc = " symbol implementation" }
+            )
             vim.keymap.set(
                 "n",
                 "<leader>fs",
@@ -69,29 +76,61 @@ return {
             end
 
             telescope.setup {
-                extensions = {
-                    file_browser = {
-                        theme = "ivy",
-                    },
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown(),
-                    },
-                    termfinder = {
-                        mappings = {},
-                    },
-                },
                 defaults = {
-                    mappings = {
-                        n = {
-                            ["<c-c>"] = require("telescope.actions").close,
+                    layout_strategy = "horizontal",
+                    layout_config = {
+                        width = 0.90,
+                        height = 0.85,
+                        -- preview_cutoff = 120,
+                        prompt_position = "bottom",
+
+                        horizontal = {
+                            preview_width = function(_, cols, _)
+                                if cols > 200 then
+                                    return math.floor(cols * 0.4)
+                                else
+                                    return math.floor(cols * 0.6)
+                                end
+                            end,
                         },
+
+                        vertical = {
+                            width = 0.9,
+                            height = 0.95,
+                            preview_height = 0.5,
+                        },
+
+                        flex = {
+                            horizontal = {
+                                preview_width = 0.9,
+                            },
+                        },
+                    },
+
+                    selection_strategy = "reset",
+                    sorting_strategy = "descending",
+                    scroll_strategy = "cycle",
+                    color_devicons = true,
+                    -- file_browser = {
+                    --     theme = "ivy",
+                    -- },
+                    -- ["ui-select"] = {
+                    --     require("telescope.themes").get_dropdown(),
+                    -- },
+                    -- termfinder = {
+                    --     mappings = {},
+                    -- },
+                },
+                mappings = {
+                    n = {
+                        ["<c-c>"] = require("telescope.actions").close,
                     },
                 },
             }
 
             telescope.load_extension "fzf"
             telescope.load_extension "file_browser"
-            telescope.load_extension "ui-select"
+            -- telescope.load_extension "ui-select"
             telescope.load_extension "workspaces"
             telescope.load_extension "live_grep_args"
             telescope.load_extension "make"

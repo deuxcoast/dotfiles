@@ -85,6 +85,20 @@ Surround selection (e.g. (selection) ) in visual mode | V_S)
 "Dap step into" | <A-l>
 "Dap step over" | <A-j>
 
+## substitute @replace @swap
+"Substitute given text object motion with contents of default register" | s<motion>
+"Substitute entire line with contents of default register" | ss
+"Substitute from cursor to EOL with contents of default register" | S
+"Substitute VISUAL mode selection with contents of default register" | s
+
+"Exchange text from motion 1 with text from motion 2" | sx<motion 1> sx<motion 2>
+"Exchange line 1 with line 2" | sxx (on line 1) sxx (on line 2)
+"Exchange visual mode selection 1 with visual mode selection 2" | X (selection 1) X (selection 2)
+"Cancel exchange process midway through" | "sxc"
+
 ## lsp
 "Rename variable" | <leader>cr
 "Code actions" | <leader>ca
+
+## tmux
+

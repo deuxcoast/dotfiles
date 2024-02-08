@@ -56,5 +56,13 @@ return {
     { "mattn/emmet-vim", lazy = true, event = "BufEnter" },
     { "fedepujol/move.nvim", lazy = true, event = "BufEnter" },
     { "vim-scripts/ReplaceWithRegister", lazy = true, event = "BufEnter" },
-    { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
+    {
+        "ellisonleao/glow.nvim",
+        config = function()
+            require("glow").setup {
+                width = 100,
+            }
+        end,
+        cmd = "Glow",
+    },
 }

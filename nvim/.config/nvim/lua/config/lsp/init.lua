@@ -174,7 +174,7 @@ local custom_attach = function(client, bufnr)
     buf_nnoremap { "K", vim.lsp.buf.hover, { desc = "lsp:hover" } }
 
     buf_nnoremap { "<space>gI", handlers.implementation }
-    buf_nnoremap { "<space>lr", "<cmd>lua R('config.lsp.codelens').run()<CR>" }
+    -- buf_nnoremap { "<space>lr", "<cmd>lua R('config.lsp.codelens').run()<CR>" }
     buf_nnoremap { "<space>rr", "LspRestart" }
 
     -- telescope_mapper("gr", "lsp_references", nil, true)
@@ -299,7 +299,10 @@ local servers = {
 
         settings = {
             gopls = {
-                codelenses = { test = true },
+                codelenses = {
+                    test = true,
+                    -- gc_details = true,
+                },
                 hints = inlays and {
                     assignVariableTypes = true,
                     compositeLiteralFields = true,
@@ -321,7 +324,7 @@ local servers = {
         cmd = { vim.fn.expand "~/build/omnisharp/run", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
     },
 
-    rust_analyzer = rust_analyzer,
+    -- rust_analyzer = rust_analyzer,
 
     racket_langserver = true,
 

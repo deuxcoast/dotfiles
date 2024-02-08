@@ -1,9 +1,9 @@
 return {
-    {
-        "plasticboy/vim-markdown",
-        branch = "master",
-        require = { "godlygeek/tabular" },
-    },
+    -- {
+    --     "plasticboy/vim-markdown",
+    --     branch = "master",
+    --     require = { "godlygeek/tabular" },
+    -- },
     {
         "iamcco/markdown-preview.nvim",
         build = "cd app && yarn install",
