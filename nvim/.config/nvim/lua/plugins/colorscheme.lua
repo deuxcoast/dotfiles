@@ -63,7 +63,7 @@ return {
                     },
                     rainbow_delimiters = true,
                     telescope = {
-                        enable = true,
+                        enable = false,
                     },
                     lsp_trouble = true,
                 },

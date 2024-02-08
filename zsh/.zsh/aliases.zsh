@@ -1,3 +1,5 @@
+#
+alias cheat='curl cht.sh/'
 # --- Navigation ---
 alias ..="cd .."
 alias ...='cd ../..'

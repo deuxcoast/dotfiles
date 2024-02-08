@@ -5,8 +5,12 @@ return {
         "nvim-lua/popup.nvim",
         "nvim-lua/plenary.nvim",
     },
+    bundled_cheatsheets = {
+        disabled = { "nerd-fonts", "unicode", "markdown", "regex" },
+    },
+    -- For plugin specific cheatsheets
     bundled_plugin_cheatsheets = {
-        -- show cheatsheets for all plugins except gitsigns
-        disabled = { "nerd-fonts" },
+        enabled = { "gitsigns.nvim", "telescope.nvim" },
+        disabled = {},
     },
 }
