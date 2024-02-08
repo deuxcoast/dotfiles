@@ -24,8 +24,8 @@ return {
 
         vim.cmd "highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#BAC2DE"
         vim.cmd "highlight! CmpItemAbbrMatch guibg=NONE guifg=#89B4FA"
-        vim.cmd "highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#89B4FA"
         vim.cmd "highlight! CmpItemKindField guibg=NONE guifg=#F38BA8"
+        vim.cmd "highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#89B4FA"
         vim.cmd "highlight! CmpItemKindProperty guibg=NONE guifg=#F38BA8"
         vim.cmd "highlight! CmpItemKindConstant guibg=NONE guifg=#F38BA8"
         vim.cmd "highlight! CmpItemKindVariable guibg=NONE guifg=#B4BEFE"
@@ -86,7 +86,7 @@ return {
                 completeopt = "menu,menuone,noselect",
             },
             enabled = function()
-                buftype = vim.api.nvim_buf_get_option(0, "buftype")
+                local buftype = vim.api.nvim_buf_get_option(0, "buftype")
                 if buftype == "prompt" then
                     return false
                 end
@@ -156,6 +156,7 @@ return {
                             treesitter = "",
                             path = "󰨣",
                             buffer = "",
+                            ["vim-dadbod-completion"] = "",
                             zsh = "",
                             vsnip = "",
                             npm = "",
@@ -216,6 +217,22 @@ return {
         -- 		sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
         -- 	})
         --
+
+        local autocomplete_group = vim.api.nvim_create_augroup("vimrc_autocompletion", { clear = true })
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = { "sql", "mysql", "plsql" },
+            callback = function()
+                cmp.setup.buffer {
+                    sources = {
+                        { name = "vim-dadbod-completion" },
+                        { name = "buffer" },
+                        { name = "vsnip" },
+                    },
+                }
+            end,
+            group = autocomplete_group,
+        })
+
         local present_autopairs, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
         if not present_autopairs then
             return
