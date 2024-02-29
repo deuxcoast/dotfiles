@@ -10,6 +10,7 @@ local opt = vim.opt
 
 opt.autoindent = true -- maintain indent of current line
 opt.breakindent = true -- continue indent visually
+opt.breakindentopt = "list:-1"
 opt.belloff = "all" -- SILENCE the bell. eternally
 opt.backup = false -- don't create backup files
 opt.clipboard = "unnamedplus" -- use '+' register for all yanks, and deletes, sync with system clipboard
@@ -70,6 +71,16 @@ opt.wildmenu = true -- show options as list when switching buffers etc
 opt.undofile = true -- persists undo tree
 opt.undolevels = 10000
 opt.updatetime = 300
+opt.fillchars = {
+    horiz = "─",
+    horizup = "┴",
+    horizdown = "┬",
+    vert = "│",
+    vertleft = "┤",
+    vertright = "├",
+    verthoriz = "┼",
+}
+
 -- opt.whichwrap:append("<>[]hl")
 -- opt.wrap = false -- do not wrap text automatically
 opt.writebackup = false -- don't create backup files

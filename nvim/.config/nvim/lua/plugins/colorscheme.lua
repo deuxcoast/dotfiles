@@ -20,6 +20,7 @@ return {
                             GitSignsAdd = { fg = mocha.blue },
                             GitSignsDelete = { fg = mocha.pink },
                             GitSignsChange = { fg = mocha.yellow },
+                            WinSeparator = { fg = mocha.yellow },
                         }
                     end,
                 },
