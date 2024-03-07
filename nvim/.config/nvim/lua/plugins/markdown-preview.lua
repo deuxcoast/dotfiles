@@ -15,4 +15,7 @@ return {
             vim.keymap.set("n", "<leader>zp", ":MarkdownPreviewToggle<CR>", { desc = "Toggle markdown preview" })
         end,
     },
+    -- {
+    --     "bullets-vim/bullets.vim",
+    -- },
 }
