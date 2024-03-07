@@ -9,7 +9,7 @@ colors:
     # Cursor colors
     cursor:
         text: "#000000" # base
-        cursor: "#F5E0DC" # rosewater
+        cursor: "#89B4FA" # blue
     vi_mode_cursor:
         text: "#000000" # base
         cursor: "#B4BEFE" # lavender
