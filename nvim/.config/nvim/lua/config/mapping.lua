@@ -36,7 +36,7 @@ vim.keymap.set("n", "<leader>tc", function()
     else
         vim.opt.colorcolumn = {}
     end
-end)
+end, { desc = "Toggle colorcolumn" })
 
 -- Jump to new line in insert mode while in middle of line
 -- This is working due to a remap of the terminal keycodes in my alacritty config.
@@ -175,7 +175,7 @@ vim.keymap.set("t", "jk", "<C-\\><C-n>", movelineOpts)
 vim.keymap.set("n", "<leader>cx", function()
     vim.cmd "w"
     vim.cmd "so %"
-end)
+end, { desc = "Save and source" })
 
 -- aerial
 
