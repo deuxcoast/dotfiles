@@ -17,10 +17,15 @@ return {
                 highlight_overrides = {
                     mocha = function(mocha)
                         return {
-                            GitSignsAdd = { fg = mocha.blue },
-                            GitSignsDelete = { fg = mocha.pink },
+                            GitSignsAdd = { fg = mocha.teal },
+                            GitSignsDelete = { fg = mocha.red },
                             GitSignsChange = { fg = mocha.yellow },
-                            WinSeparator = { fg = mocha.yellow },
+                            WinSeparator = { fg = mocha.rosewater },
+                            DiffAdd = { fg = mocha.mantle, bg = mocha.teal },
+                            DiffDelete = { fg = mocha.mantle, bg = mocha.red },
+                            DiffChange = { fg = mocha.mantle, bg = mocha.yellow },
+                            DiffText = { fg = mocha.mantle, bg = mocha.pink },
+                            -- IblScope = { fg = mocha.lavender },
                         }
                     end,
                 },
@@ -35,7 +40,7 @@ return {
                     hop = true,
                     indent_blankline = {
                         enabled = true,
-                        colored_indent_levels = false,
+                        colored_indent_levels = true,
                     },
                     mason = true,
                     notify = true,
