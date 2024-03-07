@@ -3,6 +3,7 @@ Open link in browser (or system default for filetype) | gx
 
 ## misc @default @native-vim
 Unhighlight / remove highlight | <leader>uh
+Move the cursor to start/end of visual mode selection | o
 
 ## windows @buffers @tabs
 Increase window pane width horizontally | <C-Right>
