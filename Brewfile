@@ -37,8 +37,6 @@ brew zoxide
 brew zsh
 brew zzz
 
-
-
 # databases / key-value stores
 brew elasticsearch, restart_service: :changed
 brew mongodb, restart_service: :changed
@@ -95,6 +93,9 @@ brew node
 brew nvm
 brew pnpm
 brew yarn
+brew rustup-init
+brew ruby
+brew pyenv
 
 echo "Copy and paste the following to install oh-my-zsh:"
 echo "\$ sh -c \"\$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)\""
