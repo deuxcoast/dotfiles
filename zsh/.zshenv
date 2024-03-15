@@ -12,8 +12,6 @@ export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 
 eval "$(pyenv init -)"
 
