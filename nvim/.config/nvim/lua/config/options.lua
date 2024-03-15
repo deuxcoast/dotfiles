@@ -87,10 +87,10 @@ opt.writebackup = false -- don't create backup files
 
 opt.formatoptions = opt.formatoptions -- :help fo-table
     - "a" -- dont autoformat
-    - "t" -- dont autoformat my code, have linters for that
-    + "c" -- auto wrap comments using textwith
+    + "t" -- auto-wrap text using 'textwidth'
+    + "c" -- auto-wrap comments using 'textwidth'
     + "q" -- formmating of comments w/ `gq`
-    + "l" -- long lines are not broken up
+    + "l" -- if line is already longer than 'textwidth' when entering insert mode, don't format it
     + "j" -- remove comment leader when joning comments
     + "r" -- continue comment with enter
     - "o" -- but not w/ o and o, dont continue comments
