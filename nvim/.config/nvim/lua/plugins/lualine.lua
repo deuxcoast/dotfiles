@@ -15,6 +15,18 @@ local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
     end
 end
 
+-- TODO: Write a function to toggle certain elements of lualine.
+-- For example:
+-- toggle full file path
+-- toggle displaying scope of cursor (what function am i in?)
+-- NOTE: this will require reloading lualine, which there is a function for
+
+-- local function toggle_file_path()
+--     local flag = true
+--     if flag then return
+--
+-- end
+
 local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
@@ -50,7 +62,7 @@ return {
                     { "mode", separator = { left = "", right = "" }, right_padding = 2 },
                 },
                 lualine_b = {
-                    { "b:gitsigns_head", icon = "" },
+                    { "b:gitsigns_head", icon = "" },
                     { "diff", source = diff_source },
                     "diagnostics",
                 },
