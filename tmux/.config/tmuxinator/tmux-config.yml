@@ -1,7 +1,7 @@
 # /Users/conorney/.config/tmuxinator/tmux-config.yml
 
 name: tmux-config
-root: ~/.dotfiles/tmux/
+root: ~/.dotfiles/tmux/.config/tmux
 
 # Optional tmux socket
 # socket_name: foo
@@ -51,7 +51,7 @@ windows:
       # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
       # synchronize: after
       panes:
-        - nvim .tmux.conf
+        - nvim tmux.conf
         - zsh; clear;
   - zsh:
       - zsh
