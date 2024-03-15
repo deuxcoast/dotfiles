@@ -1,0 +1,39 @@
+# Import colorscheme.
+import = [ "~/.config/alacritty/colors/catppuccin-mocha.toml" ]
+
+# Environment Variables
+[env]
+TERM = "alacritty-direct"
+LC_ALL = "en_US.UTF-8"
+LANG = "en_US.UTF-8"
+
+[shell]
+program = "/bin/zsh"
+args = [ "--login" ]
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[cursor]
+# When set to true, the cursor will be rendered
+# as a hollow box when the window is not focused.
+unfocused_hollow = true
+
+[font]
+size = 14
+normal = { family = "Hasklug Nerd Font", style = "Regular" }
+bold = {  style = "Regular" }
+italic = { style = "Regular" }
+bold_italic = { style = "Regular" }
+
+[window]
+option_as_alt = "OnlyLeft"
+startup_mode = "SimpleFullscreen"
+
+[keyboard]
+# These bindings allows me to create mappings for these keys in nvim.
+# https://stackoverflow.com/questions/16359878/how-to-map-shift-enter/42461580#42461580
+bindings = [
+  { key = "Return", mods = "Shift", chars = "\u001b[13;2u" },
+  { key = "Return", mods = "Control", chars = "\u001b[13;5u" }
+]
