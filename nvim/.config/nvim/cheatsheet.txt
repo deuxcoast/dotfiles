@@ -102,4 +102,22 @@ Surround selection (e.g. (selection) ) in visual mode | V_S)
 "Code actions" | <leader>ca
 
 ## tmux
-
+"Kill tmux server" | <C-s> + K
+"Kill tmux session" | <C-s> + x 
+"Maximize current tmux pane" | <C-s> + m
+"Reload tmux config" | <C-s> + r
+"Tmux choose-tree: change sessions" | <M-`>
+"Tmux copy mode" | <M-o>
+"Toggle rectangle selection when in copy mode"| r
+"Plugin Manager: install new plugins" | <C-s> + I
+"Plugin Manager: update plugins" | <C-s> + U
+"Plugin Manager: prune plugins" | <C-s> + <M-u>
+"Tmux Thumbs: Copy text from screen (capital will paste directly)" | <M-O>
+"Jump to a provided character" | <M-i>
+"Rename session" | <C-s> + $
+"Detach from session" | <C-s> + d
+"Convert pane into window" | <C-s> + !
+"Kill current session without detaching tmux" | <C-s> + X
+"Create a new tmux session" | <C-s> + C
+"Switch to last session" | <C-s> + S
+"Promote current pane to new session"
