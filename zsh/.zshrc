@@ -53,6 +53,7 @@ source ${HOME}/.zsh/privaterc.zsh
 # --- Change keybinding for autosuggestion expansion
 bindkey '^ ' autosuggest-accept # <C-space>
 
+eval "$(pyenv init -)"
 eval "$(atuin init zsh)"
 eval "$(zoxide init --cmd j zsh)"
 eval "$(starship init zsh)"
