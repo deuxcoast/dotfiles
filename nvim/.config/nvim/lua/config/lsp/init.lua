@@ -29,7 +29,7 @@ local signs = {
     { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
     { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    -- { name = "DiagnosticSignInfo", text = "" },
 }
 
 -- Defining signs
@@ -278,8 +278,23 @@ local servers = {
             clangdFileStatus = true,
         },
         filetypes = {
+            "h",
             "c",
+            "cpp",
+            "cc",
+            "objc",
+            "objcpp",
         },
+        single_file_support = true,
+        root_dir = lspconfig.util.root_pattern(
+            ".clangd",
+            ".clang-tidy",
+            ".clang-format",
+            "compile_commands.json",
+            "compile_flags.txt",
+            "configure.ac",
+            ".git"
+        ),
     },
 
     svelte = true,
@@ -336,26 +351,31 @@ local servers = {
     -- nix language server
     nil_ls = true,
 
-    eslint = true,
-    tsserver = {
-        init_options = ts_util.init_options,
-        cmd = { "typescript-language-server", "--stdio" },
-        filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-        },
-
-        on_attach = function(client)
-            custom_attach(client)
-
-            ts_util.setup { auto_inlay_hints = false }
-            ts_util.setup_client(client)
-        end,
-    },
+    -- eslint = true,
+    -- FIX: Commenting our the intialization of tsserver here while
+    -- I test out `typescript.nvim`. lspconfig doesn't allow more than
+    -- one setup call per server.
+    --
+    -- tsserver = {
+    --     init_options = ts_util.init_options,
+    --     cmd = { "typescript-language-server", "--stdio" },
+    --     filetypes = {
+    --         "javascript",
+    --         "javascriptreact",
+    --         "javascript.jsx",
+    --         "typescript",
+    --         "typescriptreact",
+    --         "typescript.tsx",
+    --     },
+    --
+    --     on_attach = function(client)
+    --         custom_attach(client)
+    --
+    --         ts_util.setup { auto_inlay_hints = false }
+    --         ts_util.setup_client(client)
+    --     end,
+    -- },
+    tailwindcss = true,
 }
 
 -- if vim.fn.executable "llmsp" == 1 and vim.env.SRC_ACCESS_TOKEN then
@@ -452,40 +472,44 @@ end
 -- end
 --]]
 
-local async_formatting = function(bufnr)
-    bufnr = bufnr or vim.api.nvim_get_current_buf()
+-- local async_formatting = function(bufnr)
+--     bufnr = bufnr or vim.api.nvim_get_current_buf()
+--
+--     vim.lsp.buf_request(
+--         bufnr,
+--         "textDocument/formatting",
+--         vim.lsp.util.make_formatting_params {},
+--         function(err, res, ctx)
+--             if err then
+--                 local err_msg = type(err) == "string" and err or err.message
+--                 -- you can modify the log message / level (or ignore it completely)
+--                 -- vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
+--                 return
+--             end
+--
+--             -- don't apply results if buffer is unloaded or has been modified
+--             if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, "modified") then
+--                 return
+--             end
+--
+--             if res then
+--                 local client = vim.lsp.get_client_by_id(ctx.client_id)
+--                 vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
+--                 vim.api.nvim_buf_call(bufnr, function()
+--                     vim.cmd "silent noautocmd update"
+--                 end)
+--             end
+--         end
+--     )
+-- end
 
-    vim.lsp.buf_request(
-        bufnr,
-        "textDocument/formatting",
-        vim.lsp.util.make_formatting_params {},
-        function(err, res, ctx)
-            if err then
-                local err_msg = type(err) == "string" and err or err.message
-                -- you can modify the log message / level (or ignore it completely)
-                vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
-                return
-            end
-
-            -- don't apply results if buffer is unloaded or has been modified
-            if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, "modified") then
-                return
-            end
-
-            if res then
-                local client = vim.lsp.get_client_by_id(ctx.client_id)
-                vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
-                vim.api.nvim_buf_call(bufnr, function()
-                    vim.cmd "silent noautocmd update"
-                end)
-            end
-        end
-    )
-end
-
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+-- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 require("null-ls").setup {
+    -- TODO: turn on null-ls logging to determine what the fuck is going on.
+    -- diagnostics for typescript are running multiple times
+    -- turn off vim.notify for lsp/progress. I believe this might involve the
+    -- "noice.nvim" plugin, and its filtering capabilities.
     sources = {
         -- require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.diagnostics.eslint_d,
@@ -501,11 +525,19 @@ require("null-ls").setup {
     on_attach = function(client, bufnr)
         if client.supports_method "textDocument/formatting" then
             vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-            vim.api.nvim_create_autocmd("BufWritePost", {
+            vim.api.nvim_create_autocmd("BufWritePre", {
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                    async_formatting(bufnr)
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+                    -- vim.lsp.buf.formatting_sync()
+                    vim.lsp.buf.format {
+                        bufnr = bufnr,
+                        filter = function(client)
+                            return client.name == "null-ls"
+                        end,
+                    }
                 end,
             })
         end

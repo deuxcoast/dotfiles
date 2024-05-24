@@ -1,6 +1,5 @@
 return {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-nvim-lua",
@@ -10,13 +9,28 @@ return {
         "hrsh7th/cmp-nvim-lsp-document-symbol",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "saadparwaiz1/cmp_luasnip",
+        -- "mireq/luasnip-snippets",
         "onsails/lspkind.nvim",
         "abecodes/tabout.nvim",
     },
     config = function()
         local presentCmp, cmp = pcall(require, "cmp")
-        local present_lua_snip, ls = pcall(require, "luasnip")
         local lspkind = require "lspkind"
+
+        -- Add additional capabilities supported by nvim-cmp
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+        local lspconfig = require "lspconfig"
+
+        -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
+        -- local servers = { "clangd", "pyright", "tsserver" }
+        local servers = { "pyright", "tsserver" }
+        for _, lsp in ipairs(servers) do
+            lspconfig[lsp].setup {
+                -- on_attach = my_custom_on_attach,
+                capabilities = capabilities,
+            }
+        end
 
         local winhighlight = {
             winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
@@ -72,14 +86,15 @@ return {
             TypeParameter = "󰅲",
         }
 
-        if not presentCmp or not present_lua_snip then
-            return
-        end
+        -- if not presentCmp or not present_lua_snip then
+        --     return
+        -- end
 
+        ---@diagnostic disable-next-line: missing-fields
         cmp.setup {
             snippet = {
                 expand = function(args)
-                    ls.lsp_expand(args.body)
+                    require("luasnip").lsp_expand(args.body)
                 end,
             },
             completion = {
@@ -145,10 +160,13 @@ return {
                 completion = cmp.config.window.bordered(winhighlight),
                 documentation = cmp.config.window.bordered(winhighlight),
             },
+
+            ---@diagnostic disable-next-line: missing-fields
             formatting = {
                 format = lspkind.cmp_format {
                     mode = "symbol_text",
                     maxwidth = 60,
+                    maxheight = 150,
                     before = function(entry, vim_item)
                         vim_item.menu = ({
                             nvim_lsp = "󰊷",
@@ -158,7 +176,7 @@ return {
                             buffer = "",
                             ["vim-dadbod-completion"] = "",
                             zsh = "",
-                            vsnip = "",
+                            luasnip = "",
                             npm = "",
                         })[entry.source.name]
 
@@ -183,8 +201,8 @@ return {
             sources = {
                 { name = "nvim_lsp" },
                 { name = "nvim_lua" },
+                { name = "luasnip", option = { show_autosnippets = true } },
                 --[[ { name = "npm", keyword_length = 4 }, ]]
-                { name = "luasnip" },
                 { name = "path" },
                 { name = "buffer", keyword_length = 5 },
 
@@ -199,24 +217,8 @@ return {
                 native_menu = false,
             },
 
-            -- TEST: I Don't know if this was needed. Giving it a test drive without it
-
-            --[[ performance = { throttle = 300 }, ]]
-            -- preselect = cmp.PreselectMode.None,
+            require("luasnip/loaders/from_vscode").load(),
         }
-        --
-        -- 	-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-        -- 	cmp.setup.cmdline("/", {
-        -- 		mapping = cmp.mapping.preset.cmdline(),
-        -- 		sources = { { name = "buffer" } },
-        -- 	})
-        --
-        -- 	-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-        -- 	cmp.setup.cmdline(":", {
-        -- 		mapping = cmp.mapping.preset.cmdline(),
-        -- 		sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
-        -- 	})
-        --
 
         local autocomplete_group = vim.api.nvim_create_augroup("vimrc_autocompletion", { clear = true })
         vim.api.nvim_create_autocmd("FileType", {
