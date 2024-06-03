@@ -17,6 +17,7 @@ link:
 	# We don't want to track the plugins in our dotfiles repo, but
 	# we want to ensure the custom dir they are installed to exists
 	[[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins/ 
+	echo "Alacritty should be at least version 0.13"
 
 clean:
 	stow --verbose --target=$$HOME --delete */

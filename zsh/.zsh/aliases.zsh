@@ -128,3 +128,8 @@ alias tska='tmux kill-session -a'
 # --- ssh ---
 # Connect to the raspsberry pi server
 alias 'sduexpi'='ssh -i ~/.ssh/id_pi -p 2221 conorney@duex-pi.local'
+
+# -- docker --
+alias 'dcu'='docker compose up'
+alias 'dcub'='docker compose up --build'
+alias 'dcd'='docker compose down'

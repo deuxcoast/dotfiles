@@ -190,6 +190,9 @@ end, { desc = "Save and source" })
 -- 	end
 -- end)
 
+map("n", "<leader>bo", ":BDelete other<CR>", { desc = "Close all buffers except current" })
+map("n", "<leader>ba", ":BDelete all<CR>", { desc = "Close all buffers" })
+map("n", "<C-q>", ":BDelete menu<CR>", { desc = "BDelete menu" })
 -- Close dap float windows and quickfix with q and Esc.
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "qf", "dap-float" },

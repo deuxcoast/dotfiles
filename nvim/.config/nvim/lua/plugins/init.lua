@@ -54,7 +54,14 @@ return {
     },
     { "folke/todo-comments.nvim", dependencies = "nvim-lua/plenary.nvim", config = true },
     { "mattn/emmet-vim", lazy = true, event = "BufEnter" },
-    { "fedepujol/move.nvim", lazy = true, event = "BufEnter" },
+    {
+        "fedepujol/move.nvim",
+        lazy = true,
+        event = "BufEnter",
+        config = function()
+            require("move").setup {}
+        end,
+    },
     { "vim-scripts/ReplaceWithRegister", lazy = true, event = "BufEnter" },
     {
         "ellisonleao/glow.nvim",
@@ -70,4 +77,6 @@ return {
         priority = 1000, -- We'd like this plugin to load first out of the rest
         config = true, -- This automatically runs `require("luarocks-nvim").setup()`
     },
+    { "nvim-pack/nvim-spectre" },
+    { "Asheq/close-buffers.vim" },
 }

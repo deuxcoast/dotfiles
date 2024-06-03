@@ -115,6 +115,7 @@ Surround selection (e.g. (selection) ) in visual mode | V_S)
 "Tmux Thumbs: Copy text from screen (capital will paste directly)" | <M-O>
 "Jump to a provided character" | <M-i>
 "Rename session" | <C-s> + $
+"Rename window" | <C-s> + ,
 "Detach from session" | <C-s> + d
 "Convert pane into window" | <C-s> + !
 "Kill current session without detaching tmux" | <C-s> + X

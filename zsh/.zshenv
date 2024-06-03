@@ -13,8 +13,8 @@ export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.npm-global/bin:$PATH"
 
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+# export GOPATH="$HOME/go"
+# export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 

@@ -3,7 +3,7 @@
 ## Sourcing of startup files for Zsh 
 Determining where we should put various aspects of our Zsh configuration, to 
 ensure that all operations happen in the correct order can lead to a special
-kind of insanity. Determing the order in which startup files are read by a Zsh 
+kind of insanity. Determining the order in which startup files are read by a Zsh
 shell, and in which our `$PATH` is set, is a road paved with lots of "gotachas".
 
 Taken from the [Zsh Docs](https://zsh.sourceforge.io/Intro/intro_3.html), we 
@@ -37,10 +37,12 @@ on another (keyboard input was sporatic, colors in Nvim were incorrect).
 At first I assumed the underlying problem was the different processors (Arm64 m1
 Macbook Air vs Intel x86_64 iMac). After finding that what seemingly fixed the
 problem on one machine would break the other, I went about trying to find an 
-entirely separate solution for each. This underlying assumption of where to 
-attribute thefault was completely incorrect! The real problem was the `terminfo` 
-settings, which had apparently been correctly compiled on one computer and not 
-on the other.
+entirely separate solution for each. This underlying assumption of where to
+attribute the fault was completely incorrect! The real problem was the
+`terminfo` settings, which had apparently been correctly compiled on one
+computer and not on the other (meaning I had fixed it months before on one
+computer and completely forgotten about it, hence this reference note for future
+me).
 
 The problem boiled down to MacOS shipping with an out-of-date version of `ncurses`
 that doesn't have a `terminfo` entry for `tmux-256color`. These `terminfo` entries
@@ -48,10 +50,10 @@ tell `ncurses` how to use the capabilities of our terminal: they are basically
 an API between terminals and the rendering library.
 
 Meanwhile, since I had installed tmux via Homebrew, I also had a newer version
-of `ncurses` installed on my system, the version which tmux was compiled against.
-This is why tmux worked without a hiccup in some cases, but when using a an 
-application linked against the MacOS version of `ncurses`, things started to fall
-apart.
+of `ncurses` installed on my system, the version which tmux was compiled
+against. This is why tmux worked without a hiccup in some cases, but when using
+an application linked against the MacOS version of `ncurses`, things started to
+fall apart.
 
 The fix for all of this was to update the macOS `terminfo` database with the
 `tmux-256color` entry (and `alacritty-direct` while we're at it). 
