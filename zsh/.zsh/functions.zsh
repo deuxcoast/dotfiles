@@ -10,6 +10,11 @@ mkd() {
     mkdir -p "$@" && cd "$@"
 }
 
+# Copy file contents to clipboard
+pbc() {
+    cat $1 | pbcopy
+}
+
 # Print README file
 readme() {
   for readme in {readme,README}.{md,MD,markdown,mkd,txt,TXT}; do

@@ -56,8 +56,6 @@ return {
     { "mattn/emmet-vim", lazy = true, event = "BufEnter" },
     {
         "fedepujol/move.nvim",
-        lazy = true,
-        event = "BufEnter",
         config = function()
             require("move").setup {}
         end,
