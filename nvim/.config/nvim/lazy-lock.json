@@ -30,6 +30,7 @@
   "go.nvim": { "branch": "master", "commit": "8f8ab4b968d08bd70ecda1f2909fb5e6177452ca" },
   "green_light.nvim": { "branch": "master", "commit": "add1529ca56184c5ff4eac21f0af790b6c985634" },
   "guihua.lua": { "branch": "master", "commit": "a53b76514ad42d92a821d75d712ef71e71898fcf" },
+  "gx.nvim": { "branch": "main", "commit": "cf6ed6ba86ffe4e3f51a898c03a05023b7a2fe48" },
   "harpoon": { "branch": "master", "commit": "ccae1b9bec717ae284906b0bf83d720e59d12b91" },
   "hop.nvim": { "branch": "master", "commit": "1a1eceafe54b5081eae4cb91c723abd1d450f34b" },
   "indent-blankline.nvim": { "branch": "master", "commit": "d98f537c3492e87b6dc6c2e3f66ac517528f406f" },
