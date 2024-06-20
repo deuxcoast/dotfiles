@@ -520,7 +520,14 @@ require("null-ls").setup {
         require("null-ls").builtins.formatting.black,
         require("null-ls").builtins.formatting.goimports,
         -- require("null-ls").builtins.formatting.uncrustify,
-        require("null-ls").builtins.formatting.clang_format,
+        require("null-ls").builtins.formatting.clang_format.with {
+            command = "clang-format",
+            extra_args = {
+                "--style",
+                "{BasedOnStyle: Chromium, IndentWidth: 4, ColumnLimit: 80, AlignTrailingComments: true, BraceWrapping: {AfterFunction: false}}",
+            },
+            filetypes = { "c", "cpp" },
+        },
     },
     on_attach = function(client, bufnr)
         if client.supports_method "textDocument/formatting" then
