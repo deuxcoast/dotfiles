@@ -15,61 +15,64 @@ local h = require "config/debug/debug_helpers"
 local sign = vim.fn.sign_define
 
 -- catppuccin colors
-sign("dapstopped", { text = "⭐️", texthl = "", linehl = "", numhl = "" })
+sign("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
 sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
 sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
 sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 local set = vim.keymap.set
 
-set("n", "<A-p>", function()
-    dap.step_out()
-end)
-set("n", "<A-n>", function()
-    dap.step_into()
-end)
-set("n", "<A-i>", function()
-    dap.step_over()
-end)
+set("n", "<F1>", dap.continue)
+set("n", "<F2>", dap.step_into)
+set("n", "<F3>", dap.step_over)
+set("n", "<F4>", dap.step_out)
+set("n", "<F5>", dap.step_back)
+-- keypress of <F13> is read by terminal (alacritty) as <F15>
+set("n", "<F15>", dap.restart)
+-- keypress of <F15> is read by terminal (alacritty) as <F17>
+set("n", "<F17>", dap.terminate)
 
-set("n", "<leader>db", function()
-    dap.toggle_breakpoint()
+set("n", "<leader>b", dap.toggle_breakpoint)
+-- temporarily removes all breakpoints, sets a breakpoint at the cursor, resumes
+-- execution and then adds back breakpoints
+set("n", "<leader>db", dap.run_to_cursor)
+
+-- Eval under cursor
+set("n", "<leader>?", function()
+    require("dapui").eval(nil, { enter = true })
 end)
-set("n", "<leader>dB", function()
-    dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
-end)
-set("n", "<leader>ds", function()
-    dap.terminate()
-end)
-set("n", "<leader>dn", function()
-    dap.continue()
-end)
-set("n", "<leader>dk", function()
-    dap.up()
-end)
-set("n", "<leader>dj", function()
-    dap.down()
-end)
+-- set("n", "<leader>dB", function()
+--     dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
+-- end)
+-- set("n", "<leader>ds", function()
+--     dap.terminate()
+-- end)
+-- set("n", "<leader>dk", function()
+--     dap.up()
+-- end)
+-- set("n", "<leader>dj", function()
+--     dap.down()
+-- end)
 
 set("n", "<leader>dr", function()
     dap.repl.open({}, "vsplit")
 end)
-set("n", "<leader>de", function()
-    dap.set_exception_breakpoints { "all" }
-end)
-set("n", "<leader>da", function()
-    h.attach()
-end)
-set("n", "<leader>dA", function()
-    h.attach_remote()
-end)
-set("n", "<leader>di", function()
-    require("dap.ui.widgets").hover()
-end)
-set("n", "<leader>d?", function()
-    local widgets = require "dap.ui.widgets"
-    widgets.centered_float(widgets.scopes)
-end)
+-- set("n", "<leader>de", function()
+--     dap.set_exception_breakpoints { "all" }
+-- end)
+-- set("n", "<leader>da", function()
+--     h.attach()
+-- end)
+-- set("n", "<leader>dA", function()
+--     h.attach_remote()
+-- end)
+-- set("n", "<leader>di", function()
+--     require("dap.ui.widgets").hover()
+-- end)
+-- set("n", "<leader>d?", function()
+--     local widgets = require "dap.ui.widgets"
+--     widgets.centered_float(widgets.scopes)
+-- end)
 
 ------------------------------------------------------
 ----- Dap Go
@@ -91,7 +94,46 @@ end
 local present_dapui, dapui = pcall(require, "dapui")
 
 if present_dapui then
-    dapui.setup()
+    dapui.setup {
+        layouts = {
+            {
+                elements = {
+                    {
+                        id = "scopes",
+                        size = 0.25,
+                    },
+                    {
+                        id = "breakpoints",
+                        size = 0.25,
+                    },
+                    {
+                        id = "stacks",
+                        size = 0.25,
+                    },
+                    {
+                        id = "watches",
+                        size = 0.25,
+                    },
+                },
+                position = "left",
+                size = 65,
+            },
+            {
+                elements = {
+                    {
+                        id = "repl",
+                        size = 0.5,
+                    },
+                    {
+                        id = "console",
+                        size = 0.5,
+                    },
+                },
+                position = "bottom",
+                size = 18,
+            },
+        },
+    }
     set("n", "<leader>du", function()
         dapui.toggle()
     end)
@@ -99,13 +141,19 @@ if present_dapui then
         dapui.eval()
     end)
 
-    dap.listeners.after.event_initialized["dapui_config"] = function()
+    -- dap.listeners.after.event_initialized["dapui_config"] = function()
+    --     dapui.open()
+    -- end
+    dap.listeners.before.attach.dapui_config = function()
         dapui.open()
     end
-    dap.listeners.before.event_terminated["dapui_config"] = function()
+    dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated.dapui_config = function()
         dapui.close()
     end
-    dap.listeners.before.event_exited["dapui_config"] = function()
+    dap.listeners.before.event_exited.dapui_config = function()
         dapui.close()
     end
 end

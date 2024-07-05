@@ -25,6 +25,7 @@ return {
                             DiffDelete = { fg = mocha.mantle, bg = mocha.red },
                             DiffChange = { fg = mocha.mantle, bg = mocha.yellow },
                             DiffText = { fg = mocha.mantle, bg = mocha.pink },
+                            DapStopped = { fg = mocha.blue, bg = mocha.mantle },
                             -- IblScope = { fg = mocha.lavender },
                         }
                     end,
@@ -49,6 +50,7 @@ return {
                         enabled = true,
                         enable_ui = true, -- enable nvim-dap-ui
                     },
+                    dap_ui = true,
                     native_lsp = {
                         enabled = true,
                         virtual_text = {
