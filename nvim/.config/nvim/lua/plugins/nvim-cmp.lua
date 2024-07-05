@@ -182,9 +182,9 @@ return {
 
                         -- Get the full snippet (and only keep first line)
                         local word = entry:get_insert_text()
-                        if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-                            word = vim.lsp.util.parse_snippet(word)
-                        end
+                        -- if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
+                        --     word = vim.lsp.util.parse_snippet(word)
+                        -- end
                         word = str.oneline(word)
                         if
                             entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
@@ -199,12 +199,12 @@ return {
                 },
             },
             sources = {
-                { name = "nvim_lsp" },
-                { name = "nvim_lua" },
-                { name = "luasnip", option = { show_autosnippets = true } },
+                { name = "nvim_lsp", priority = 8 },
+                { name = "luasnip", option = { show_autosnippets = true }, priority = 7 },
+                { name = "nvim_lua", priority = 5 },
+                { name = "buffer", keyword_length = 5, priority = 7 },
+                { name = "path", priority = 4 },
                 --[[ { name = "npm", keyword_length = 4 }, ]]
-                { name = "path" },
-                { name = "buffer", keyword_length = 5 },
 
                 -- nvim_lsp_signature help will show the parameter name as autocomplete
                 -- I have setup signature help to show in a popup window in the upper right hand
@@ -212,6 +212,34 @@ return {
 
                 --[[ { name = "nvim_lsp_signature_help" }, ]]
             },
+            -- sorting = {
+            --     priority_weight = 1.0,
+            --     comparators = {
+            --         compare.
+            --         cmp.config.compare.offset,
+            --         cmp.config.compare.exact,
+            --         cmp.config.compare.score,
+            --
+            --         -- copied from cmp-under, but I don't think I need the plugin for this.
+            --         -- I might add some more of my own.
+            --         function(entry1, entry2)
+            --             local _, entry1_under = entry1.completion_item.label:find "^_+"
+            --             local _, entry2_under = entry2.completion_item.label:find "^_+"
+            --             entry1_under = entry1_under or 0
+            --             entry2_under = entry2_under or 0
+            --             if entry1_under > entry2_under then
+            --                 return false
+            --             elseif entry1_under < entry2_under then
+            --                 return true
+            --             end
+            --         end,
+            --
+            --         cmp.config.compare.kind,
+            --         cmp.config.compare.sort_text,
+            --         cmp.config.compare.length,
+            --         cmp.config.compare.order,
+            --     },
+            -- },
             experimental = {
                 ghost_text = true,
                 native_menu = false,

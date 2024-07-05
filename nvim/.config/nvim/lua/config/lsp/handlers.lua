@@ -15,11 +15,11 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
     vim.lsp.with(vim.lsp.handlers["textDocument/publishDiagnostics"], {
         signs = {
-            severity_limit = "Error",
+            severity = { min = vim.diagnostic.severity.WARN },
         },
         underline = false,
         -- underline = {
-        -- 	severity_limit = "Warning",
+        -- severity = {min = vim.diagnostic.severity.WARN}
         -- },
         virtual_text = true,
     })

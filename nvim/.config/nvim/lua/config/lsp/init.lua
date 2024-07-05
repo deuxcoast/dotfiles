@@ -1,15 +1,3 @@
-local neodev = vim.F.npcall(require, "neodev")
-if neodev then
-    neodev.setup {
-        override = function(_, library)
-            library.enabled = true
-            library.plugins = true
-        end,
-        lspconfig = true,
-        pathStrict = true,
-    }
-end
-
 local lspconfig = vim.F.npcall(require, "lspconfig")
 if not lspconfig then
     return
@@ -223,8 +211,15 @@ local servers = {
     bashls = true,
     lua_ls = {
         Lua = {
+            runtime = {
+                version = "LuaJIT",
+            },
+            -- make the server aware of Neovim runtime files
             workspace = {
                 checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                },
             },
         },
     },
