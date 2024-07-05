@@ -266,8 +266,12 @@ local servers = {
     dartls = pcall(require, "flutter-tools"),
 
     clangd = {
+        -- additional config in ~/Library/Preferences/clangd/config.yaml
+        -- This is where clangd looks for additional flags to be added
+        -- Currently setup for maximum diagnostics
         cmd = {
             "clangd",
+            "--enable-config",
             "--background-index",
             "--suggest-missing-includes",
             "--clang-tidy",
