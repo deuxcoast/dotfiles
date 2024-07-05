@@ -67,6 +67,10 @@ alias gcc="gcc-13"
 alias g++="g++-13"
 alias cc="cc-12"
 alias c++="c++-13"
+
+# Clang Compiler
+alias clng="clang++ -std=c++20 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -glldb"
+
 # This command allows me to produce x86 assembly on the M1 mac. Use this
 # for following along with CS:APP textbook
 alias igcc="arch -x86_64 /usr/local/bin/gcc-13"
