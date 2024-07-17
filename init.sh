@@ -23,9 +23,10 @@ fi
 # ------------------------------------------------------------------------------
 # Create necessary file structure
 # ------------------------------------------------------------------------------
-# add directory for tmux plugins, if it doesn't exist yet.
-# necessary because we're using a custom directory, and using stow
-# with out the path in place first will create problems.
+# Add directory for tmux plugins, if it doesn't exist yet. this is necessary
+# because we're using a custom plugin directory, and using stow with out the 
+# path in place first will create problems (we want to stow the files only, not 
+# the directory structure around them).
 [[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins/
 
 # ------------------------------------------------------------------------------
@@ -100,5 +101,8 @@ if [[ ! -d ~/.config/tmux-plugins/tpm ]]; then
 
     printf "\n\n"
     printf "Installing tmux plugins\n\n"
+    # executable provided by tmux plugin manager that installs plugins listed
+    # in tmux.conf, will install plugins into $TMUX_PLUGIN_MANAGER_PATH, which 
+    # is also set in tmux.conf
     ~/.config/tmux-plugins/tpm/bin/install_plugins
 fi
