@@ -418,7 +418,24 @@ end
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "jsonls" },
+    ensure_installed = {
+        "astro",
+        "bashls",
+        "cssls",
+        "dockerls",
+        "eslint",
+        "gopls",
+        "graphql",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "pyright",
+        "sqlls",
+        "tailwindcss",
+        "tsserver",
+        "vimls",
+        "yamlls",
+    },
     -- automatic_installation =
 }
 
@@ -505,20 +522,14 @@ end
 -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 require("null-ls").setup {
-    -- TODO: turn on null-ls logging to determine what the fuck is going on.
-    -- diagnostics for typescript are running multiple times
-    -- turn off vim.notify for lsp/progress. I believe this might involve the
-    -- "noice.nvim" plugin, and its filtering capabilities.
     sources = {
         -- require("null-ls").builtins.formatting.stylua,
         require("null-ls").builtins.diagnostics.eslint_d,
-        -- require("null-ls").builtins.completion.spell,
-        -- require("null-ls").builtins.diagnostics.selene,
+        require("null-ls").builtins.formatting.beautysh,
         require("null-ls").builtins.formatting.prettierd,
         require("null-ls").builtins.formatting.isort,
         require("null-ls").builtins.formatting.black,
         require("null-ls").builtins.formatting.goimports,
-        -- require("null-ls").builtins.formatting.uncrustify,
         require("null-ls").builtins.formatting.clang_format.with {
             command = "clang-format",
             extra_args = {

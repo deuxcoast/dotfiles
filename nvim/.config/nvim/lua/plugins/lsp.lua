@@ -9,53 +9,50 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     {
+        "jay-babu/mason-nvim-dap.nvim",
+        config = function()
+            require("mason-nvim-dap").setup {
+                automatic_installation = true,
+            }
+        end,
+    },
+    {
+        "jay-babu/mason-null-ls.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "jose-elias-alvarez/null-ls.nvim",
+        },
+        config = function()
+            require("mason-null-ls").setup {
+                ensure_installed = {
+                    "delve",
+                    "chrome-debug-adapter",
+                    "firefox-debug-adapter",
+                    "debugpy",
+                    "js-debug-adapter",
+                },
+            }
+        end,
+    },
+    {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         config = function()
             require("mason-tool-installer").setup {
                 auto_update = true,
                 debounce_hours = 24,
                 ensure_installed = {
-                    "astro-language-server",
-                    "bash-language-server",
                     "beautysh",
                     "black",
-                    "chrome-debug-adapter",
-                    "clang-format",
+                    "debugpy",
                     "clangd",
                     "codelldb",
                     "cpplint",
                     "cpptools",
-                    "css-lsp",
-                    "delve",
-                    "deno",
-                    "diagnostic-languageserver",
-                    "dockerfile-language-server",
-                    "emmet-ls",
-                    "eslint-lsp",
-                    "eslint-lsp",
-                    "eslint_d",
-                    "firefox-debug-adapter",
-                    "gofumpt",
-                    "goimports",
-                    "golangci-lint-langserver",
-                    "gopls",
-                    "graphql-language-service-cli",
-                    "html-lsp",
                     "isort",
-                    "json-lsp",
-                    "lua-language-server",
-                    "markdownlint",
                     "marksman",
-                    "prettierd",
-                    "prisma-language-server",
-                    "pyright",
                     "shellcheck",
                     "shfmt",
-                    "sqlls",
                     "stylua",
-                    "tailwindcss-language-server",
-                    "typescript-language-server",
-                    "yaml-language-server",
                 },
             }
         end,

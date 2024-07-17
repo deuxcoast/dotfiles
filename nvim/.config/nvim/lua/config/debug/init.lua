@@ -30,9 +30,9 @@ set("n", "<F3>", dap.step_over)
 set("n", "<F4>", dap.step_out)
 set("n", "<F5>", dap.step_back)
 -- keypress of <F13> is read by terminal (alacritty) as <F15>
-set("n", "<F15>", dap.restart)
+set("n", "<F11>", dap.restart)
 -- keypress of <F15> is read by terminal (alacritty) as <F17>
-set("n", "<F17>", dap.terminate)
+set("n", "<F12>", dap.terminate)
 
 set("n", "<leader>b", dap.toggle_breakpoint)
 -- temporarily removes all breakpoints, sets a breakpoint at the cursor, resumes
@@ -95,7 +95,7 @@ if present_dapui then
                     },
                 },
                 position = "left",
-                size = 65,
+                size = 0.28,
             },
             {
                 elements = {
@@ -109,7 +109,7 @@ if present_dapui then
                     },
                 },
                 position = "bottom",
-                size = 18,
+                size = 0.2,
             },
         },
     }
