@@ -29,3 +29,4 @@ typeset -U PATH path
 
 # Add homebrew install directory to PATH for ARM Macs
 [[ $(uname -ms) = "Darwin arm64" ]] && export PATH="/opt/homebrew/bin:$PATH"
+. "$HOME/.cargo/env"

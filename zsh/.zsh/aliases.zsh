@@ -11,10 +11,10 @@ alias ~='cd ~'
 # --- Easy reports ---
 
 # List
-alias ls='exa --classify'
-alias lsa='exa --classify --all'
+alias ls='eza --classify'
+alias lsa='eza --classify --all'
 alias grep='grep --color=auto'
-alias l="exa --classify -l"
+alias l="eza --classify -l"
 alias la="ls -la"
 alias lf="ls -l | grep '^-'"
 alias lr="ls -R"
