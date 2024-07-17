@@ -1,6 +1,7 @@
 /setup.sh
 /init.sh
-/script.sh.
+/script.sh
+/test.sh
 RCS
 .+,v
 
@@ -16,6 +17,8 @@ _darcs
 state.yml
 
 \.git
+
+^/lazygit/.*state.yml
 
 .+~          # emacs backup files
 \#.*\#       # emacs autosave files
