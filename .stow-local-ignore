@@ -1,4 +1,6 @@
 /setup.sh
+/init.sh
+/script.sh.
 RCS
 .+,v
 
@@ -11,6 +13,7 @@ CVS
 \.svn
 _darcs
 \.hg
+state.yml
 
 \.git
 
