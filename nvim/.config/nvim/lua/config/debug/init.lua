@@ -12,6 +12,8 @@ end
 require "config.debug.dap_config"
 local h = require "config/debug/debug_helpers"
 
+require("nvim-dap-virtual-text").setup()
+
 local sign = vim.fn.sign_define
 
 -- catppuccin colors
@@ -41,38 +43,15 @@ set("n", "<leader>db", dap.run_to_cursor)
 set("n", "<leader>?", function()
     require("dapui").eval(nil, { enter = true })
 end)
--- set("n", "<leader>dB", function()
---     dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
--- end)
--- set("n", "<leader>ds", function()
---     dap.terminate()
--- end)
--- set("n", "<leader>dk", function()
---     dap.up()
--- end)
--- set("n", "<leader>dj", function()
---     dap.down()
--- end)
-
+set("n", "<leader>dk", function()
+    dap.up()
+end)
+set("n", "<leader>dj", function()
+    dap.down()
+end)
 set("n", "<leader>dr", function()
     dap.repl.open({}, "vsplit")
 end)
--- set("n", "<leader>de", function()
---     dap.set_exception_breakpoints { "all" }
--- end)
--- set("n", "<leader>da", function()
---     h.attach()
--- end)
--- set("n", "<leader>dA", function()
---     h.attach_remote()
--- end)
--- set("n", "<leader>di", function()
---     require("dap.ui.widgets").hover()
--- end)
--- set("n", "<leader>d?", function()
---     local widgets = require "dap.ui.widgets"
---     widgets.centered_float(widgets.scopes)
--- end)
 
 ------------------------------------------------------
 ----- Dap Go
