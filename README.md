@@ -4,6 +4,36 @@
 
 Simply clone the repository into your home directory, `cd` in and run `init.sh`.
 
+### Yabai and skhd
+
+Getting `yabai` to work is a more involved process, as we need to disable System
+Integrity Protection, and install a scripting addition.
+
+The detailed instructions, which are different for Intel Macs and ARM Macs, can
+be found
+[here](https://github.com/koekeishiya/yabai/wiki/Disabling-System-Integrity-Protection).
+
+- For ARM Macs, do not forget to enable non-Apple-signed arm64 binaries after
+  disabling SIP, with the command below. _Restart a second time after doing this_.
+
+  ```bash
+
+  sudo nvram boot-args=-arm64e_preview_abi
+
+  ```
+
+- To configure the scripting addition, we can enter the command below, which
+  gives yabai root privileges, which it needs in order to inject code into
+  Dock.app, which is how it can act as a window manager on top of OSX.
+
+```bash
+echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut
+-d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+```
+
+- Should be good to go at this point. Run `yabai --start-service`, which will
+  start the launchd service.
+
 ## Sourcing of startup files for Zsh
 
 Determining where we should put various aspects of our Zsh configuration, to

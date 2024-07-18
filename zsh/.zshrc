@@ -4,7 +4,6 @@
 # --- Theme / Prompt
 ZSH_THEME="robbyrussell"
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1 # Should improve zsh-autosuggestions performance
-# DISABLE_LS_COLORS=true
 
 # --- Environment variables
 source ${HOME}/.zsh/exports.zsh
@@ -15,13 +14,13 @@ source ${HOME}/.zsh/exports.zsh
 plugins=(
     fd
     gh
-    git 
-    golang 
-    fzf-tab 
+    git
+    golang
+    fzf-tab
     mosh
     ripgrep
-    sudo 
-    zsh-syntax-highlighting 
+    sudo
+    zsh-syntax-highlighting
     zsh-autosuggestions
 )
 

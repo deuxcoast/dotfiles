@@ -8,6 +8,28 @@ if ! command -v brew &> /dev/null
 then
     printf "Installing Brew\n\n"
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # If brew is being installed for the first time, we need to add it to the
+    # PATH so it can be used in the rest of this script. The installation
+    # directory is different depending on the CPU architecture.
+    case $(uname -ms) in
+
+        "Darwin arm64")
+            printf "Adding brew to path (in ~/.zprofile) for arm64 Mac\n\n"
+
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+            ;;
+
+        "Darwin x86_64")
+            printf "Adding brew to path (in ~/.zprofile) for x86_64 Mac\n\n"
+
+            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+            ;;
+    esac
+
+
 else
     printf "Brew already installed\n\n"
 fi
@@ -24,10 +46,15 @@ fi
 # Create necessary file structure
 # ------------------------------------------------------------------------------
 # Add directory for tmux plugins, if it doesn't exist yet. this is necessary
-# because we're using a custom plugin directory, and using stow with out the 
-# path in place first will create problems (we want to stow the files only, not 
+# because we're using a custom plugin directory, and using stow with out the
+# path in place first will create problems (we want to stow the files only, not
 # the directory structure around them).
-[[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins/
+[[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins
+
+# Similar issue, lazygit has runtime files that it keeps in the config folder
+# that we don't want to sync between machines. So we don't want to symlink the
+# folder, just the config file within it
+[[ -d ~/.config/lazygit ]] || mkdir ~/.config/lazygit
 
 # ------------------------------------------------------------------------------
 # Symlink dotfiles using stow
@@ -102,7 +129,11 @@ if [[ ! -d ~/.config/tmux-plugins/tpm ]]; then
     printf "\n\n"
     printf "Installing tmux plugins\n\n"
     # executable provided by tmux plugin manager that installs plugins listed
-    # in tmux.conf, will install plugins into $TMUX_PLUGIN_MANAGER_PATH, which 
+    # in tmux.conf, will install plugins into $TMUX_PLUGIN_MANAGER_PATH, which
     # is also set in tmux.conf
     ~/.config/tmux-plugins/tpm/bin/install_plugins
 fi
+
+# ------------------------------------------------------------------------------
+# Configure Yabai
+# ------------------------------------------------------------------------------
