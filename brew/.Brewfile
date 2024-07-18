@@ -14,7 +14,6 @@ brew 'eza'
 brew 'fd'
 brew 'fzf'
 brew 'gh'
-cask 'git-credentials-manager'
 brew 'git-delta'
 brew 'glow'
 brew 'htop'
@@ -48,10 +47,11 @@ brew 'mysql', restart_service: :changed
 brew 'postgresql', restart_service: :changed
 brew 'redis', restart_service: :changed
 
-# dev gui apps
+# dev macos apps
 cask 'alacritty' unless File.directory?("/Applications/Alacritty.app/")
 cask 'karabiner-elements'
 cask 'docker' unless File.directory?("/Applications/Docker.app/")
+cask 'git-credential-manager'
 cask 'ngrok'
 cask 'pgadmin4'
 cask 'postman'
@@ -61,7 +61,7 @@ cask 'tailscale'
 cask 'vagrant'
 cask 'wireshark'
 
-# non-dev gui apps
+# non-dev macos apps
 cask 'anki'
 cask 'brave-browser'
 cask 'bitwarden'
