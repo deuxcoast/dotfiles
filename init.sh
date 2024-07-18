@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit script if there's an error
+set -e
+
 # ------------------------------------------------------------------------------
 # Install Brew
 # ------------------------------------------------------------------------------
@@ -43,8 +46,9 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# Create necessary file structure
+# Create necessary directory structure
 # ------------------------------------------------------------------------------
+
 # Add directory for tmux plugins, if it doesn't exist yet. this is necessary
 # because we're using a custom plugin directory, and using stow with out the
 # path in place first will create problems (we want to stow the files only, not
@@ -53,12 +57,19 @@ fi
 
 # Similar issue, lazygit has runtime files that it keeps in the config folder
 # that we don't want to sync between machines. So we don't want to symlink the
-# folder, just the config file within it
+# folder, just the config file within it.
 [[ -d ~/.config/lazygit ]] || mkdir ~/.config/lazygit
 
+
+# This is where clangd gets additional configuration. Again, we want to symlink
+# just the file and not the directory structure.
+[[ -d ~/Library/Preferences/clangd ]] || mkdir ~/Library/Preferences/clangd
+
+[[ -d ~/.config/karabiner ]] || mkdir ~/.config/karabiner
 # ------------------------------------------------------------------------------
 # Symlink dotfiles using stow
 # ------------------------------------------------------------------------------
+
 printf "Creating symlinks of dotfiles using Stow\n\n"
 if [[ -f Makefile ]]; then
     make
