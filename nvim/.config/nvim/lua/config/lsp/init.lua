@@ -374,7 +374,9 @@ local servers = {
     --         ts_util.setup_client(client)
     --     end,
     -- },
-    tailwindcss = true,
+    tailwindcss = {
+        filetypes = { "css", "typescript" },
+    },
 }
 
 -- if vim.fn.executable "llmsp" == 1 and vim.env.SRC_ACCESS_TOKEN then
