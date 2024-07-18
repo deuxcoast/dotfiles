@@ -1,4 +1,4 @@
 .env
 .DS_Store
 *.out
-test.sh
+test*.sh
