@@ -1,8 +1,9 @@
-local function db_completion()
-    require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
-end
+-- local function db_completion()
+--     require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
+-- end
 return {
     "tpope/vim-dadbod",
+    ft = { "sql", "mysql", "plsql" },
     dependencies = {
         { "kristijanhusak/vim-dadbod-ui" },
         { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },

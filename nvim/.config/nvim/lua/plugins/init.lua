@@ -1,5 +1,5 @@
 return {
-    { "HiPhish/rainbow-delimiters.nvim" },
+    { "HiPhish/rainbow-delimiters.nvim", event = "BufEnter" },
     {
         "kazhala/close-buffers.nvim",
         config = function()
@@ -70,11 +70,6 @@ return {
             }
         end,
         cmd = "Glow",
-    },
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000, -- We'd like this plugin to load first out of the rest
-        config = true, -- This automatically runs `require("luarocks-nvim").setup()`
     },
     { "Asheq/close-buffers.vim" },
 }

@@ -5,16 +5,16 @@ return {
         vim.keymap.set({ "n" }, "<leader>na", require("ts-node-action").node_action, { desc = "Trigger Node Action" })
     end,
     config = function()
-        local ts_node_action = require("ts-node-action")
-        local helpers = require("ts-node-action.helpers")
-        local toggle_boolean = require("ts-node-action.actions.toggle_boolean")
+        local ts_node_action = require "ts-node-action"
+        local helpers = require "ts-node-action.helpers"
+        local toggle_boolean = require "ts-node-action.actions.toggle_boolean"
 
         local padding = {
             [","] = "%s ",
             [":"] = "%s ",
         }
 
-        local toggle_multiline = require("ts-node-action.actions.toggle_multiline")(padding)
+        local toggle_multiline = require "ts-node-action.actions.toggle_multiline"(padding)
 
         local operators = {
             ["!="] = "==",
@@ -55,12 +55,12 @@ return {
             ["binary_expression"] = toggle_operator,
         }
 
-        ts_node_action.setup({
+        ts_node_action.setup {
             typescript = js,
             typescriptreact = js,
             javascript = js,
             javascriptreact = js,
             svelte = js,
-        })
+        }
     end,
 }
