@@ -27,8 +27,11 @@ be found
   Dock.app, which is how it can act as a window manager on top of OSX.
 
 ```bash
-echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai) | cut
--d " " -f 1) $(which yabai) --load-sa" | sudo tee /private/etc/sudoers.d/yabai
+
+bash echo "$(whoami) ALL=(root) NOPASSWD: sha256:$(shasum -a 256 $(which yabai)
+| cut -d " " -f 1) $(which yabai) --load-sa" | sudo tee
+/private/etc/sudoers.d/yabai
+
 ```
 
 - Should be good to go at this point. Run `yabai --start-service`, which will
@@ -99,3 +102,7 @@ indispensible for getting everything in a working state:
 - [Installing tmux-256color for macOS](https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95)
 - [The definitive guide to using tmux-256color on
   macOS](https://gpanders.com/blog/the-definitive-guide-to-using-tmux-256color-on-macos/)
+
+```
+
+```

@@ -12,13 +12,11 @@ source ${HOME}/.zsh/exports.zsh
 # Plugins must be defined before sourcing oh-my-zsh
 # zsh-autosuggestions plugin must be sourced last
 plugins=(
-    fd
     gh
     git
     golang
     fzf-tab
     mosh
-    ripgrep
     sudo
     zsh-syntax-highlighting
     zsh-autosuggestions
