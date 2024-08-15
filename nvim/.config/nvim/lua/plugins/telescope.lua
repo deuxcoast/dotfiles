@@ -17,7 +17,7 @@ return {
             "tknightz/telescope-termfinder.nvim",
         },
         init = function()
-            vim.keymap.set("n", "<leader><leader>", ":Telescope git_files<CR>", { desc = " Git files" })
+            vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = " Project files" })
             vim.keymap.set(
                 "n",
                 "<leader>f/",
@@ -31,7 +31,7 @@ return {
                 { desc = " Current buffer fzf" }
             )
             vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = " Buffers" })
-            vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = " Project files" })
+            vim.keymap.set("n", "<leader>ff", ":Telescope git_files<CR>", { desc = " Git files" })
             vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = " Project grep" })
             -- vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
             vim.keymap.set("n", "<leader>fG", ":Telescope grep_string<CR>", { desc = " String under cursor" })
@@ -139,11 +139,16 @@ return {
                         ["<c-c>"] = require("telescope.actions").close,
                     },
                 },
+                pickers = {
+                    colorscheme = {
+                        ignore_builtins = true,
+                        enable_preview = true,
+                    },
+                },
             }
 
             telescope.load_extension "fzf"
             telescope.load_extension "file_browser"
-            -- telescope.load_extension "ui-select"
             telescope.load_extension "workspaces"
             telescope.load_extension "live_grep_args"
             telescope.load_extension "make"

@@ -3,9 +3,9 @@ if not lspconfig then
     return
 end
 
-local imap = require("duex.keymap").imap
-local nmap = require("duex.keymap").nmap
-local autocmd = require("duex.auto").autocmd
+local imap = require("config.mapping").imap
+local nmap = require("config.mapping").nmap
+local autocmd = require("config.auto").autocmd
 local autocmd_clear = vim.api.nvim_clear_autocmds
 
 -- local is_mac = vim.fn.has "macunix" == 1
@@ -93,10 +93,10 @@ local filetype_attach = setmetatable({
     end,
 
     rust = function()
-        telescope_mapper("<space>wf", "lsp_workspace_symbols", {
-            ignore_filename = true,
-            query = "#",
-        }, true)
+        -- telescope_mapper("<space>wf", "lsp_workspace_symbols", {
+        --     ignore_filename = true,
+        --     query = "#",
+        -- }, true)
 
         autocmd_format(false)
     end,
@@ -154,24 +154,26 @@ local custom_attach = function(client, bufnr)
 
     buf_inoremap { "<c-s>", vim.lsp.buf.signature_help }
 
-    buf_nnoremap { "<space>cr", vim.lsp.buf.rename, { desc = "rename variable" } }
-    buf_nnoremap { "<space>ca", vim.lsp.buf.code_action, { desc = "code action" } }
+    buf_nnoremap { "<space>cr", vim.lsp.buf.rename, { desc = "Rename variable" } }
+    buf_nnoremap { "<space>ca", vim.lsp.buf.code_action, { desc = "Code action" } }
 
     buf_nnoremap { "gd", vim.lsp.buf.definition, { desc = "Symbol definition" } }
     buf_nnoremap { "gD", vim.lsp.buf.declaration, { desc = "Symbol declaration" } }
     buf_nnoremap { "gT", vim.lsp.buf.type_definition, { desc = "Type definition" } }
     buf_nnoremap { "K", vim.lsp.buf.hover, { desc = "lsp:hover" } }
 
-    buf_nnoremap { "<space>gI", handlers.implementation }
+    buf_nnoremap { "<space>gI", handlers.implementation, { desc = "Symbol Implementation" } }
     -- buf_nnoremap { "<space>lr", "<cmd>lua R('config.lsp.codelens').run()<CR>" }
-    buf_nnoremap { "<space>rr", "LspRestart" }
+    buf_nnoremap { "<space>rr", "LspRestart", { desc = "LSP restart" } }
 
     -- telescope_mapper("gr", "lsp_references", nil, true)
     -- telescope_mapper("gI", "lsp_implementations", nil, true)
     -- telescope_mapper("<space>wd", "lsp_document_symbols", { ignore_filename = true }, true)
     -- telescope_mapper("<space>ww", "lsp_dynamic_workspace_symbols", { ignore_filename = true }, true)
 
-    vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
+    -- NOTE: Just recently commented this out, if any changes to lsp or completion
+    -- functionality occur
+    -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then
@@ -210,15 +212,21 @@ local servers = {
     -- Also uses `shellcheck` and `explainshell`
     bashls = true,
     lua_ls = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
-            -- make the server aware of Neovim runtime files
-            workspace = {
-                checkThirdParty = false,
-                library = {
-                    vim.env.VIMRUNTIME,
+        settings = {
+            Lua = {
+                runtime = {
+                    version = "LuaJIT",
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = { "vim" },
+                },
+                workspace = {
+                    -- make the server aware of Neovim runtime files
+                    checkThirdParty = false,
+                    library = {
+                        vim.env.VIMRUNTIME,
+                    },
                 },
             },
         },
@@ -299,19 +307,6 @@ local servers = {
     svelte = true,
 
     gopls = {
-        -- root_dir = function(fname)
-        --   local Path = require "plenary.path"
-        --
-        --   local absolute_cwd = Path:new(vim.loop.cwd()):absolute()
-        --   local absolute_fname = Path:new(fname):absolute()
-        --
-        --   if string.find(absolute_cwd, "/cmd/", 1, true) and string.find(absolute_fname, absolute_cwd, 1, true) then
-        --     return absolute_cwd
-        --   end
-        --
-        --   return lspconfig_util.root_pattern("go.mod", ".git")(fname)
-        -- end,
-
         settings = {
             gopls = {
                 codelenses = {
@@ -350,73 +345,10 @@ local servers = {
     -- nix language server
     nil_ls = true,
 
-    -- eslint = true,
-    -- FIX: Commenting our the intialization of tsserver here while
-    -- I test out `typescript.nvim`. lspconfig doesn't allow more than
-    -- one setup call per server.
-    --
-    -- tsserver = {
-    --     init_options = ts_util.init_options,
-    --     cmd = { "typescript-language-server", "--stdio" },
-    --     filetypes = {
-    --         "javascript",
-    --         "javascriptreact",
-    --         "javascript.jsx",
-    --         "typescript",
-    --         "typescriptreact",
-    --         "typescript.tsx",
-    --     },
-    --
-    --     on_attach = function(client)
-    --         custom_attach(client)
-    --
-    --         ts_util.setup { auto_inlay_hints = false }
-    --         ts_util.setup_client(client)
-    --     end,
-    -- },
     tailwindcss = {
         filetypes = { "css", "typescript" },
     },
 }
-
--- if vim.fn.executable "llmsp" == 1 and vim.env.SRC_ACCESS_TOKEN then
---   vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
---     pattern = { "*" },
---     callback = function()
---       vim.lsp.start {
---         name = "llmsp",
---         cmd = { "llmsp" },
---         root_dir = vim.fs.dirname(vim.fs.find({ "go.mod", ".git" }, { upward = true })[1]),
---         capabilities = updated_capabilities,
---         on_attach = custom_attach,
---         settings = {
---           llmsp = {
---             sourcegraph = {
---               url = vim.env.SRC_ENDPOINT,
---               accessToken = vim.env.SRC_ACCESS_TOKEN,
---             },
---           },
---         },
---       }
---     end,
---   })
--- end
-
--- Can remove later if not installed (TODO: enable for not linux)
-if vim.fn.executable "tree-sitter-grammar-lsp-linux" == 1 then
-    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-        pattern = { "grammar.js", "*/corpus/*.txt" },
-        callback = function()
-            vim.lsp.start {
-                name = "tree-sitter-grammar-lsp",
-                cmd = { "tree-sitter-grammar-lsp-linux" },
-                root_dir = "/",
-                capabilities = updated_capabilities,
-                on_attach = custom_attach,
-            }
-        end,
-    })
-end
 
 require("mason").setup()
 require("mason-lspconfig").setup {
@@ -438,7 +370,6 @@ require("mason-lspconfig").setup {
         "vimls",
         "yamlls",
     },
-    -- automatic_installation =
 }
 
 local setup_server = function(server, config)
@@ -462,66 +393,6 @@ end
 for server, config in pairs(servers) do
     setup_server(server, config)
 end
-
---[ An example of using functions...
--- 0. nil -> do default (could be enabled or disabled)
--- 1. false -> disable it
--- 2. true -> enable, use defaults
--- 3. table -> enable, with (some) overrides
--- 4. function -> can return any of above
---
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, params, client_id, bufnr, config)
---   local uri = params.uri
---
---   vim.lsp.with(
---     vim.lsp.diagnostic.on_publish_diagnostics, {
---       underline = true,
---       virtual_text = true,
---       signs = sign_decider,
---       update_in_insert = false,
---     }
---   )(err, method, params, client_id, bufnr, config)
---
---   bufnr = bufnr or vim.uri_to_bufnr(uri)
---
---   if bufnr == vim.api.nvim_get_current_buf() then
---     vim.lsp.diagnostic.set_loclist { open_loclist = false }
---   end
--- end
---]]
-
--- local async_formatting = function(bufnr)
---     bufnr = bufnr or vim.api.nvim_get_current_buf()
---
---     vim.lsp.buf_request(
---         bufnr,
---         "textDocument/formatting",
---         vim.lsp.util.make_formatting_params {},
---         function(err, res, ctx)
---             if err then
---                 local err_msg = type(err) == "string" and err or err.message
---                 -- you can modify the log message / level (or ignore it completely)
---                 -- vim.notify("formatting: " .. err_msg, vim.log.levels.WARN)
---                 return
---             end
---
---             -- don't apply results if buffer is unloaded or has been modified
---             if not vim.api.nvim_buf_is_loaded(bufnr) or vim.api.nvim_buf_get_option(bufnr, "modified") then
---                 return
---             end
---
---             if res then
---                 local client = vim.lsp.get_client_by_id(ctx.client_id)
---                 vim.lsp.util.apply_text_edits(res, bufnr, client and client.offset_encoding or "utf-16")
---                 vim.api.nvim_buf_call(bufnr, function()
---                     vim.cmd "silent noautocmd update"
---                 end)
---             end
---         end
---     )
--- end
-
--- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 require("null-ls").setup {
     sources = {

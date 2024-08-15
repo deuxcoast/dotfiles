@@ -1,4 +1,14 @@
+local M = {}
 vim.g.mapleader = " "
+
+M.imap = function(tbl)
+    vim.keymap.set("i", tbl[1], tbl[2], tbl[3])
+end
+
+M.nmap = function(tbl)
+    vim.keymap.set("n", tbl[1], tbl[2], tbl[3])
+end
+
 local map = vim.api.nvim_set_keymap
 
 -- function for toggling vim.opt settings
@@ -19,14 +29,14 @@ vim.keymap.set("c", "<S-Enter>", function()
 end, { desc = "Redirect Cmdline" })
 
 -- Quit vim
-vim.keymap.set("n", "<leader>Q", ":qall <CR>", { desc = "Quit vim, unless there is modified buffers" })
+vim.keymap.set("n", "<leader>Q", ":qall <CR>", { desc = "Quit vim" })
 -- Close the current window
 vim.keymap.set("n", "<leader>qw", ":close<CR>", { desc = "Close the current window" })
 
 -- Revert to last save
 map("n", "U", ":earlier 1f<CR>", { desc = "Revert file to last write" })
 
-vim.keymap.set("v", "y", "y']")
+vim.keymap.set("v", "y", "y']", { desc = "Yank into default register" })
 
 vim.keymap.set("n", "<leader>tc", function()
     local default_value = { 80 }
@@ -53,12 +63,12 @@ vim.keymap.set("n", "<leader>sf", ":source %<CR>", { desc = "Source the current 
 
 --- CLIPBOARD
 -- paste to a new line
-vim.keymap.set("n", "<leader>p", "o<ESC>p")
-vim.keymap.set("n", "<leader>P", "O<ESC>p")
+vim.keymap.set("n", "<leader>p", "o<ESC>p", { desc = "Paste on line below" })
+vim.keymap.set("n", "<leader>P", "O<ESC>p", { desc = "Paste on line above" })
 
 -- Toggle comment
-vim.keymap.set("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)")
-vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)")
+vim.keymap.set("n", "<leader>/", "<Plug>(comment_toggle_linewise_current)", { desc = "Toggle comment linewise" })
+vim.keymap.set("v", "<leader>/", "<Plug>(comment_toggle_linewise_visual)", { desc = "Toggle comment" })
 
 -- navigate within insert mode
 vim.keymap.set("i", "<C-l>", "<Right>")
@@ -66,25 +76,19 @@ vim.keymap.set("i", "<C-k>", "<Up>")
 vim.keymap.set("i", "<C-j>", "<C-o>j")
 vim.keymap.set("i", "<C-h>", "<C-o>h")
 
--- switch between windows
--- vim.keymap.set("n", "<C-h>", "<C-w>h")
--- vim.keymap.set("n", "<C-j>", "<C-w>j")
--- vim.keymap.set("n", "<C-k>", "<C-w>k")
--- vim.keymap.set("n", "<C-l>", "<C-w>l")
-
 -- go to beginning / end in insert mode
 -- TODO: These mappings are not working. Looks like the terminal is not
 -- properly interpreting the escape codes.
-vim.keymap.set("i", "<C-e>", "<end>")
-vim.keymap.set("i", "<C-b>", "<ESC>^i")
+vim.keymap.set("i", "<C-p>", "<end>")
+vim.keymap.set("i", "<C-n>", "<ESC>^i")
 
 -- unhighlight
-vim.keymap.set("n", "<leader>uh", ":noh <CR>")
+vim.keymap.set("n", "<leader>uh", ":noh <CR>", { desc = "remove highlights" })
 
 vim.keymap.set("v", "p", '"_dP"') -- don't yank replaced text
 
-vim.keymap.set("n", "<leader>we", ":x<CR>") -- save and close
-vim.keymap.set("n", "<leader>w", ":w<CR>") -- save
+vim.keymap.set("n", "<leader>we", ":x<CR>", { desc = "save and close file" }) -- save and close
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "save file" }) -- save
 vim.keymap.set("n", "<A-q>", ":q!<CR>") -- close w/o saving
 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move current line down one" })
@@ -148,8 +152,6 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
---[[ vim.keymap.set("n", "<M-j>", "<Plug>(unimpaired-move-down)", { desc = "Move current line down" }) ]]
---[[ vim.keymap.set("n", "<M-k>", "<Plug>(unimpaired-move-up)", { desc = "Move current line up" }) ]]
 local movelineOpts = { noremap = true, silent = true }
 vim.keymap.set("n", "<M-j>", ":MoveLine(1)<CR>", movelineOpts)
 vim.keymap.set("n", "<M-k>", ":MoveLine(-1)<CR>", movelineOpts)
@@ -166,18 +168,11 @@ map("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Navigate left" })
 map("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Navigate right" })
 vim.keymap.set("t", "jk", "<C-\\><C-n>", movelineOpts)
 
--- Escape key goes from Terminal Mode to Normal Mode
--- map("t", "<ESC>", "<C-><C-n>", { desc = "Insert Mode" })
-
---[[ map("n", "<C-t>", '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
---[[ map("i", "<C-t>", '<ESC><Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Open terminal. Accepts preceding arg."}) ]]
 -- save and source
 vim.keymap.set("n", "<leader>cx", function()
     vim.cmd "w"
     vim.cmd "so %"
 end, { desc = "Save and source" })
-
--- aerial
 
 -- toggle foldmethod
 -- vim.keymap.set("n", "yof", function()
@@ -199,3 +194,5 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.keymap.set("n", "<Esc>", "<cmd>close!<CR>", { silent = true, buffer = true })
     end,
 })
+
+return M

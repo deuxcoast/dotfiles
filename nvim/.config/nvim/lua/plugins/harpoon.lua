@@ -14,7 +14,7 @@ return {
         nmap("<leader>4", ':lua require("harpoon.ui").nav_file(4)<CR>', "harpoon: go to file 4")
         nmap("<leader>5", ':lua require("harpoon.ui").nav_file(5)<CR>', "harpoon: go to file 5")
         nmap("<leader>6", ':lua require("harpoon.ui").nav_file(6)<CR>', "harpoon: go to file 6")
-        nmap("<leader>-", ':lua require("harpoon.ui").nav_next()<CR>', "harpoon: navigate to the next file")
-        nmap("<leader>=", ':lua require("harpoon.ui").nav_prev()<CR>', "harpoon: navigate to the next file")
+        nmap("<leader>9", ':lua require("harpoon.ui").nav_next()<CR>', "harpoon: navigate to the prev file")
+        nmap("<leader>0", ':lua require("harpoon.ui").nav_prev()<CR>', "harpoon: navigate to the next file")
     end,
 }

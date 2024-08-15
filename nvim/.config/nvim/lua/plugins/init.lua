@@ -24,12 +24,6 @@ return {
     },
     { "hrsh7th/vim-eft", event = "BufEnter" },
     {
-        "goolord/alpha-nvim",
-        config = function()
-            require("alpha").setup(require("alpha.themes.dashboard").config)
-        end,
-    },
-    {
         "szw/vim-maximizer",
         event = "BufEnter",
         init = function()
@@ -43,10 +37,8 @@ return {
             vim.api.nvim_set_keymap("n", "<Leader>gr", ':lua require("replacer").run()<cr>', { silent = true })
         end,
     },
-    { "mbbill/undotree", event = "BufEnter" },
     { "mfussenegger/nvim-treehopper", event = "InsertEnter" },
     { "nvim-tree/nvim-web-devicons" },
-    { "RishabhRD/nvim-cheat.sh", dependencies = "RishabhRD/popfix" },
     {
         "windwp/nvim-autopairs",
         config = function()
@@ -72,4 +64,8 @@ return {
         cmd = "Glow",
     },
     { "Asheq/close-buffers.vim" },
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+    },
 }

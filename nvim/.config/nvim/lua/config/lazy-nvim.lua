@@ -12,8 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-opts = {
-    -- defaults = { lazy = true },
+local opts = {
     performance = {
         rtp = {
             disabled_plugins = {
@@ -54,7 +53,7 @@ opts = {
     },
     dev = {
         -- directory where you store your local plugin projects
-        path = "~/duexcoast/nvim-plugins-local",
+        path = "~/deuxcoast/nvim-plugins-local",
     },
 }
 

@@ -1,5 +1,5 @@
 return {
-    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
+    { "bluz71/vim-moonfly-colors", name = "moonfly" },
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -87,7 +87,7 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        priority = 1000,
+        -- priority = 1000,
         config = function()
             require("rose-pine").setup {
                 --- @usage 'auto'|'main'|'moon'|'dawn'
@@ -143,5 +143,10 @@ return {
                 },
             }
         end,
+    },
+    {
+        "sainnhe/gruvbox-material",
+        -- lazy = false,
+        -- priority = 1000,
     },
 }

@@ -1,11 +1,10 @@
 return {
-
     "chrishrb/gx.nvim",
-    event = { "BufEnter" },
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
     cmd = { "Browse" },
     dependencies = { "nvim-lua/plenary.nvim" },
     config = true, -- default settings
+    -- event = { "BufEnter" },
+    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
     -- dev = true,
 
     -- 	-- you can specify also another config if you want

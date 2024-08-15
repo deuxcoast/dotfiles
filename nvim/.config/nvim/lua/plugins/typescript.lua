@@ -1,5 +1,6 @@
 return {
     "jose-elias-alvarez/typescript.nvim",
+    event = "VeryLazy",
     config = function()
         ts_util = require "nvim-lsp-ts-utils"
         require("typescript").setup {

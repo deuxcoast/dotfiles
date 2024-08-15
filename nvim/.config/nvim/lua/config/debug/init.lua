@@ -24,34 +24,32 @@ sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl =
 
 local set = vim.keymap.set
 
-set("n", "<F1>", dap.continue)
-set("n", "<F2>", dap.step_into)
-set("n", "<F3>", dap.step_over)
-set("n", "<F4>", dap.step_out)
-set("n", "<F5>", dap.step_back)
--- keypress of <F13> is read by terminal (alacritty) as <F15>
-set("n", "<F11>", dap.restart)
--- keypress of <F15> is read by terminal (alacritty) as <F17>
-set("n", "<F12>", dap.terminate)
+set("n", "<F1>", dap.continue, { desc = "dap: continue" })
+set("n", "<F2>", dap.step_into, { desc = "dap: step into" })
+set("n", "<F3>", dap.step_over, { desc = "dap: step over" })
+set("n", "<F4>", dap.step_out, { desc = "dap: step out" })
+set("n", "<F5>", dap.step_back, { desc = "dap: step back" })
+set("n", "<F11>", dap.restart, { desc = "dap: restart" })
+set("n", "<F12>", dap.terminate, { desc = "dap: terminate" })
 
-set("n", "<leader>b", dap.toggle_breakpoint)
+set("n", "<leader>b", dap.toggle_breakpoint, { desc = "dap: toggle brkpt" })
 -- temporarily removes all breakpoints, sets a breakpoint at the cursor, resumes
--- execution and then adds back breakpoints
-set("n", "<leader>db", dap.run_to_cursor)
+--execution and then adds back breakpoints
+set("n", "<leader>db", dap.run_to_cursor, { desc = "dap: run to cursor" })
 
 -- Eval under cursor
 set("n", "<leader>?", function()
     require("dapui").eval(nil, { enter = true })
-end)
+end, { desc = "dap: eval under cursor" })
 set("n", "<leader>dk", function()
     dap.up()
-end)
+end, { desc = "dap: dap.up()" })
 set("n", "<leader>dj", function()
     dap.down()
-end)
+end, { desc = "dap: dap.down()" })
 set("n", "<leader>dr", function()
     dap.repl.open({}, "vsplit")
-end)
+end, { desc = "dap: open repl" })
 
 ------------------------------------------------------
 ----- Dap Go
@@ -62,10 +60,10 @@ if present_dap_go then
     dap_go.setup()
     set("n", "<leader>dgt", function()
         dap_go.debug_test()
-    end)
+    end, { desc = "dap go: dbg test" })
     set("n", "<leader>dgl", function()
         dap_go.debug_last_test()
-    end)
+    end, { desc = "dap go: dbg last test" })
 end
 
 ------------------------------------------------------
@@ -143,7 +141,7 @@ local present_telescope, telescope = pcall(require, "telescope")
 
 if present_telescope then
     telescope.load_extension "dap"
-    set("n", "<leader>df", ":Telescope dap frames<CR>")
-    set("n", "<leader>dc", ":Telescope dap commands<CR>")
-    set("n", "<leader>dl", ":Telescope dap list_breakpoints<CR>")
+    set("n", "<leader>df", ":Telescope dap frames<CR>", { desc = " dap frames" })
+    set("n", "<leader>dc", ":Telescope dap commands<CR>", { desc = " dap commands" })
+    set("n", "<leader>dl", ":Telescope dap list_breakpoints<CR>", { desc = " dap list brkpts" })
 end

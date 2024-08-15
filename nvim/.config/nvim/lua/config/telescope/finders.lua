@@ -43,7 +43,7 @@ finders.find_git_preview = function()
 end
 
 -- Find files with_preview settings
-function fd()
+finders.fd = function()
     local opts = vim.deepcopy(with_preview)
     opts.prompt_prefix = "FD>"
     require("telescope.builtin").fd(opts)

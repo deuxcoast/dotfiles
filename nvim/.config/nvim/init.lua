@@ -1,4 +1,4 @@
-require "duex.globals"
+require "config.globals"
 require "config.mapping"
 require "config.lazy-nvim"
 require "config.theme"
