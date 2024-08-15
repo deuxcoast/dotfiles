@@ -18,6 +18,8 @@ export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+export CONDA_AUTO_ACTIVATE_BASE=false
+
 # Rust
 source "$HOME/.cargo/env"
 
