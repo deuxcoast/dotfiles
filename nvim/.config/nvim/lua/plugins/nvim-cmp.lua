@@ -22,7 +22,7 @@ return {
             -- event = "VeryLazy",
             config = function()
                 local ls = require "luasnip"
-                require "duex.snips"
+                require "config.snippets.snips"
                 require("luasnip/loaders/from_vscode").load { paths = { "~/.local/share/nvim/lazy/friendly-snippets" } }
 
                 local M = {}
@@ -62,7 +62,7 @@ return {
 
                 function M.refresh_snippets()
                     ls.cleanup()
-                    M.reload_package "duex.snips"
+                    M.reload_package "config.snippets.snips"
                 end
 
                 local set = vim.keymap.set
@@ -79,6 +79,10 @@ return {
     },
     config = function()
         local presentCmp, cmp = pcall(require, "cmp")
+        if not presentCmp then
+            return
+        end
+
         local lspkind = require "lspkind"
 
         -- Add additional capabilities supported by nvim-cmp
@@ -150,10 +154,6 @@ return {
             TypeParameter = "󰅲",
         }
 
-        -- if not presentCmp or not present_lua_snip then
-        --     return
-        -- end
-
         ---@diagnostic disable-next-line: missing-fields
         cmp.setup {
             snippet = {
@@ -212,7 +212,16 @@ return {
                         end
                     end,
                 },
-                ["<tab>"] = cmp.config.disable,
+                -- ["<tab>"] = cmp.config.disable,
+                ["<Tab>"] = cmp.mapping {
+                    c = function()
+                        if cmp.visible() then
+                            cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+                        else
+                            cmp.complete()
+                        end
+                    end,
+                },
 
                 -- Maybe?
                 ["<c-q>"] = cmp.mapping.confirm {
@@ -276,6 +285,25 @@ return {
 
             require("luasnip/loaders/from_vscode").load(),
         }
+
+        -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline({ "/", "?" }, {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = {
+                { name = "buffer" },
+            },
+        })
+
+        -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+        cmp.setup.cmdline(":", {
+            mapping = cmp.mapping.preset.cmdline(),
+            sources = cmp.config.sources({
+                { name = "path" },
+            }, {
+                { name = "cmdline" },
+            }),
+            matching = { disallow_symbol_nonprefix_matching = false },
+        })
 
         local autocomplete_group = vim.api.nvim_create_augroup("vimrc_autocompletion", { clear = true })
         vim.api.nvim_create_autocmd("FileType", {
