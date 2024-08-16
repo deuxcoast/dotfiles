@@ -163,17 +163,7 @@ local custom_attach = function(client, bufnr)
     buf_nnoremap { "K", vim.lsp.buf.hover, { desc = "lsp:hover" } }
 
     buf_nnoremap { "<space>gI", handlers.implementation, { desc = "Symbol Implementation" } }
-    -- buf_nnoremap { "<space>lr", "<cmd>lua R('config.lsp.codelens').run()<CR>" }
     buf_nnoremap { "<space>rr", "LspRestart", { desc = "LSP restart" } }
-
-    -- telescope_mapper("gr", "lsp_references", nil, true)
-    -- telescope_mapper("gI", "lsp_implementations", nil, true)
-    -- telescope_mapper("<space>wd", "lsp_document_symbols", { ignore_filename = true }, true)
-    -- telescope_mapper("<space>ww", "lsp_dynamic_workspace_symbols", { ignore_filename = true }, true)
-
-    -- NOTE: Just recently commented this out, if any changes to lsp or completion
-    -- functionality occur
-    -- vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
 
     -- Set autocommands conditional on server_capabilities
     if client.server_capabilities.documentHighlightProvider then

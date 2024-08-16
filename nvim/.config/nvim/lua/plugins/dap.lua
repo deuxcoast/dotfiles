@@ -1,9 +1,8 @@
 return {
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-    "theHamsta/nvim-dap-virtual-text",
-    "nvim-telescope/telescope-dap.nvim",
-
+    { "mfussenegger/nvim-dap", event = "VeryLazy" },
+    { "rcarriga/nvim-dap-ui", event = "VeryLazy" },
+    { "theHamsta/nvim-dap-virtual-text", event = "VeryLazy" },
+    { "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" },
     --  Adapter configuration for specific languages
     {
         "leoluz/nvim-dap-go",

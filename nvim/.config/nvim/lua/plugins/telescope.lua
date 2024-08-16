@@ -1,19 +1,15 @@
 return {
     {
         "nvim-telescope/telescope.nvim",
-        lazy = true,
         event = "VimEnter",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            -- "nvim-telescope/telescope-ui-select.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-dap.nvim",
             "nvim-telescope/telescope-live-grep-args.nvim",
             "benfowler/telescope-luasnip.nvim",
             "folke/trouble.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            "sopa0/telescope-makefile",
-            "tknightz/telescope-termfinder.nvim",
         },
         init = function()
             local set_mappings = require "config.telescope.mappings"
@@ -93,24 +89,27 @@ return {
                 },
             }
 
-            telescope.load_extension "fzf"
-            telescope.load_extension "file_browser"
-            telescope.load_extension "live_grep_args"
-            telescope.load_extension "make"
-            telescope.load_extension "termfinder"
-            telescope.load_extension "noice"
-            telescope.load_extension "luasnip"
+            -- vim.defer_fn(function()
+            --     telescope.load_extension "fzf"
+            --     telescope.load_extension "file_browser"
+            --     telescope.load_extension "live_grep_args"
+            --     telescope.load_extension "make"
+            --     telescope.load_extension "termfinder"
+            --     telescope.load_extension "noice"
+            --     telescope.load_extension "luasnip"
+            -- end, 1000)
         end,
     },
-    {
-        "sopa0/telescope-makefile",
-        config = function()
-            require("telescope-makefile").setup {
-                -- The path where to search the makefile in the priority order
-                makefile_priority = { ".", "build/" },
-                default_target = "[DEFAULT]", -- nil or string : Name of the default target | nil will disable the default_target
-                make_bin = "make", -- Custom makefile binary path, uses system make by def
-            }
-        end,
-    },
+    -- {
+    --     "sopa0/telescope-makefile",
+    --     event = "VeryLazy",
+    --     config = function()
+    --         require("telescope-makefile").setup {
+    --             -- The path where to search the makefile in the priority order
+    --             makefile_priority = { ".", "build/" },
+    --             default_target = "[DEFAULT]", -- nil or string : Name of the default target | nil will disable the default_target
+    --             make_bin = "make", -- Custom makefile binary path, uses system make by def
+    --         }
+    --     end,
+    -- },
 }

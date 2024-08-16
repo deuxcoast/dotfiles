@@ -101,11 +101,11 @@ fi
 # Brew file should be symlinked as ~/.Brewfile from stow command above
 # ------------------------------------------------------------------------------
 
-# Generate a checksum so that we only run the `brew bundle install --global` 
-# command if the hash of the Brewfile has changed since the last time we 
+# Generate a checksum so that we only run the `brew bundle install --global`
+# command if the hash of the Brewfile has changed since the last time we
 # executed this script on this machine.
 
-# I want to be able to run this script quickly and often, and `brew bundle` 
+# I want to be able to run this script quickly and often, and `brew bundle`
 # causes the script to be too slow for frequent use.
 MACHINE_ID=$(hostname)
 CHECKSUM_DIR="./checksum"
