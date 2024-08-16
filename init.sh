@@ -3,6 +3,20 @@
 # exit script if there's an error
 set -e
 
+# cd to proper directory to run script from
+cd "$(git rev-parse --show-toplevel)"
+if $(basename "$(pwd)") != ".dotfiles"; then
+    echo "This script must be run from the .dotfiles directory."
+    echo "The git repository must be cloned as .dotfiles."
+    exit 1
+fi
+
+
+# ------------------------------------------------------------------------------
+# Generate or read checksum file
+# ------------------------------------------------------------------------------
+
+
 # ------------------------------------------------------------------------------
 # Install Brew
 # ------------------------------------------------------------------------------
@@ -20,15 +34,15 @@ then
         "Darwin arm64")
             printf "Adding brew to path (in ~/.zprofile) for arm64 Mac\n\n"
 
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+            echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
             eval "$(/opt/homebrew/bin/brew shellenv)"
             ;;
 
         "Darwin x86_64")
             printf "Adding brew to path (in ~/.zprofile) for x86_64 Mac\n\n"
 
-            echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+            echo "eval '$(/usr/local/bin/brew shellenv)'" >> ~/.zprofile
+            eval "$(/usr/local/bin/brew shellenv)"
             ;;
     esac
 
@@ -53,19 +67,21 @@ fi
 # because we're using a custom plugin directory, and using stow with out the
 # path in place first will create problems (we want to stow the files only, not
 # the directory structure around them).
-[[ -d ~/.config/tmux-plugins ]] || mkdir ~/.config/tmux-plugins
+[[ -d ~/.config/tmux-plugins ]] || mkdir -p ~/.config/tmux-plugins
 
 # Similar issue, lazygit has runtime files that it keeps in the config folder
 # that we don't want to sync between machines. So we don't want to symlink the
 # folder, just the config file within it.
-[[ -d ~/.config/lazygit ]] || mkdir ~/.config/lazygit
+[[ -d ~/.config/lazygit ]] || mkdir -p ~/.config/lazygit
 
 
 # This is where clangd gets additional configuration. Again, we want to symlink
 # just the file and not the directory structure.
-[[ -d ~/Library/Preferences/clangd ]] || mkdir ~/Library/Preferences/clangd
+[[ -d ~/Library/Preferences/clangd ]] || mkdir -p ~/Library/Preferences/clangd
 
-[[ -d ~/.config/karabiner ]] || mkdir ~/.config/karabiner
+[[ -d ~/.config/karabiner ]] || mkdir -p ~/.config/karabiner
+
+[[ -d ~/deuxcoast/nvim-plugins-local ]] || mkdir -p ~/deuxcoast/nvim-plugins-local
 # ------------------------------------------------------------------------------
 # Symlink dotfiles using stow
 # ------------------------------------------------------------------------------
@@ -82,11 +98,49 @@ fi
 # ------------------------------------------------------------------------------
 # Install packages from Brewfile
 #
-# Brew file should be symlinked as ~/Brewfile from stow command above
+# Brew file should be symlinked as ~/.Brewfile from stow command above
 # ------------------------------------------------------------------------------
 
-# Looks for ~/Brewfile and installs its contents
-brew bundle install --global
+# Generate a checksum so that we only run the `brew bundle install --global` 
+# command if the hash of the Brewfile has changed since the last time we 
+# executed this script on this machine.
+
+# I want to be able to run this script quickly and often, and `brew bundle` 
+# causes the script to be too slow for frequent use.
+MACHINE_ID=$(hostname)
+CHECKSUM_DIR="./checksum"
+mkdir -p $CHECKSUM_DIR
+
+# Target file and checksum file path
+BREWFILE="./brew/.Brewfile"
+FILE_NAME=$(basename $BREWFILE)
+CHECKSUM_FILE="$CHECKSUM_DIR/${FILE_NAME}_${MACHINE_ID}.checksum"
+
+# Calculate current checksum
+CURRENT_CHECKSUM=$(md5sum "$BREWFILE" | awk '{ print $1 }')
+
+# Compare with previous checksum
+if [ -f "$CHECKSUM_FILE" ]; then
+    PREVIOUS_CHECKSUM=$(cat "$CHECKSUM_FILE")
+else
+    PREVIOUS_CHECKSUM=""
+fi
+
+if [ "$CURRENT_CHECKSUM" != "$PREVIOUS_CHECKSUM" ]; then
+    printf "\n"
+    printf "Brewfile has changed, executing 'brew bundle install --global'...\n"
+    # Looks for ~/Brewfile and installs its contents
+    brew bundle install --global
+    # Your expensive command here
+
+    # Update the checksum file
+    echo "$CURRENT_CHECKSUM" > "$CHECKSUM_FILE"
+else
+    printf "\n"
+    printf "Brewfile has not changed since the last execution of this script.\n"
+    printf "Skipping 'brew bundle --global'\n"
+fi
+
 
 # Build cache for bat pager, so themes can be used
 printf "\n"

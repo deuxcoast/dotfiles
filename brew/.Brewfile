@@ -1,7 +1,10 @@
 # !/bin/bash
 
+tap "homebrew/services"
 tap "homebrew/bundle"
 tap "buo/cask-upgrade"
+tap "koekeishiya/formulae"
+tap "jesseduffield/lazygit"
 
 # cli tools
 brew 'archey4'
@@ -9,13 +12,14 @@ brew 'atuin'
 brew 'bat'
 brew 'btop'
 brew 'coreutils'
-brew 'docker'
+brew 'cppman'
 brew 'eza'
 brew 'fd'
 brew 'fzf'
 brew 'gh'
 brew 'git-delta'
 brew 'glow'
+brew 'hey'
 brew 'htop'
 brew 'hub'
 brew 'jq'
@@ -24,14 +28,13 @@ brew 'lazygit'
 brew 'mongocli'
 brew 'mosh'
 brew 'most'
-brew 'mysql'
 brew 'neovim'
 brew 'osx-cpu-temp'
 brew 'ripgrep'
 brew 'rsync'
-brew 'sshfs'
 brew 'stow'
 brew 'the_silver_searcher'
+brew 'tldr'
 brew 'tmux'
 brew 'tmuxinator'
 brew 'tree'
@@ -44,15 +47,14 @@ brew 'koekeishiya/formulae/yabai'
 brew 'koekeishiya/formulae/skhd'
 
 # databases / key-value stores
-brew 'mysql', restart_service: :changed
-brew 'postgresql', restart_service: :changed
+brew 'postgresql@14', restart_service: :changed
 brew 'redis', restart_service: :changed
 
 # dev macos apps
-cask 'alacritty' unless File.directory?("/Applications/Alacritty.app/")
+cask 'alacritty'
 cask 'karabiner-elements'
-cask 'docker' unless File.directory?("/Applications/Docker.app/")
 cask 'git-credential-manager'
+cask 'miniconda'
 cask 'ngrok'
 cask 'pgadmin4'
 cask 'postman'
@@ -76,11 +78,13 @@ cask 'purevpn'
 
 # programming languages & package managers
 brew 'golang'
+brew 'lua'
+brew 'luarocks'
 brew 'node'
 brew 'nvm'
 brew 'pnpm'
 brew 'yarn'
-brew 'rustup-init'
+brew 'rustup'
 brew 'ruby'
 brew 'pyenv'
 

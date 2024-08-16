@@ -10,6 +10,7 @@ CVS
 \.cvsignore
 
 \.DS_Store
+\.checksum
 
 \.svn
 _darcs
