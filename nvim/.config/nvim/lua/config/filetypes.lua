@@ -1,4 +1,4 @@
-vim.filetype.add({
+vim.filetype.add {
     extension = {
         h = function()
             -- Use a lazy heuristic that #including a C++ header means it's a
@@ -18,4 +18,4 @@ vim.filetype.add({
         pcss = "scss",
         prisma = "prisma",
     },
-})
+}

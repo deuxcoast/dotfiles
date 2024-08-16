@@ -1,5 +1,9 @@
 local finders = {}
 
+-------------------------------------
+-- Helpers for styling custom pickers
+-------------------------------------
+
 -- Dropdown list theme using a builtin theme definitions :
 local center_list = require("telescope.themes").get_dropdown {
     winblend = 10,
@@ -37,16 +41,33 @@ finders.fd_in_nvim = function()
     require("telescope.builtin").fd(opts)
 end
 
--- Find git files with with_large_preview settings
-finders.find_git_preview = function()
-    local opts = vim.deepcopy(with_large_preview)
-end
-
 -- Find files with_preview settings
 finders.fd = function()
     local opts = vim.deepcopy(with_preview)
     opts.prompt_prefix = "FD>"
     require("telescope.builtin").fd(opts)
+end
+
+-- Fallback to `find_files` if `git_files` can't find a `.git` directory
+--
+-- We cache the results of "git rev-parse"
+-- Process creation is expensive in Windows, so this reduces latency
+local is_inside_work_tree = {}
+
+finders.project_files = function()
+    local opts = {} -- define here if you want to define something
+
+    local cwd = vim.fn.getcwd()
+    if is_inside_work_tree[cwd] == nil then
+        vim.fn.system "git rev-parse --is-inside-work-tree"
+        is_inside_work_tree[cwd] = vim.v.shell_error == 0
+    end
+
+    if is_inside_work_tree[cwd] then
+        require("telescope.builtin").git_files(opts)
+    else
+        require("telescope.builtin").find_files(opts)
+    end
 end
 
 return finders

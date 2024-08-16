@@ -12,76 +12,25 @@ return {
             "benfowler/telescope-luasnip.nvim",
             "folke/trouble.nvim",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-            "natecraddock/workspaces.nvim",
             "sopa0/telescope-makefile",
             "tknightz/telescope-termfinder.nvim",
         },
         init = function()
-            vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = " Project files" })
-            vim.keymap.set(
-                "n",
-                "<leader>f/",
-                ":Telescope current_buffer_fuzzy_find<CR>",
-                { desc = " Current buffer fzf" }
-            )
-            vim.keymap.set(
-                "n",
-                "<leader>;",
-                ":Telescope current_buffer_fuzzy_find<CR>",
-                { desc = " Current buffer fzf" }
-            )
-            vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = " Buffers" })
-            vim.keymap.set("n", "<leader>ff", ":Telescope git_files<CR>", { desc = " Git files" })
-            vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = " Project grep" })
-            -- vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-            vim.keymap.set("n", "<leader>fG", ":Telescope grep_string<CR>", { desc = " String under cursor" })
-            vim.keymap.set(
-                "n",
-                "<leader>fo",
-                "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>",
-                { desc = " File browser" }
-            )
-            vim.keymap.set("n", "<leader>fT", ":Telescope builtin<CR>", { desc = " Telescope meta" })
-            vim.keymap.set("n", "<leader>fr", ":Telescope lsp_references<CR>", { desc = " LSP symbol references" })
-            vim.keymap.set("n", "<leader>fl", ":Telescope loclist<CR>", { desc = " loclist" })
-            vim.keymap.set(
-                "n",
-                "<leader>fi",
-                ":Telescope lsp_implementations<CR>",
-                { desc = " symbol implementation" }
-            )
-            vim.keymap.set(
-                "n",
-                "<leader>fs",
-                ":Telescope lsp_document_symbols<CR>",
-                { desc = " LSP document symbols" }
-            )
-            vim.keymap.set("n", "<leader>fc", ":Telescope git_bcommits<CR>", { desc = " Buffer git commit history" })
-            vim.keymap.set("n", "<leader>fC", ":Telescope git_commits<CR>", { desc = " Project git commit history" })
-            vim.keymap.set("n", "<leader>fW", ":Telescope workspaces<CR>", { desc = " Workspaces" })
-            vim.keymap.set("n", "<leader>fM", ":Telescope make<CR>", { desc = " Makefile" })
-            vim.keymap.set("n", "<leader>ft", ":Telescope termfinder find<CR>", { desc = " Terminals" })
-            vim.keymap.set("n", "<leader>fm", ":Telescope noice<CR>", { desc = " Messages" })
-            vim.keymap.set("n", "<leader>fk", ":Telescope man_pages sections=ALL<CR>", { desc = " Man pages" })
-            vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = " Help tags" })
-            vim.keymap.set("n", "<leader>fs", ":Telescope colorscheme<CR>", { desc = " Color schemes" })
-            vim.keymap.set("n", "<leader>fa", ":Cheatsheet<CR>", { desc = " Cheatsheet keymaps" })
-            vim.keymap.set("n", "<leader>fS", ":Telescope luasnip<CR>", { desc = " LuaSnip" })
-            vim.keymap.set(
-                "n",
-                "<leader>fd",
-                ":Telescope lsp_document_symbols<CR>",
-                { desc = " LSP document symbols" }
-            )
-            vim.keymap.set(
-                "n",
-                "<leader>fw",
-                ":Telescope lsp_workspace_symbols<CR>",
-                { desc = " LSP workspace symbols" }
-            )
+            local set_mappings = require "config.telescope.mappings"
+            set_mappings()
         end,
         config = function()
             local telescope = require "telescope"
+            local telescope_config = require "telescope.config"
+
+            -- Clone the default Telescope configuration
+            local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
+
+            -- I want to search in hidden/dot files.
+            table.insert(vimgrep_arguments, "--hidden")
+            -- I don't want to search in the `.git` directory.
+            table.insert(vimgrep_arguments, "--glob")
+            table.insert(vimgrep_arguments, "!**/.git/*")
 
             local trouble_present, trouble = pcall(require, "trouble.providers.telescope")
             if not trouble_present then
@@ -90,6 +39,8 @@ return {
 
             telescope.setup {
                 defaults = {
+                    -- `hidden = true` is not supported in text grep commands.
+                    vimgrep_arguments = vimgrep_arguments,
                     layout_strategy = "horizontal",
                     layout_config = {
                         width = 0.90,
@@ -124,15 +75,6 @@ return {
                     sorting_strategy = "descending",
                     scroll_strategy = "cycle",
                     color_devicons = true,
-                    -- file_browser = {
-                    --     theme = "ivy",
-                    -- },
-                    -- ["ui-select"] = {
-                    --     require("telescope.themes").get_dropdown(),
-                    -- },
-                    -- termfinder = {
-                    --     mappings = {},
-                    -- },
                 },
                 mappings = {
                     n = {
@@ -140,6 +82,10 @@ return {
                     },
                 },
                 pickers = {
+                    find_files = {
+                        -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                    },
                     colorscheme = {
                         ignore_builtins = true,
                         enable_preview = true,
@@ -149,7 +95,6 @@ return {
 
             telescope.load_extension "fzf"
             telescope.load_extension "file_browser"
-            telescope.load_extension "workspaces"
             telescope.load_extension "live_grep_args"
             telescope.load_extension "make"
             telescope.load_extension "termfinder"

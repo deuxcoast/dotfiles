@@ -1,6 +1,3 @@
--- local function db_completion()
---     require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
--- end
 return {
     "tpope/vim-dadbod",
     ft = { "sql", "mysql", "plsql" },

@@ -5,7 +5,7 @@ return {
     config = function()
         local alpha = require "alpha"
         local dashboard = require "alpha.themes.dashboard"
-        dashboard.section.header.val = {
+        local logo = {
             [[                  _____                   _____                   _____                                            ]],
             [[                 /\    \                 /\    \                 /\    \                ______                     ]],
             [[                /::\    \               /::\    \               /::\____\              |::|   |                    ]],
@@ -51,14 +51,16 @@ return {
             [[         \/____/                                         \/____/                  \/____/                          ]],
             [[                                                                                                                   ]],
         }
+        dashboard.section.header.val = logo
+        dashboard.section.header.opts.hl = "AlphaHeader"
         dashboard.section.buttons.val = {
             dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
             dashboard.button("q", "󰅚  Quit NVIM", ":qa<CR>"),
         }
-        local handle = io.popen "fortune"
-        local fortune = handle:read "*a"
-        handle:close()
+
+        local fortune = require "alpha.fortune"()
         dashboard.section.footer.val = fortune
+        dashboard.section.footer.opts.hl = "AlphaFooter"
 
         dashboard.config.opts.noautocmd = true
 

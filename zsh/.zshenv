@@ -11,7 +11,6 @@ export ZSH="$HOME/.oh-my-zsh"
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.npm-global/bin:$PATH"
 
 export PATH="$HOME/.local/bin:$PATH"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST

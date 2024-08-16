@@ -17,6 +17,8 @@ return {
                 highlight_overrides = {
                     mocha = function(mocha)
                         return {
+                            AlphaHeader = { fg = mocha.green },
+                            AlphaFooter = { fg = mocha.yellow },
                             GitSignsAdd = { fg = mocha.teal },
                             GitSignsDelete = { fg = mocha.red },
                             GitSignsChange = { fg = mocha.yellow },
@@ -33,6 +35,7 @@ return {
                 no_italic = true,
                 no_bold = true,
                 integrations = {
+                    alpha = true,
                     cmp = true,
                     gitsigns = true,
                     nvimtree = true,
