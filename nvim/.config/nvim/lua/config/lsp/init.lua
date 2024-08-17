@@ -8,16 +8,12 @@ local nmap = require("config.mapping").nmap
 local autocmd = require("config.auto").autocmd
 local autocmd_clear = vim.api.nvim_clear_autocmds
 
--- local is_mac = vim.fn.has "macunix" == 1
-
--- local telescope_mapper = require "duex.telescope.mappings"
 local handlers = require "config.lsp.handlers"
 
 local signs = {
     { name = "DiagnosticSignError", text = "" },
     { name = "DiagnosticSignWarn", text = "" },
     { name = "DiagnosticSignHint", text = "" },
-    -- { name = "DiagnosticSignInfo", text = "" },
 }
 
 -- Defining signs
@@ -38,94 +34,94 @@ local augroup_codelens = vim.api.nvim_create_augroup("custom-lsp-codelens", { cl
 local augroup_format = vim.api.nvim_create_augroup("custom-lsp-format", { clear = true })
 local augroup_semantic = vim.api.nvim_create_augroup("custom-lsp-semantic", { clear = true })
 
-local autocmd_format = function(async, filter)
-    vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
-    vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = 0,
-        callback = function()
-            vim.lsp.buf.format { async = async, filter = filter }
-        end,
-    })
-end
-
-local filetype_attach = setmetatable({
-    clojure_lsp = function()
-        autocmd_format(false)
-    end,
-    c = function()
-        autocmd_format(false)
-    end,
-
-    ocaml = function()
-        autocmd_format(false)
-
-        -- Display type information
-        autocmd_clear { group = augroup_codelens, buffer = 0 }
-        autocmd {
-            { "BufEnter", "BufWritePost", "CursorHold" },
-            augroup_codelens,
-            require("config.lsp.codelens").refresh_virtlines,
-            0,
-        }
-
-        vim.keymap.set(
-            "n",
-            "<space>tt",
-            require("config.lsp.codelens").toggle_virtlines,
-            { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
-        )
-    end,
-
-    ruby = function()
-        autocmd_format(false)
-    end,
-
-    go = function()
-        autocmd_format(false)
-    end,
-
-    scss = function()
-        autocmd_format(false)
-    end,
-
-    css = function()
-        autocmd_format(false)
-    end,
-
-    rust = function()
-        -- telescope_mapper("<space>wf", "lsp_workspace_symbols", {
-        --     ignore_filename = true,
-        --     query = "#",
-        -- }, true)
-
-        autocmd_format(false)
-    end,
-
-    racket = function()
-        autocmd_format(false)
-    end,
-
-    typescript = function()
-        -- autocmd_format(false)
-        autocmd_format(false, function(client)
-            return client.name ~= "tsserver"
-        end)
-    end,
-
-    javascript = function()
-        autocmd_format(false, function(client)
-            return client.name ~= "tsserver"
-        end)
-    end,
-
-    python = function()
-        autocmd_format(false)
-    end,
-}, {
-    __index = function()
-        return function() end
-    end,
-})
+-- local autocmd_format = function(async, filter)
+--     vim.api.nvim_clear_autocmds { buffer = 0, group = augroup_format }
+--     vim.api.nvim_create_autocmd("BufWritePre", {
+--         buffer = 0,
+--         callback = function()
+--             vim.lsp.buf.format { async = async, filter = filter }
+--         end,
+--     })
+-- end
+--
+-- local filetype_attach = setmetatable({
+--     clojure_lsp = function()
+--         autocmd_format(false)
+--     end,
+--     c = function()
+--         autocmd_format(false)
+--     end,
+--
+--     ocaml = function()
+--         autocmd_format(false)
+--
+--         -- Display type information
+--         autocmd_clear { group = augroup_codelens, buffer = 0 }
+--         autocmd {
+--             { "BufEnter", "BufWritePost", "CursorHold" },
+--             augroup_codelens,
+--             require("config.lsp.codelens").refresh_virtlines,
+--             0,
+--         }
+--
+--         vim.keymap.set(
+--             "n",
+--             "<space>tt",
+--             require("config.lsp.codelens").toggle_virtlines,
+--             { silent = true, desc = "[T]oggle [T]ypes", buffer = 0 }
+--         )
+--     end,
+--
+--     ruby = function()
+--         autocmd_format(false)
+--     end,
+--
+--     go = function()
+--         autocmd_format(false)
+--     end,
+--
+--     scss = function()
+--         autocmd_format(false)
+--     end,
+--
+--     css = function()
+--         autocmd_format(false)
+--     end,
+--
+--     rust = function()
+--         -- telescope_mapper("<space>wf", "lsp_workspace_symbols", {
+--         --     ignore_filename = true,
+--         --     query = "#",
+--         -- }, true)
+--
+--         autocmd_format(false)
+--     end,
+--
+--     racket = function()
+--         autocmd_format(false)
+--     end,
+--
+--     typescript = function()
+--         -- autocmd_format(false)
+--         autocmd_format(false, function(client)
+--             return client.name ~= "tsserver"
+--         end)
+--     end,
+--
+--     javascript = function()
+--         autocmd_format(false, function(client)
+--             return client.name ~= "tsserver"
+--         end)
+--     end,
+--
+--     python = function()
+--         autocmd_format(false)
+--     end,
+-- }, {
+--     __index = function()
+--         return function() end
+--     end,
+-- })
 
 local buf_nnoremap = function(opts)
     if opts[3] == nil then
@@ -185,7 +181,8 @@ local custom_attach = function(client, bufnr)
     end
 
     -- Attach any filetype specific options to the client
-    filetype_attach[filetype]()
+    -- TODO: implement custom ft attach function
+    -- filetype_attach[filetype]()
 end
 
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -199,7 +196,6 @@ updated_capabilities.textDocument.completion.completionItem.insertReplaceSupport
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
 
 local servers = {
-    -- Also uses `shellcheck` and `explainshell`
     bashls = true,
     lua_ls = {
         settings = {
@@ -385,45 +381,83 @@ for server, config in pairs(servers) do
     setup_server(server, config)
 end
 
-require("null-ls").setup {
-    sources = {
-        require("null-ls").builtins.formatting.stylua,
-        require("null-ls").builtins.diagnostics.eslint_d,
-        require("null-ls").builtins.formatting.beautysh,
-        require("null-ls").builtins.formatting.prettierd,
-        require("null-ls").builtins.formatting.isort,
-        require("null-ls").builtins.formatting.black,
-        require("null-ls").builtins.formatting.goimports,
-        require("null-ls").builtins.formatting.clang_format.with {
-            command = "clang-format",
-            extra_args = {
-                "--style",
-                "{BasedOnStyle: Chromium, IndentWidth: 4, ColumnLimit: 80, AlignTrailingComments: true, BraceWrapping: {AfterFunction: false}}",
-            },
-            filetypes = { "c", "cpp" },
-        },
-    },
-    on_attach = function(client, bufnr)
-        if client.supports_method "textDocument/formatting" then
-            vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
-                    -- vim.lsp.buf.formatting_sync()
-                    vim.lsp.buf.format {
-                        bufnr = bufnr,
-                        filter = function(client)
-                            return client.name == "null-ls"
-                        end,
-                    }
-                end,
-            })
-        end
-    end,
-}
+-- local prettier = { "prettierd", "prettier", stop_after_first = true }
+-- require("conform").setup {
+--     format_on_save = {
+--         -- These options will be passed to conform.format()
+--         timeout_ms = 500,
+--         lsp_format = "fallback",
+--     },
+--     formatters_by_ft = {
+--         javascript = prettier,
+--         typescript = prettier,
+--         javascriptreact = prettier,
+--         typescriptreact = prettier,
+--         css = prettier,
+--         graphql = prettier,
+--         html = prettier,
+--         json = prettier,
+--         json5 = prettier,
+--         jsonc = prettier,
+--         yaml = prettier,
+--         markdown = function(bufnr)
+--             return { first(bufnr, "prettierd", "prettier"), "injected" }
+--         end,
+--         lua = { "stylua" },
+--         c = { "clang-format" },
+--         cpp = { "clang-format" },
+--         go = { "goimports", "gofmt" },
+--         python = { "isort", "black" },
+--         sh = { "shmft", "shellharden" },
+--     },
+--     formatters = {
+--         ["clang-format"] = {
+--             prepend_args = {
+--                 "--style",
+--                 "{BasedOnStyle: Chromium, IndentWidth: 4, ColumnLimit: 80, AlignTrailingComments: true, BraceWrapping: {AfterFunction: false}}",
+--             },
+--         },
+--     },
+-- }
+-- require("null-ls").setup {
+--     sources = {
+--         require("null-ls").builtins.formatting.stylua,
+--         require("null-ls").builtins.diagnostics.eslint_d,
+--         require("null-ls").builtins.formatting.beautysh,
+--         require("null-ls").builtins.formatting.prettierd,
+--         require("null-ls").builtins.formatting.isort,
+--         require("null-ls").builtins.formatting.black,
+--         require("null-ls").builtins.formatting.goimports,
+--         require("null-ls").builtins.formatting.clang_format.with {
+--             command = "clang-format",
+--             extra_args = {
+--                 "--style",
+--                 "--                 "{BasedOnStyle: Chromium, IndentWidth: 4, ColumnLimit: 80, AlignTrailingComments: true, BraceWrapping: {AfterFunction: false}}",",
+--             },
+--             filetypes = { "c", "cpp" },
+--         },
+--     },
+--     on_attach = function(client, bufnr)
+--         if client.supports_method "textDocument/formatting" then
+--             vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+--             vim.api.nvim_create_autocmd("BufWritePre", {
+--                 group = augroup,
+--                 buffer = bufnr,
+--                 callback = function()
+--                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+--                     -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+--                     -- vim.lsp.buf.formatting_sync()
+--                     vim.lsp.buf.format {
+--                         bufnr = bufnr,
+--                         filter = function(client)
+--                             return client.name == "null-ls"
+--                         end,
+--                     }
+--                 end,
+--             })
+--         end
+--     end,
+-- }
 
 return {
     on_init = custom_init,

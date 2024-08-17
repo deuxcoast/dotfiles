@@ -5,7 +5,6 @@ return {
             require "config.lsp"
         end,
     },
-    "jose-elias-alvarez/null-ls.nvim",
     {
         "williamboman/mason.nvim",
         event = "User FilePost",
@@ -25,25 +24,6 @@ return {
                 config = function()
                     require("mason-nvim-dap").setup {
                         automatic_installation = true,
-                    }
-                end,
-            },
-            {
-                "jay-babu/mason-null-ls.nvim",
-
-                -- dependencies = {
-                --     "williamboman/mason.nvim",
-                --     "jose-elias-alvarez/null-ls.nvim",
-                -- },
-                config = function()
-                    require("mason-null-ls").setup {
-                        ensure_installed = {
-                            "delve",
-                            "chrome-debug-adapter",
-                            "firefox-debug-adapter",
-                            "debugpy",
-                            "js-debug-adapter",
-                        },
                     }
                 end,
             },

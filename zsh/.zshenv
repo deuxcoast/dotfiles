@@ -16,6 +16,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 export XDG_CONFIG_HOME="$HOME/.config"
+export DOTS="$HOME/.dotfiles"
 
 export CONDA_AUTO_ACTIVATE_BASE=false
 

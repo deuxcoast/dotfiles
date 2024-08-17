@@ -5,24 +5,21 @@ set -e
 
 # cd to proper directory to run script from
 cd "$(git rev-parse --show-toplevel)"
-if $(basename "$(pwd)") != ".dotfiles"; then
+if "$(basename "$PWD")" != ".dotfiles"; then
     echo "This script must be run from the .dotfiles directory."
     echo "The git repository must be cloned as .dotfiles."
     exit 1
 fi
 
-
 # ------------------------------------------------------------------------------
 # Generate or read checksum file
 # ------------------------------------------------------------------------------
-
 
 # ------------------------------------------------------------------------------
 # Install Brew
 # ------------------------------------------------------------------------------
 
-if ! command -v brew &> /dev/null
-then
+if ! command -v brew &>/dev/null; then
     printf "Installing Brew\n\n"
     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -31,28 +28,26 @@ then
     # directory is different depending on the CPU architecture.
     case $(uname -ms) in
 
-        "Darwin arm64")
-            printf "Adding brew to path (in ~/.zprofile) for arm64 Mac\n\n"
+    "Darwin arm64")
+        printf "Adding brew to path (in ~/.zprofile) for arm64 Mac\n\n"
 
-            echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >> ~/.zprofile
-            eval "$(/opt/homebrew/bin/brew shellenv)"
-            ;;
+        echo "eval '$(/opt/homebrew/bin/brew shellenv)'" >>~/.zprofile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        ;;
 
-        "Darwin x86_64")
-            printf "Adding brew to path (in ~/.zprofile) for x86_64 Mac\n\n"
+    "Darwin x86_64")
+        printf "Adding brew to path (in ~/.zprofile) for x86_64 Mac\n\n"
 
-            echo "eval '$(/usr/local/bin/brew shellenv)'" >> ~/.zprofile
-            eval "$(/usr/local/bin/brew shellenv)"
-            ;;
+        echo "eval '$(/usr/local/bin/brew shellenv)'" >>~/.zprofile
+        eval "$(/usr/local/bin/brew shellenv)"
+        ;;
     esac
-
 
 else
     printf "Brew already installed\n\n"
 fi
 
-if ! command -v stow &> /dev/null
-then
+if ! command -v stow &>/dev/null; then
     printf "Installing Stow\n\n"
     brew install stow
 else
@@ -73,7 +68,6 @@ fi
 # that we don't want to sync between machines. So we don't want to symlink the
 # folder, just the config file within it.
 [[ -d ~/.config/lazygit ]] || mkdir -p ~/.config/lazygit
-
 
 # This is where clangd gets additional configuration. Again, we want to symlink
 # just the file and not the directory structure.
@@ -107,9 +101,9 @@ fi
 
 # I want to be able to run this script quickly and often, and `brew bundle`
 # causes the script to be too slow for frequent use.
-MACHINE_ID=$(hostname)
+MACHINE_ID=$(hostname -s)
 CHECKSUM_DIR="./checksum"
-mkdir -p $CHECKSUM_DIR
+mkdir -p "$CHECKSUM_DIR"
 
 # Target file and checksum file path
 BREWFILE="./brew/.Brewfile"
@@ -117,7 +111,7 @@ FILE_NAME=$(basename $BREWFILE)
 CHECKSUM_FILE="$CHECKSUM_DIR/${FILE_NAME}_${MACHINE_ID}.checksum"
 
 # Calculate current checksum
-CURRENT_CHECKSUM=$(md5sum "$BREWFILE" | awk '{ print $1 }')
+CURRENT_CHECKSUM=$(md5sum $BREWFILE | awk '{ print $1 }')
 
 # Compare with previous checksum
 if [ -f "$CHECKSUM_FILE" ]; then
@@ -134,13 +128,12 @@ if [ "$CURRENT_CHECKSUM" != "$PREVIOUS_CHECKSUM" ]; then
     # Your expensive command here
 
     # Update the checksum file
-    echo "$CURRENT_CHECKSUM" > "$CHECKSUM_FILE"
+    echo "$CURRENT_CHECKSUM" >"$CHECKSUM_FILE"
 else
     printf "\n"
     printf "Brewfile has not changed since the last execution of this script.\n"
     printf "Skipping 'brew bundle --global'\n"
 fi
-
 
 # Build cache for bat pager, so themes can be used
 printf "\n"

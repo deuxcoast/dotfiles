@@ -88,6 +88,7 @@ brew 'yarn'
 brew 'rustup'
 brew 'ruby'
 brew 'pyenv'
+brew 'python'
 
 # nerd fonts
 cask 'font-fira-code-nerd-font'
