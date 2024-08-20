@@ -56,6 +56,18 @@ fshow() {
         --bind="alt-y:execute:$commit_hash | xclip -selection clipboard"
 }
 
+git_history_browse() {
+  local out sha q
+  while out=$(
+      git log --graph --color=always \
+          --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" |
+      fzf --ansi --multi --reverse --query="$q" --print-query); do
+    q=$(head -1 <<< "$out")
+    while read sha; do
+      [ -n "$sha" ] && git show --color=always $sha | less -R
+    done < <(sed '1d;s/^[^a-z0-9]*//;/^$/d' <<< "$out" | awk '{print $1}')
+  done
+}
 # Remove all commit in Git
 git-remove-all-commit() {
     local branch
