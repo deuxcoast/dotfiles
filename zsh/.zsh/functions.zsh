@@ -11,8 +11,12 @@ mkd() {
 }
 
 # Copy file contents to clipboard
-pbc() {
+cpf() {
     cat $1 | pbcopy
+}
+
+cpcwd() {
+  pwd | pbcopy
 }
 
 # Print README file

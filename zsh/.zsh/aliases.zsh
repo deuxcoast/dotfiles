@@ -1,4 +1,5 @@
-#
+alias j='z'
+alias ji='zi'
 alias cheat='curl cht.sh/'
 # --- Navigation ---
 alias ..="cd .."
@@ -103,7 +104,7 @@ alias vimconfig="cd ~/.config/nvim ; vim"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # --- Kubernetes ---
-alias k="kubectl"
+# alias k="kubectl"
 
 # --- Typos ---
 alias :q='exit'

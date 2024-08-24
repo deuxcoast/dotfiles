@@ -1,73 +1,49 @@
-# '.zshrc' is sourced in interactive shells.
-# It should be used to set aliases, functions, options, key bindings, etc.
-#
-# --- Theme / Prompt
-ZSH_THEME="robbyrussell"
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1 # Should improve zsh-autosuggestions performance
+PATH="${HOME}/.local/bin:$PATH"
 
-# --- Environment variables
-source ${HOME}/.zsh/exports.zsh
+# Add homebrew install directory to PATH for ARM Macs
+[[ $(uname -ms) = "Darwin arm64" ]] && PATH="/opt/homebrew/bin:$PATH"
 
-# --- Oh My Zsh
-# Plugins must be defined before sourcing oh-my-zsh
-# zsh-autosuggestions plugin must be sourced last
-plugins=(
-    gh
-    git
-    golang
-    fzf
-    fzf-tab
-    mosh
-    sudo
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-)
-
-source ${ZSH}/oh-my-zsh.sh
-
-# Start tmux immediately upon opening a new shell.
-# Attach to 'default' session, or create 'default'
-# session if it does not exist
+# Start tmux if not already in tmux.
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach -t default || tmux new -s default
 fi
 
 
-# --- Aliases
-source ${HOME}/.zsh/aliases.zsh
+#################################################################
+# Sourcing
+#################################################################
 
-# --- Functions
-source ${HOME}/.zsh/functions.zsh
+for file in "${HOME}/.zsh/prompts.zsh" \
+            "${HOME}/.zsh/aliases.zsh" \
+            "${HOME}/.zsh/set_history.zsh" \
+            "${HOME}/.zsh/zinit.zsh" \
+            "${HOME}/.zsh/completions.zsh"
+do
+    [ -s "${file}" ] && source "${file}"
+done
 
-# --- Set options
-source ${HOME}/.zsh/setopt.zsh
+#################################################################
+# Key Bindings
+#################################################################
 
-# --- Private config
-source ${HOME}/.zsh/privaterc.zsh
+# Cycle through command history with <C-p> and <C-n>
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
 
-# Enable fzf keybindings and completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# --- Change keybinding for autosuggestion expansion
-bindkey '^ ' autosuggest-accept # <C-space>
-
-eval "$(pyenv init -)"
-eval "$(atuin init zsh)"
-eval "$(zoxide init --cmd j zsh)"
-eval "$(starship init zsh)"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+up-directory() {
+    builtin cd ..
+    if (( $? == 0 )); then
+        local precmd
+        for precmd in $precmd_functions; do
+            $precmd
+        done
+        zle reset-prompt
     fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+}
 
+# Move to parent directory with <C-b> 
+zle -N up-directory
+bindkey "^B" up-directory
+
+# Set some options
+setopt interactive_comments extended_glob autocd complete_aliases

@@ -12,10 +12,6 @@ if "$(basename "$PWD")" != ".dotfiles"; then
 fi
 
 # ------------------------------------------------------------------------------
-# Generate or read checksum file
-# ------------------------------------------------------------------------------
-
-# ------------------------------------------------------------------------------
 # Install Brew
 # ------------------------------------------------------------------------------
 
@@ -141,39 +137,8 @@ printf "Build cache for bat pager, enable custom themes\n\n"
 bat cache --build
 
 # ------------------------------------------------------------------------------
-# Install Oh My Zsh
+# Does zinit auto-install itself?
 # ------------------------------------------------------------------------------
-
-if [[ -n $ZSH_CUSTOM ]]; then
-    printf "\n"
-    printf "Installing Oh My Zsh\n\n"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-    printf "\n"
-    printf "Oh My Zsh already installed\n\n"
-fi
-
-# ------------------------------------------------------------------------------
-# Install zsh plugins
-# ------------------------------------------------------------------------------
-
-# zsh-autosuggestions
-if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]]; then
-    printf "Installing zsh-autosuggestions plugin\n"
-    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-fi
-
-# zsh-syntax-highlighting
-if [[ ! -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]]; then
-    printf "Installing zsh-syntax-highlighting plugin\n"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-fi
-
-# fzf-tab
-if [[ ! -d ~/.oh-my-zsh/custom/plugins/fzf-tab ]]; then
-    printf "Installing fzf-tab plugin\n"
-    git clone https://github.com/Aloxaf/fzf-tab ~/.oh-my-zsh/custom/plugins/fzf-tab
-fi
 
 # ------------------------------------------------------------------------------
 # Install tmux plugins

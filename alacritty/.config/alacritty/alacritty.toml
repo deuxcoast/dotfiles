@@ -30,6 +30,7 @@ bold_italic = { style = "Regular" }
 option_as_alt = "OnlyLeft"
 startup_mode = "SimpleFullscreen"
 
+
 [keyboard]
 # These bindings allows me to create mappings for these keys in nvim.
 # https://stackoverflow.com/questions/16359878/how-to-map-shift-enter/42461580#42461580

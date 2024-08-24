@@ -111,15 +111,15 @@ package({
   config = conf.gitsigns,
 })
 
--- package({
---   "NeogitOrg/neogit",
---   dependencies = {
---     "nvim-lua/plenary.nvim",
---     "sindrets/diffview.nvim",
---     "nvim-telescope/telescope.nvim",
---   },
---   config = true
--- })
+package({
+  "NeogitOrg/neogit",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "sindrets/diffview.nvim",
+    "nvim-telescope/telescope.nvim",
+  },
+  config = conf.neogit
+})
 
 --------------------------------------------------------------------------------
 -- ToggleTerm

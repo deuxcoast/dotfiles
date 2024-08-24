@@ -1,27 +1,28 @@
 _G.DV = require("util")
 
 local g, fn = vim.g, vim.fn
+---@diagnostic disable-next-line: param-type-mismatch
 local cache_dir = vim.fs.joinpath(vim.fn.stdpath("cache"), "nvim")
 
 -- Create cache dir and subs dir
 local create_dir = function()
-	local data_dir = {
-		cache_dir .. "backup",
-		cache_dir .. "session",
-		cache_dir .. "swap",
-		cache_dir .. "tags",
-		cache_dir .. "undo",
-	}
-	-- There only check once that If cache_dir exists
-	-- Then I don't want to check subs dir exists
-	if fn.isdirectory(cache_dir) == 0 then
-		os.execute("mkdir -p " .. cache_dir)
-		for _, v in pairs(data_dir) do
-			if fn.isdirectory(v) == 0 then
-				os.execute("mkdir -p " .. v)
-			end
-		end
-	end
+  local data_dir = {
+    cache_dir .. "backup",
+    cache_dir .. "session",
+    cache_dir .. "swap",
+    cache_dir .. "tags",
+    cache_dir .. "undo",
+  }
+  -- Only check once if cache_dir exists
+  -- Then I don't want to check subs dir exists
+  if fn.isdirectory(cache_dir) == 0 then
+    os.execute("mkdir -p " .. cache_dir)
+    for _, v in pairs(data_dir) do
+      if fn.isdirectory(v) == 0 then
+        os.execute("mkdir -p " .. v)
+      end
+    end
+  end
 end
 
 create_dir()
@@ -46,8 +47,8 @@ g.loaded_netrwPlugin = 1
 g.loaded_netrwSettings = 1
 g.loaded_netrwFileHandlers = 1
 
-DV.pack:boot_strap()
 require("core.options")
 require("core.autocmd")
-
-vim.cmd.colorscheme("rose-pine")
+DV.pack:boot_strap()
+require("core.maps")
+vim.cmd.colorscheme("oh-lucy-evening")

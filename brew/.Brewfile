@@ -8,6 +8,7 @@ tap "jesseduffield/lazygit"
 
 # cli tools
 brew 'archey4'
+brew 'asdf'
 brew 'atuin'
 brew 'bat'
 brew 'btop'
@@ -17,9 +18,11 @@ brew 'diff-so-fancy'
 brew 'eza'
 brew 'fd'
 brew 'fzf'
+brew 'gawk'
 brew 'gh'
 brew 'git-delta'
 brew 'glow'
+brew 'gpg'
 brew 'hey'
 brew 'htop'
 brew 'hub'
@@ -31,9 +34,9 @@ brew 'mosh'
 brew 'most'
 brew 'neovim'
 brew 'osx-cpu-temp'
+brew 'powerlevel10k'
 brew 'ripgrep'
 brew 'rsync'
-brew 'starship'
 brew 'stow'
 brew 'the_silver_searcher'
 brew 'tldr'
@@ -47,10 +50,6 @@ brew 'zsh'
 brew 'zzz'
 brew 'koekeishiya/formulae/yabai'
 brew 'koekeishiya/formulae/skhd'
-
-# databases / key-value stores
-brew 'postgresql@14', restart_service: :changed
-brew 'redis', restart_service: :changed
 
 # dev macos apps
 cask 'alacritty'
@@ -79,16 +78,11 @@ cask 'zoom'
 cask 'purevpn'
 
 # programming languages & package managers
-brew 'golang'
 brew 'lua'
 brew 'luarocks'
-brew 'node'
-brew 'nvm'
 brew 'pnpm'
 brew 'yarn'
 brew 'rustup'
-brew 'ruby'
-brew 'pyenv'
 brew 'python'
 
 # nerd fonts

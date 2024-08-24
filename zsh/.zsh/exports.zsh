@@ -1,12 +1,6 @@
-# PATH env vars are exported from ~/.zshenv
-# This file is for sourcing and exporting env vars for various CLI tools
+PATH="${HOME}/.local/bin:$PATH"
 
-# Source zsh-completions plugin
-# This must be run before `source "$ZSH/oh-my-zsh.sh"`
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
-fpath+=${HOME}/.zsh/functions/
-
-export LS_COLORS=$(vivid generate catppuccin-mocha)
+export PAGER="less"
 
 export FZF_DEFAULT_COMMAND="fd --color=never --hidden"
 export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
@@ -37,3 +31,4 @@ export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
 export LESS_TERMCAP_se=$'\e[0m' # End standout mode
 export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
 export LESS_TERMCAP_ue=$'\e[0m' # End underline
+

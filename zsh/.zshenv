@@ -1,32 +1,32 @@
-# - Exports
-#
-# '.zshev' is sourced on all invocations of the shell, unless the -f option
-# is set.
-#
-# This file should be used to set our PATH and other important environment
-# variables, but should not include commands that produce output or assume
-# the shell is attached to a tty.
+export PAGER="less"
 
-export ZSH="$HOME/.oh-my-zsh"
-export VISUAL="nvim"
-export EDITOR="$VISUAL"
-export PATH="/usr/local/sbin:$PATH"
+export FZF_DEFAULT_COMMAND="fd --color=never --hidden"
+export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
 
-export PATH="$HOME/.local/bin:$PATH"
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}' --height=50%"
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export DOTS="$HOME/.dotfiles"
+export FZF_ALT_C_COMMAND="fd --type d . --color=never --hidden"
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50' --height=50%"
 
-export CONDA_AUTO_ACTIVATE_BASE=false
-
-# Rust
-source "$HOME/.cargo/env"
-
-# This removes duplicate entries from $PATH
-typeset -U PATH path
+# FZF Catppucin Mocha Colorscheme
+export FZF_DEFAULT_OPTS=" \
+--no-height \
+--color=bg+:#313244,bg:#000000,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 
-# Add homebrew install directory to PATH for ARM Macs
-[[ $(uname -ms) = "Darwin arm64" ]] && export PATH="/opt/homebrew/bin:$PATH"
-. "$HOME/.cargo/env"
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.config/rg/config"
+
+# Less
+export LESS="--RAW-CONTROL-CHARS"
+export LESS_TERMCAP_mb=$'\e[1;31m' # Start blinking
+export LESS_TERMCAP_md=$'\e[1;34m' # Start bold mode
+export LESS_TERMCAP_me=$'\e[0m' # End all mode
+export LESS_TERMCAP_so=$'\e[38;5;215m' # Start standout mode
+export LESS_TERMCAP_se=$'\e[0m' # End standout mode
+export LESS_TERMCAP_us=$'\e[4;35m' # Start underline
+export LESS_TERMCAP_ue=$'\e[0m' # End underline
+

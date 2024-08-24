@@ -2,6 +2,7 @@ local opt = vim.opt
 local cache_dir = vim.env.HOME .. "/.cache/nvim/"
 
 opt.termguicolors = true
+opt.background = "dark"
 opt.hidden = true
 opt.magic = true
 opt.virtualedit = "block"
@@ -15,18 +16,19 @@ opt.viewdir = cache_dir .. "view/"
 opt.spellfile = cache_dir .. "spell/en.uft-8.add"
 opt.history = 2000
 opt.timeout = true
-opt.ttimeout = true
 opt.timeoutlen = 300
-opt.ttimeoutlen = 10
-opt.updatetime = 100
-opt.redrawtime = 1500
+opt.inccommand = "nosplit"
+-- opt.ttimeout = true
+-- opt.ttimeoutlen = 10
+-- opt.updatetime = 100
+-- opt.redrawtime = 1500
 opt.ignorecase = true
 opt.smartcase = true
 opt.infercase = true
 
 if vim.fn.executable("rg") == 1 then
-	opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
-	opt.grepprg = "rg --vimgrep --no-heading --smart-case"
+  opt.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+  opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 
 opt.completeopt = "menu,menuone,noselect"
@@ -35,7 +37,7 @@ opt.shortmess = "aoOTIcF"
 opt.scrolloff = 2
 opt.sidescrolloff = 5
 opt.ruler = false
-opt.showtabline = 0
+-- opt.showtabline = 0
 opt.winwidth = 30
 opt.pumheight = 15
 opt.showcmd = false
@@ -63,24 +65,25 @@ opt.foldlevelstart = 99
 opt.foldmethod = "marker"
 
 opt.number = true
+opt.relativenumber = true
 opt.signcolumn = "yes"
 opt.spelloptions = "camel"
 
 opt.textwidth = 100
 opt.colorcolumn = "100"
 if vim.loop.os_uname().sysname == "Darwin" then
-	vim.g.clipboard = {
-		name = "macOS-clipboard",
-		copy = {
-			["+"] = "pbcopy",
-			["*"] = "pbcopy",
-		},
-		paste = {
-			["+"] = "pbpaste",
-			["*"] = "pbpaste",
-		},
-		cache_enabled = 0,
-	}
-	vim.g.python_host_prog = "/usr/bin/python"
-	vim.g.python3_host_prog = "/usr/local/bin/python3"
+  vim.g.clipboard = {
+    name = "macOS-clipboard",
+    copy = {
+      ["+"] = "pbcopy",
+      ["*"] = "pbcopy",
+    },
+    paste = {
+      ["+"] = "pbpaste",
+      ["*"] = "pbpaste",
+    },
+    cache_enabled = 0,
+  }
+  vim.g.python_host_prog = "/usr/bin/python"
+  vim.g.python3_host_prog = "/usr/local/bin/python3"
 end

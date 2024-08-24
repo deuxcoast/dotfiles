@@ -86,8 +86,8 @@ local setup = function()
     ["<leader>fm"] = cmd("Telescope noice"),
     ["<leader>fb"] = cmd("Telescope buffers"),
     ["<leader>ft"] = cmd("Telescope colorscheme"),
-    ["<leader>fg"] = cmd("Telescope git_bcommit"),
-    ["<leader>fG"] = cmd("Telescope git_commit"),
+    ["<leader>fg"] = cmd("Telescope git_bcommits"),
+    ["<leader>fG"] = cmd("Telescope git_commits"),
     ["<leader>fn"] = cmd("Telescope nvim_config"),
     ["<leader>fa"] = cmd("Telescope file_browser path=%:p:h select_buffer=true"),
   })
