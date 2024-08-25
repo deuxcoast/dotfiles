@@ -1,11 +1,27 @@
-local deux_object = require("deux.utils.object")
+-- Observable settings object
+
+local deuxobject = require("deux.utils.object")
 
 local settings = {
+  --"none" | "single" | "double" | "shadow" | "rounded"
   border = "rounded",
+  colors = {
+    -- set in ./plugins/colorscheme.lua
+    --   dark = "meh",
+    --   light = "zenbones",
+  },
   diagnostics = {
     goto_float = true,
   },
-  heirline = {},
+  heirline = {
+    show_buftype = false,
+  },
+  lsp = {
+    -- Which code action UI should we try first?
+    -- The alternative will be tried second
+    --code_action = "tiny-code-action",
+    code_action = "actions-preview",
+  },
 }
 
 local M = {}
@@ -13,13 +29,12 @@ local M = {}
 M.watchers = {}
 
 M.get = function(path)
-  return deux_object.get(settings, path)
+  return deuxobject.get(settings, path)
 end
 
 M.set = function(path, value)
-  local current = M.get(value)
-  local success = deux_object.set(settings, path, value)
-
+  local current = M.get(path)
+  local success = deuxobject.set(settings, path, value)
   if success and value ~= current then
     M.watchers[path] = M.watchers[path] or {}
     vim.iter(M.watchers[path]):each(function(cb)

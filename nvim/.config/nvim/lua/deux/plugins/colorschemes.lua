@@ -172,4 +172,37 @@ return {
       })
     end,
   },
+
+  {
+    "miikanissi/modus-themes.nvim",
+    config = function()
+      ---@diagnostic disable-next-line missing-fields
+      require("modus-themes").setup({
+        on_highlights = function(highlight, color)
+          highlight.GitSignsAdd = { fg = color.green, bg = color.bg_main }
+          highlight.GitSignsChange = { fg = color.pink, bg = color.bg_main }
+          highlight.GitSignsDelete = { fg = color.red, bg = color.bg_main }
+          highlight.LineNr = { fg = color.magenta, bg = color.bg_main }
+          highlight.LineNrAbove = { fg = color.fg_dim, bg = color.bg_main }
+          highlight.LineNrBelow = { fg = color.fg_dim, bg = color.bg_main }
+          -- highlight.CursorLineNr = { fg = color.magenta, bg = color.bg_main }
+        end
+      })
+    end
+  },
+
+  {
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
+    -- init = function()
+    --   vim.cmd.colorscheme("oldworld")
+    -- end
+  },
+
+  {
+    'Yazeed1s/oh-lucy.nvim',
+    dev = true,
+  },
+
 }

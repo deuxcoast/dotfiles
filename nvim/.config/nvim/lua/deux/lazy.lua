@@ -12,7 +12,7 @@ if not vim.uv.fs_stat(lazypath) then
       :wait()
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("dko.plugins", {
+require("lazy").setup("deux.plugins", {
   change_detection = {
     enabled = false,
   },
@@ -43,3 +43,5 @@ require("lazy").setup("dko.plugins", {
     },
   },
 })
+
+vim.cmd.colorscheme("oh-lucy-evening")

@@ -77,21 +77,21 @@ M.setup = function()
   telescope.load_extension("file_browser")
 
   local map = require("deux.utils.keymap")
-  local finder = require("modules.editor.config.telescope_finders")
-  local ext = telescope.extensions
+  local cmd = map.cmd
+  local finder = require("deux.config.telescope.finders")
+  local builtin = require("telescope.builtin")
 
   map.n({
-    ["<leader><leader>"] = ext.find_files(),
+    ["<leader><leader>"] = builtin.find_files,
     ["<leader>ff"] = finder.project_files,
-    ["<leader>fs"] = ext.live_grep(),
-    ["<leader>fm"] = ext.noice(),
-    ["<leader>fb"] = ext.buffers(),
-    ["<leader>ft"] = ext.colorscheme(),
-    ["<leader>fg"] = ext.git_bcommits(),
-    ["<leader>fG"] = ext.git_commits(),
-    ["<leader>fn"] = ext.nvim_config(),
+    ["<leader>fs"] = builtin.live_grep,
+    ["<leader>fb"] = builtin.buffers,
+    ["<leader>ft"] = builtin.colorscheme,
+    ["<leader>fg"] = builtin.git_bcommits,
+    ["<leader>fG"] = builtin.git_commits,
+    ["<leader>fn"] = cmd("Telescope nvim_config"),
     -- ["<leader>fa"] = cmd("Telescope file_browser path=%:p:h select_buffer=true"),
-    ["<leader>fa"] = telescope.extensions.file_browser(),
+    -- ["<leader>fa"] = telescope.extensions.file_browser(),
   })
 end
 

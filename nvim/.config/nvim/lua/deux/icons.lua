@@ -1,14 +1,16 @@
 --  ✕ ✖ ✘ ‼   ❢ ❦ ‽    ⁕ ⚑ ✔  ✎
 
-local M = {
-  Ok = "",
-  Debug = "",
-  Error = "✖", -- "",
-  Warn = "", -- "",
-  Info = "⚑", -- ""
-  Hint = "",
-  Trace = "", -- "✎",
-  Off = "",
+local icons = {
+	diagnostic = {
+		Ok = "",
+		Debug = "",
+		Error = "", -- "",✖
+		Warn = "", -- "",
+		Info = "⚑", -- ""
+		Hint = "",
+		Trace = "", -- "✎",
+		Off = "",
+	},
 }
 
-return M
+return icons

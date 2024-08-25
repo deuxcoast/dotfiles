@@ -5,12 +5,12 @@ dim_foreground = "#CDD6F4"
 bright_foreground = "#CDD6F4"
 
 [colors.cursor]
-text = "#000000"
-cursor = "#89B4FA"
+# text = "#000000"
+# cursor = "#89B4FA"
 
 [colors.vi_mode_cursor]
-text = "#000000"
-cursor = "#B4BEFE"
+# text = "#000000"
+# cursor = "#B4BEFE"
 
 [colors.search.matches]
 foreground = "#000000"
