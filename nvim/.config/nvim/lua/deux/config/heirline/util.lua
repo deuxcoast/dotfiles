@@ -1,101 +1,133 @@
 local util = {}
 
+local hl = require("deux.config.heirline.theme").highlight
+
 util.icons = {
-	powerline    = {
-		vertical_bar_thin = '│',
-		vertical_bar = '┃',
-		block = '█',
+	powerline = {
+		vertical_bar_thin = "│",
+		vertical_bar = "┃",
+		block = "█",
 		----------------------------------------------
-		left = '',
-		left_filled = '',
-		right = '',
-		right_filled = '',
+		left = "",
+		left_filled = "",
+		right = "",
+		right_filled = "",
 		----------------------------------------------
-		slant_left = '',
-		slant_left_thin = '',
-		slant_right = '',
-		slant_right_thin = '',
+		slant_left = "",
+		slant_left_thin = "",
+		slant_right = "",
+		slant_right_thin = "",
 		----------------------------------------------
-		slant_left_2 = '',
-		slant_left_2_thin = '',
-		slant_right_2 = '',
-		slant_right_2_thin = '',
+		slant_left_2 = "",
+		slant_left_2_thin = "",
+		slant_right_2 = "",
+		slant_right_2_thin = "",
 		----------------------------------------------
-		left_rounded = '',
-		left_rounded_thin = '',
-		right_rounded = '',
-		right_rounded_thin = '',
+		left_rounded = "",
+		left_rounded_thin = "",
+		right_rounded = "",
+		right_rounded_thin = "",
 		----------------------------------------------
-		trapezoid_left = '',
-		trapezoid_right = '',
+		trapezoid_left = "",
+		trapezoid_right = "",
 		----------------------------------------------
-		line_number = '',
-		column_number = '',
+		line_number = "",
+		column_number = "",
 	},
-	padlock      = '',
-	circle_small = '●', -- ●
-	circle       = '', -- 
-	circle_plus  = '', -- 
-	dot_circle_o = '', -- 
-	circle_o     = '⭘', -- ⭘
+	padlock = "",
+	circle_small = "●", -- ●
+	circle = "", -- 
+	circle_plus = "", -- 
+	dot_circle_o = "", -- 
+	circle_o = "⭘", -- ⭘
 }
 
 util.mode = setmetatable({
-	n        = 'normal',
-	no       = 'op',
-	nov      = 'op',
-	noV      = 'op',
-	["no"]  = 'op',
-	niI      = 'normal',
-	niR      = 'normal',
-	niV      = 'normal',
-	nt       = 'normal',
-	v        = "visual",
-	V        = 'visual_lines',
-	[""]    = 'visual_block',
-	s        = "select",
-	S        = 'select',
-	[""]    = "block",
-	i        = 'insert',
-	ic       = 'insert',
-	ix       = 'insert',
-	R        = 'replace',
-	Rc       = 'replace',
-	Rv       = 'v_replace',
-	Rx       = 'replace',
-	c        = 'command',
-	cv       = 'command',
-	ce       = 'command',
-	r        = 'enter',
-	rm       = 'more',
-	["r?"]   = 'confirm',
-	["!"]    = 'shell',
-	t        = 'terminal',
-	["null"] = 'none',
+	n = "normal",
+	no = "op",
+	nov = "op",
+	noV = "op",
+	["no"] = "op",
+	niI = "normal",
+	niR = "normal",
+	niV = "normal",
+	nt = "normal",
+	v = "visual",
+	V = "visual_lines",
+	[""] = "visual_block",
+	s = "select",
+	S = "select",
+	[""] = "block",
+	i = "insert",
+	ic = "insert",
+	ix = "insert",
+	R = "replace",
+	Rc = "replace",
+	Rv = "v_replace",
+	Rx = "replace",
+	c = "command",
+	cv = "command",
+	ce = "command",
+	r = "enter",
+	rm = "more",
+	["r?"] = "confirm",
+	["!"] = "shell",
+	t = "terminal",
+	["null"] = "none",
 }, {
 	__call = function(self, raw_mode)
 		return self[raw_mode]
-	end
+	end,
 })
 
-util.mode_lable = {
-	normal       = 'NORMAL',
-	op           = 'OP',
-	visual       = 'VISUAL',
-	visual_lines = 'VISUAL LINES',
-	visual_block = 'VISUAL BLOCK',
-	select       = 'SELECT',
-	block        = 'BLOCK',
-	insert       = 'INSERT',
-	replace      = 'REPLACE',
-	v_replace    = 'V-REPLACE',
-	command      = 'COMMAND',
-	enter        = 'ENTER',
-	more         = 'MORE',
-	confirm      = 'CONFIRM',
-	shell        = 'SHELL',
-	terminal     = 'TERMINAL',
-	none         = 'NONE'
+util.mode_label = {
+	normal = "NORMAL",
+	op = "OP",
+	visual = "VISUAL",
+	visual_lines = "VISUAL LINES",
+	visual_block = "VISUAL BLOCK",
+	select = "SELECT",
+	block = "BLOCK",
+	insert = "INSERT",
+	replace = "REPLACE",
+	v_replace = "V-REPLACE",
+	command = "COMMAND",
+	enter = "ENTER",
+	more = "MORE",
+	confirm = "CONFIRM",
+	shell = "SHELL",
+	terminal = "TERMINAL",
+	none = "NONE",
+}
+
+util.priority = {
+	CurrentPath = 60,
+	Git = 40,
+	WorkDir = 25,
+	Lsp = 10,
+}
+
+util.LeftCap = {
+	provider = "▌",
+	hl = hl.Mode.normal,
+}
+
+util.Null = { provider = "" }
+
+util.Align = { provider = "%=" }
+
+util.Space = setmetatable({ provider = " " }, {
+	__call = function(_, n)
+		return { provider = string.rep(" ", n) }
+	end,
+})
+
+util.ReadOnly = {
+	condition = function()
+		return not vim.bo.modifiable or vim.bo.readonly
+	end,
+	provider = util.icons.padlock,
+	hl = hl.ReadOnly,
 }
 
 return util
