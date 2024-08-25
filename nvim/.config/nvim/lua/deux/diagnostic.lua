@@ -1,16 +1,14 @@
-local diagnostic_icons = require("deux.icons").diagnostic
-
 local M = {}
 
 local sev_to_icon = {}
 local signs = { linehl = {}, numhl = {}, text = {} }
 
-local SIGN_TYPES = { "Error", "Warn", "Info", "Hint" }
-for _, type in ipairs(SIGN_TYPES) do
-	local hl = ("DiagnosticSign%s"):format(type)
-	local icon = diagnostic_icons[type]
+local diagnostic_signs = require("deux.icons").diagnostic
+for k, v in pairs(diagnostic_signs) do
+	local hl = v.name
+	local icon = v.text
 
-	local key = type:upper()
+	local key = k:upper()
 	local code = vim.diagnostic.severity[key]
 
 	-- for vim.notify icon
@@ -67,22 +65,22 @@ local function float_format(diagnostic)
 		source = "NIL.SOURCE"
 		vim.print(diagnostic)
 	end
-	local source_tag =
-			require("deux.utils.string").smallcaps(("%s"):format(source))
+	local source_tag = require("deux.utils.string").smallcaps(("%s"):format(source))
 	local code = diagnostic.code and ("[%s]"):format(diagnostic.code) or ""
 	return ("%s %s %s\n%s"):format(symbol, source_tag, code, diagnostic.message)
 end
 
 vim.diagnostic.config({
 	signs = signs,
-	virtual_lines = { only_current_line = true }, -- for lsp_lines.nvim
+	-- virtual_lines = { only_current_line = true }, -- for lsp_lines.nvim
+	underline = false,
 	virtual_text = false,
 	float = {
 		border = require("deux.settings").get("border"),
-		header = "",           -- remove the line that says 'Diagnostic:'
-		source = false,        -- hide it since my float_format will add it
+		header = "", -- remove the line that says 'Diagnostic:'
+		source = false, -- hide it since my float_format will add it
 		format = float_format, -- can customize more colors by using prefix/suffix instead
-		suffix = "",           -- default is error code. Moved to message via float_format
+		suffix = "", -- default is error code. Moved to message via float_format
 	},
 	update_in_insert = false, -- wait until insert leave to check diagnostics
 })

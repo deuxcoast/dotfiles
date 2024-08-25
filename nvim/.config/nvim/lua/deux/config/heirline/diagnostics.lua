@@ -7,11 +7,10 @@ local Space = require("deux.config.heirline.util").Space
 local Diagnostics = {
 	condition = conditions.has_diagnostics,
 	static = {
-		-- error_icon = '󰂭 ',
-		error_icon = diagnostic_icons.Error,
-		warn_icon = diagnostic_icons.Warn,
-		info_icon = diagnostic_icons.Warn,
-		hint_icon = diagnostic_icons.Hint,
+		error_icon = diagnostic_icons.Error.text,
+		warn_icon = diagnostic_icons.Warn.text,
+		info_icon = diagnostic_icons.Info.text,
+		hint_icon = diagnostic_icons.Hint.text,
 	},
 	init = function(self)
 		self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
