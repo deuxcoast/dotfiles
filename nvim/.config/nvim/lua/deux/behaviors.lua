@@ -17,14 +17,6 @@ end
 local autocmd = vim.api.nvim_create_autocmd
 
 if has_ui then
-	-- Highlight yanked text
-	-- autocmd("TextYankPost", {
-	-- 	group = augroup("highlight_yank"),
-	-- 	callback = function()
-	-- 		vim.highlight.on_yank({ timeout = 50 })
-	-- 	end,
-	-- })
-
 	-- @TODO keep an eye on https://github.com/neovim/neovim/issues/23581
 	autocmd("WinLeave", {
 		desc = "Toggle close->open loclist so it is always under the correct window",
@@ -114,10 +106,7 @@ if has_ui then
 		desc = "Replace tokens in commit-template",
 		callback = function()
 			local tokens = {}
-			tokens.BRANCH = vim
-					.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" })
-					:wait().stdout
-					:gsub("\n", "")
+			tokens.BRANCH = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }):wait().stdout:gsub("\n", "")
 
 			local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 			for i, line in ipairs(lines) do
@@ -169,7 +158,7 @@ if has_ui then
 					paste = {
 						["+"] = "pbpaste",
 						["*"] = "pbpaste",
-					}
+					},
 				}
 			elseif vim.fn.has("unix") == 1 then
 				if vim.fn.executable("xclip") == 1 then
@@ -197,6 +186,6 @@ if has_ui then
 				end
 			end
 			-- vim.opt.clipboard = "unnamedplus"
-		end
+		end,
 	})
 end

@@ -1,7 +1,10 @@
+local uis = vim.api.nvim_list_uis()
+local has_ui = #uis > 0
+
 return {
 	{
 		"hrsh7th/nvim-cmp",
-		cond = #vim.api.nvim_list_uis() > 0,
+		cond = has_ui,
 		lazy = false,
 		priority = 100,
 		dependencies = {
@@ -21,5 +24,13 @@ return {
 		config = function()
 			require "deux.config.cmp"
 		end,
-	},
+	}, {
+	"L3MON4D3/LuaSnip",
+	cond = has_ui,
+	build = "make install_jsregexp",
+	version = "v2.*",
+	config = function()
+		require("deux.config.luasnip").setup()
+	end
+}
 }

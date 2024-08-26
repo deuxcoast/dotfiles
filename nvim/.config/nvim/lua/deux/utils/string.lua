@@ -14,7 +14,7 @@ end
 -- alt F ғ (ghayn)
 -- alt Q ꞯ (currently using ogonek)
 local smallcaps =
-"ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ‹›⁰¹²³⁴⁵⁶⁷⁸⁹"
+	"󰬈󰬉󰬊󰬋󰬌󰬍󰬎󰬏󰬐󰬑󰬒󰬓󰬔󰬕󰬖󰬗󰬘󰬙󰬚󰬛󰬜󰬝󰬞󰬟󰬠󰬡‹›⁰¹²³⁴⁵⁶⁷⁸⁹"
 local normal = "ABCDEFGHIJKLMNOPQRSTUVWXYZ<>0123456789"
 
 ---@param text string

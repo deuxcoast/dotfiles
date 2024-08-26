@@ -1,20 +1,20 @@
 local M = {}
 
 M.setup = function()
-	---------------------
-	-- Capabilities
-	---------------------
+	local lspconfig = require("lspconfig")
+
+	-- ===========================================================================
+	-- LSP Capabilities
+	-- ===========================================================================
+	-- advertise nvim-cmp completion capabilities to lsp server
 	local capabilities = nil
 	if pcall(require, "cmp_nvim_lsp") then
 		capabilities = require("cmp_nvim_lsp").default_capabilities()
 	end
 
-	local lspconfig = require("lspconfig")
-
-	---------------------
-	-- Install servers
-	---------------------
-
+	-- ===========================================================================
+	-- Install LSP Servers
+	-- ===========================================================================
 	local servers = require("deux.config.lsp.servers")
 
 	-- use mason to install lsp servers that do not require manual installation
@@ -48,6 +48,12 @@ M.setup = function()
 		lua = true,
 	}
 
+	require("deux.config.lsp.handlers")
+	require("deux.config.lsp.diagnostic")
+
+	-- ===========================================================================
+	-- Attach
+	-- ===========================================================================
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
 			local bufnr = args.buf

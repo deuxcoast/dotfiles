@@ -17,10 +17,10 @@ return {
 				["gP"] = "<Plug>(YankyGPutBefore)",
 			})
 
-			map.n({
-				["<S-K>"] = "<Plug>(YankyPreviousEntry)",
-				["<S-J>"] = "<Plug>(YankyNextEntry)",
-			})
-		end
+			-- map.n({
+			-- 	["<S-K>"] = "<Plug>(YankyPreviousEntry)",
+			-- 	["<S-J>"] = "<Plug>(YankyNextEntry)",
+			-- })
+		end,
 	},
 }

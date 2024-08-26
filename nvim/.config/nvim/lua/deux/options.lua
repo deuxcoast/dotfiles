@@ -127,7 +127,7 @@ vim.o.switchbuf = "useopen"
 -- Code folding
 -- ===========================================================================
 
-vim.o.foldlevel = 999     -- very high === all folds open
+vim.o.foldlevel = 999 -- very high === all folds open
 vim.o.foldlevelstart = 99 -- show all folds by default
 vim.o.foldenable = false
 
@@ -152,8 +152,8 @@ vim.opt.listchars = {
 vim.opt.fillchars = { diff = "⣿" }
 vim.opt.diffopt = {
 	vertical = true, -- Use in vertical diff mode
-	filler = true,  -- blank lines to keep sides aligned
-	iwhite = true,  -- Ignore whitespace changes
+	filler = true, -- blank lines to keep sides aligned
+	iwhite = true, -- Ignore whitespace changes
 }
 
 -- ===========================================================================
@@ -163,13 +163,13 @@ vim.opt.diffopt = {
 -- ===========================================================================
 
 vim.opt.formatoptions = {
-	j = true,                       -- remove comment leader on join comments
-	n = true,                       -- Recognize numbered lists
-	q = true,                       -- allow gq to format comments
-	o = true,                       -- continue comment using o or O
-	r = true,                       -- Continue comments by default
-	a = false,                      -- auto-gq paragraphs
-	l = false,                      -- break lines that are already long?
+	j = true, -- remove comment leader on join comments
+	n = true, -- Recognize numbered lists
+	q = true, -- allow gq to format comments
+	o = true, -- continue comment using o or O
+	r = true, -- Continue comments by default
+	a = false, -- auto-gq paragraphs
+	l = false, -- break lines that are already long?
 }
 vim.opt.formatoptions:append("1") -- Break before 1-letter words
 vim.opt.formatoptions:append("2") -- Use indent from 2nd line of a paragraph
@@ -216,9 +216,9 @@ vim.o.shiftround = false
 -- Match and search
 -- ===========================================================================
 
-vim.o.matchtime = 1     -- tenths of a sec
+vim.o.matchtime = 1 -- tenths of a sec
 vim.o.showmatch = false -- briefly jump to matching paren?
-vim.o.wrapscan = true   -- Searches wrap around end of the file.
+vim.o.wrapscan = true -- Searches wrap around end of the file.
 vim.o.ignorecase = true
 vim.o.smartcase = true
 -- Follow smartcase and ignorecase when doing tag search
@@ -228,7 +228,7 @@ vim.o.tagcase = "followscs"
 -- netrw
 -- ===========================================================================
 
-vim.g.netrw_altfile = 1   -- never altfile back to netrw
-vim.g.netrw_hide = 0      -- show all files
+vim.g.netrw_altfile = 1 -- never altfile back to netrw
+vim.g.netrw_hide = 0 -- show all files
 vim.g.netrw_liststyle = 3 -- netrw in details format when no vimfiler
 vim.g.netrw_browsex_viewer = "deux-open"

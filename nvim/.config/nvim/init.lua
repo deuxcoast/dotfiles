@@ -6,13 +6,12 @@ vim.g.mapleader = " "
 vim.g.loaded_node_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
-vim.g.loaded_python_provider = 0  -- disable python 2
+vim.g.loaded_python_provider = 0 -- disable python 2
 vim.g.loaded_python3_provider = 0 -- disable python 3 also, who's still using these?
 
 require("deux.options")
-require("deux.commands")
 require("deux.behaviors")
-require("deux.diagnostic")
 require("deux.mappings")
 
 require("deux.lazy")
+require("deux.signs")

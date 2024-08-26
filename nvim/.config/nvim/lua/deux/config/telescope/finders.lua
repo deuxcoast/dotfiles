@@ -20,5 +20,8 @@ M.project_files = function()
 	end
 end
 
-return M
+M.lsp_definitions = function()
+	local opts = {}
+end
 
+return M

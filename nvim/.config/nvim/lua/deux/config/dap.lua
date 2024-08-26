@@ -1,10 +1,6 @@
 local M = {}
 
 M.setup = function()
-	-- TODO: install nvim lua DAP
-	-- Maybe this could be a good reference:
-	-- https://github.com/ibhagwan/nvim-lua/blob/main/lua/plugins/dap/lua.lua
-
 	--- mfussenegger/nvim-dap
 	local present_dap, dap = pcall(require, "dap")
 
@@ -20,17 +16,6 @@ M.setup = function()
 	for _, v in pairs(signs) do
 		vim.fn.sign_define(v.name, { text = v.text, texthl = v.name, numhl = "", linehl = "" })
 	end
-	-- local debug_signs = require("deux.icons").debug
-	-- for _, sign in ipairs(debug_signs) do
-	-- 	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, linehl = "", numhl = "" })
-	-- end
-	--
-	-- local sign = vim.fn.sign_define
-	--
-	-- sign("DapStopped", { text = "", texthl = "DapStopped", linehl = "", numhl = "" })
-	-- sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
-	-- sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
-	-- sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 
 	local set = vim.keymap.set
 
