@@ -185,7 +185,7 @@ if has_ui then
 					}
 				end
 			end
-			-- vim.opt.clipboard = "unnamedplus"
+			vim.opt.clipboard = "unnamedplus"
 		end,
 	})
 end

@@ -68,7 +68,7 @@ M.setup = function()
 			local builtin = require("telescope.builtin")
 
 			map.n({
-				["gd"] = builtin.lsp_definitions,
+				["gd"] = vim.lsp.buf.definition,
 				["gr"] = builtin.lsp_references,
 				["gD"] = vim.lsp.buf.declaration,
 				["gT"] = vim.lsp.buf.type_definition,

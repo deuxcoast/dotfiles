@@ -14,4 +14,3 @@ require("deux.behaviors")
 require("deux.mappings")
 
 require("deux.lazy")
-require("deux.signs")

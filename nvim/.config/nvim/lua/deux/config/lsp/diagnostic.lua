@@ -2,8 +2,9 @@ local M = {}
 
 local sev_to_icon = {}
 local signs = { linehl = {}, numhl = {}, text = {} }
-
 local diagnostic_signs = require("deux.icons").diagnostic
+local diagnostic = require("vim.diagnostic")
+
 for k, v in pairs(diagnostic_signs) do
 	local hl = v.name
 	local icon = v.text
@@ -39,7 +40,6 @@ local function float_format(diagnostic)
 		source = "NIL.SOURCE"
 		vim.print(diagnostic)
 	end
-	-- local source_tag = require("deux.utils.string").smallcaps(("%s"):format(source))
 	local code = diagnostic.code and ("[%s]"):format(diagnostic.code) or ""
 	return ("%s %s\n%s\n\n%s"):format(symbol, source, code, diagnostic.message)
 end
@@ -48,13 +48,13 @@ vim.diagnostic.config({
 	signs = signs,
 	-- virtual_lines = { only_current_line = true }, -- for lsp_lines.nvim
 	underline = false,
-	virtual_text = true,
+	virtual_text = false,
 	float = {
 		border = require("deux.settings").get("border"),
-		-- header = "Diagnostic:\n", -- remove the line that says 'Diagnostic:'
-		source = false, -- hide it since my float_format will add it
+		header = "", -- remove the line that says 'Diagnostic:'
+		-- source = "", -- hide it since my float_format will add it
 		format = float_format, -- can customize more colors by using prefix/suffix instead
-		suffix = "\n", -- default is error code. Moved to message via float_format
+		suffix = "", -- default is error code. Moved to message via float_format
 	},
 	update_in_insert = false, -- wait until insert leave to check diagnostics
 })

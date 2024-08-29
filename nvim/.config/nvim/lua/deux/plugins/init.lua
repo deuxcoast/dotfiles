@@ -2,6 +2,7 @@ local uis = vim.api.nvim_list_uis()
 local has_ui = #uis > 0
 
 local map = require("deux.utils.keymap")
+local settings = require("deux.settings")
 local cmd = map.cmd
 
 return {
@@ -21,6 +22,32 @@ return {
 	-- ui: buffer and window manipulation
 	-- =========================================================================
 
+	{
+		"yorickpeterse/nvim-pqf",
+		cond = has_ui,
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("pqf").setup()
+		end,
+	},
+	{
+		"echasnovski/mini.bufremove",
+		version = false,
+		config = function()
+			require("mini.bufremove").setup()
+		end,
+	},
+	{
+		"ghillb/cybu.nvim",
+		cond = has_ui,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("deux.config.cybu").setup()
+		end,
+	},
 	{
 		"alexghergh/nvim-tmux-navigation",
 		cond = has_ui,
@@ -58,7 +85,9 @@ return {
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
-		config = function() require("nvim-autopairs").setup() end,
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
 	},
 
 	--------------------------------------------------------------------------------
@@ -140,9 +169,9 @@ return {
 					-- 'RainbowDelimiterGreen',
 					-- 'RainbowDelimiterViolet',
 					-- 'RainbowDelimiterCyan',
-				}
+				},
 			})
-		end
+		end,
 	},
 
 	--------------------------------------------------------------------------------
@@ -159,7 +188,7 @@ return {
 							k = false,
 						},
 					},
-				}
+				},
 			})
 		end,
 	},
@@ -214,7 +243,7 @@ return {
 				["t"] = "<Plug>(eft-t)",
 				["T"] = "<Plug>(eft-T)",
 			})
-		end
+		end,
 	},
 
 	--------------------------------------------------------------------------------
@@ -227,7 +256,7 @@ return {
 		config = function()
 			map.o("m", ":<C-U> lua require('tsht').nodes()<CR>", { remap = true })
 			map.x("m", ":lua require('tsht').nodes()<CR>")
-		end
+		end,
 	},
 
 	--------------------------------------------------------------------------------
@@ -250,9 +279,8 @@ return {
 			require("nvim-navic").setup({
 				lsp = {
 					auto_attach = true,
-				}
+				},
 			})
-		end
+		end,
 	},
-
 }

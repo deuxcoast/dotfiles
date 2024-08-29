@@ -16,14 +16,14 @@ map.n({
 })
 
 map.n({
-	["<C-n>"] = cmd("bn"), -- go to next buffer
-	["<C-p>"] = cmd("bp"), -- go to prev buffer
+	-- ["<C-n>"] = cmd("bn"), -- go to next buffer
+	-- ["<C-p>"] = cmd("bp"), -- go to prev buffer
 	["<C-q>"] = cmd("qa!"), -- quit all
 })
 
 -- Comments
-map.n("<leader>/", "gcc", { remap = true })
-map.v("<leader>/", "gc", { remap = true })
+map.n("g;", "gcc", { remap = true })
+map.v("g;", "gc", { remap = true })
 
 -- Create space on line above/below
 map.n({
@@ -37,7 +37,7 @@ map.t({
 	["<C-j>"] = "<C-\\><C-n><C-w>j",
 	["<C-h>"] = "<C-\\><C-n><C-w>h",
 	["<C-l>"] = "<C-\\><C-n><C-w>l",
-	["jk"] = "<C-\\><C-n>"
+	["jk"] = "<C-\\><C-n>",
 })
 
 -- Saner behavior of n and N

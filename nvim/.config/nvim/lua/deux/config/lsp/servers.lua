@@ -4,16 +4,12 @@ local servers = {
 	bashls = true,
 	lua_ls = {
 		settings = {
-			server_capabilities = {},
 			Lua = {
+				runtime = {
+					version = "LuaJIT",
+				},
 				workspace = {
 					checkThirdParty = false,
-				},
-				codeLens = {
-					enable = true,
-				},
-				completion = {
-					callSnippet = "Replace",
 				},
 				doc = {
 					privateName = { "^_" },

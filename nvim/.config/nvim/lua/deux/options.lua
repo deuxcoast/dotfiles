@@ -51,7 +51,7 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 16
 
 -- min 1, max 4 signs
-vim.o.signcolumn = "yes:2"
+vim.o.signcolumn = "auto:3"
 
 vim.o.synmaxcol = 512 -- don't syntax highlight long lines
 
