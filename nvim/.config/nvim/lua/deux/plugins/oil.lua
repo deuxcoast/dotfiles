@@ -15,9 +15,6 @@ return {
 				default_file_explorer = true,
 				delete_to_trash = true,
 				skip_confirm_for_simple_edits = true,
-				win_options = {
-					signcolumn = "yes:2",
-				},
 				columns = { "icon" },
 				keymaps = {
 					["<C-h>"] = false,
