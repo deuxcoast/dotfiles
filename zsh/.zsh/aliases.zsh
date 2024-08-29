@@ -71,6 +71,7 @@ alias c++="c++-13"
 
 # Clang Compiler
 alias clng="clang++ -std=c++20 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -glldb"
+alias clngdb="clang++ -std=c++20 -g3 -O0 -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror -glldb" 
 
 # This command allows me to produce x86 assembly on the M1 mac. Use this
 # for following along with CS:APP textbook
