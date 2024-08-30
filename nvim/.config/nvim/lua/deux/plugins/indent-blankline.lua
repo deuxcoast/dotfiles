@@ -5,7 +5,7 @@ return {
 		main = "ibl",
 		event = "VeryLazy",
 		-- For setting shiftwidth and tabstop automatically.
-		dependencies = "tpope/vim-sleuth",
+		-- dependencies = "tpope/vim-sleuth",
 		opts = {
 			indent = {
 				char = require("deux.icons").misc.vertical_bar,

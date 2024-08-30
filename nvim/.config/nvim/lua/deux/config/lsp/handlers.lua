@@ -1,6 +1,5 @@
 local methods = vim.lsp.protocol.Methods
 local md_namespace = vim.api.nvim_create_namespace("deuxcoast/lsp_float")
-local settings = require("deux.settings")
 
 --- Adds extra inline highlights to the given buffer.
 ---@param buf integer

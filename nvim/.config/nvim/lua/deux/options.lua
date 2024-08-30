@@ -1,4 +1,4 @@
-vim.go.termguicolors = vim.env.TERM_PROGRAM ~= "Apple_Terminal"
+vim.go.termguicolors = vim.env.TERM_PROGRAM ~= 'Apple_Terminal'
 
 -- ===========================================================================
 -- File reading
@@ -15,7 +15,7 @@ vim.o.undofile = true
 -- Bumped <50 to <100 to save more register lines
 -- Bumped s10 to s100 for to allow up to 100kb of data per item
 vim.o.shada = "!,'1000,<100,s100,h"
-vim.o.fileformats = "unix,mac,dos"
+vim.o.fileformats = 'unix,mac,dos'
 
 -- writebackup: use backup files when writing (create new file, replace old
 -- one with new one)
@@ -24,10 +24,10 @@ vim.o.backup = false -- do not leave around backup.xyz~ files after that
 
 -- need this for webpack-dev-server and hot module reloading -- preserves
 -- special file types like symlinks
-vim.o.backupcopy = "yes"
+vim.o.backupcopy = 'yes'
 
-vim.opt.backupskip:append("/private/tmp/*") -- needed to edit crontab files
-vim.opt.backupskip:append("~/.secret/*")
+vim.opt.backupskip:append '/private/tmp/*' -- needed to edit crontab files
+vim.opt.backupskip:append '~/.secret/*'
 
 -- ===========================================================================
 -- Display
@@ -51,14 +51,14 @@ vim.o.scrolloff = 8
 vim.o.sidescrolloff = 16
 
 -- min 1, max 4 signs
-vim.o.signcolumn = "auto:3"
+vim.o.signcolumn = 'auto:3'
 
 vim.o.synmaxcol = 512 -- don't syntax highlight long lines
 
 vim.o.textwidth = 78
 
 -- the line will be right after column 80, &tw+3
-vim.opt.colorcolumn = { "+3", "120" }
+vim.opt.colorcolumn = { '+3', '120' }
 vim.o.cursorline = true
 
 vim.o.ruler = false
@@ -74,13 +74,13 @@ vim.o.showmode = false -- don't show -- INSERT -- in cmdline
 -- regex tokens).
 -- https://github.com/neovim/neovim/pull/5226
 -- vim.o.inccommand = ""
-vim.o.inccommand = "split" -- See replacement changes in real
+vim.o.inccommand = 'split' -- See replacement changes in real
 -- ===========================================================================
 -- Wild and file globbing stuff in command mode
 -- ===========================================================================
 
 --vim.o.browsedir = "buffer" -- browse files in same dir as open file
-vim.o.wildmode = "list:longest,full"
+vim.o.wildmode = 'list:longest,full'
 vim.o.wildignorecase = true
 
 -- ===========================================================================
@@ -88,28 +88,28 @@ vim.o.wildignorecase = true
 -- ===========================================================================
 
 -- Don't consider = symbol as part filename.
-vim.opt.isfname:remove("=")
+vim.opt.isfname:remove '='
 
-vim.opt.complete:remove("t") -- don't complete tags
+vim.opt.complete:remove 't' -- don't complete tags
 
-vim.opt.completeopt:remove("longest")
-vim.opt.completeopt:append("menuone") -- show PUM, even for one thing
-vim.opt.completeopt:append("noinsert")
-vim.opt.completeopt:append("noselect")
-vim.opt.completeopt:remove("preview") -- don't open scratch
+vim.opt.completeopt:remove 'longest'
+vim.opt.completeopt:append 'menuone' -- show PUM, even for one thing
+vim.opt.completeopt:append 'noinsert'
+vim.opt.completeopt:append 'noselect'
+vim.opt.completeopt:remove 'preview' -- don't open scratch
 
 -- ===========================================================================
 -- Message output on vim actions
 -- ===========================================================================
 
-vim.opt.shortmess:append({
-	c = true, -- Disable "Pattern not found" messages
-	m = true, -- use "[+]" instead of "[Modified]"
-	r = true, -- use "[RO]" instead of "[readonly]"
-	I = true, -- don't give the intro message when starting Vim |:intro|.
-	S = true, -- hide search info echoing (i have a statusline for that)
-	W = true, -- don't give "written" or "[w]" when writing a file
-})
+vim.opt.shortmess:append {
+  c = true, -- Disable "Pattern not found" messages
+  m = true, -- use "[+]" instead of "[Modified]"
+  r = true, -- use "[RO]" instead of "[readonly]"
+  I = true, -- don't give the intro message when starting Vim |:intro|.
+  S = true, -- hide search info echoing (i have a statusline for that)
+  W = true, -- don't give "written" or "[w]" when writing a file
+}
 
 -- ===========================================================================
 -- Window splitting and buffers
@@ -121,7 +121,7 @@ vim.o.hidden = true
 
 -- reveal already opened files from the quickfix window instead of opening new
 -- buffers
-vim.o.switchbuf = "useopen"
+vim.o.switchbuf = 'useopen'
 
 -- ===========================================================================
 -- Code folding
@@ -137,23 +137,24 @@ vim.o.foldenable = false
 
 vim.o.list = true
 vim.opt.listchars = {
-	extends = "»",
-	nbsp = "⣿",
-	precedes = "«",
-	trail = "·",
-	-- removed tab, it's too noisy
-	tab = "  ", -- this must be two chars, see :h listchars
+  extends = '»',
+  nbsp = '⣿',
+  precedes = '«',
+  trail = '·',
+  -- space = "·",
+  -- removed tab, it's too noisy
+  -- tab = "»»", -- this must be two chars, see :h listchars
 }
 
 -- ===========================================================================
 -- Diffing
 -- ===========================================================================
 
-vim.opt.fillchars = { diff = "⣿" }
+vim.opt.fillchars = { diff = '⣿' }
 vim.opt.diffopt = {
-	vertical = true, -- Use in vertical diff mode
-	filler = true, -- blank lines to keep sides aligned
-	iwhite = true, -- Ignore whitespace changes
+  vertical = true, -- Use in vertical diff mode
+  filler = true, -- blank lines to keep sides aligned
+  iwhite = true, -- Ignore whitespace changes
 }
 
 -- ===========================================================================
@@ -163,16 +164,16 @@ vim.opt.diffopt = {
 -- ===========================================================================
 
 vim.opt.formatoptions = {
-	j = true, -- remove comment leader on join comments
-	n = true, -- Recognize numbered lists
-	q = true, -- allow gq to format comments
-	o = true, -- continue comment using o or O
-	r = true, -- Continue comments by default
-	a = false, -- auto-gq paragraphs
-	l = false, -- break lines that are already long?
+  j = true, -- remove comment leader on join comments
+  n = true, -- Recognize numbered lists
+  q = true, -- allow gq to format comments
+  o = true, -- continue comment using o or O
+  r = true, -- Continue comments by default
+  a = false, -- auto-gq paragraphs
+  l = false, -- break lines that are already long?
 }
-vim.opt.formatoptions:append("1") -- Break before 1-letter words
-vim.opt.formatoptions:append("2") -- Use indent from 2nd line of a paragraph
+vim.opt.formatoptions:append '1' -- Break before 1-letter words
+vim.opt.formatoptions:append '2' -- Use indent from 2nd line of a paragraph
 
 vim.o.wrap = false
 vim.o.joinspaces = false -- J command doesn't add extra space
@@ -222,7 +223,7 @@ vim.o.wrapscan = true -- Searches wrap around end of the file.
 vim.o.ignorecase = true
 vim.o.smartcase = true
 -- Follow smartcase and ignorecase when doing tag search
-vim.o.tagcase = "followscs"
+vim.o.tagcase = 'followscs'
 
 -- ===========================================================================
 -- netrw
@@ -231,4 +232,4 @@ vim.o.tagcase = "followscs"
 vim.g.netrw_altfile = 1 -- never altfile back to netrw
 vim.g.netrw_hide = 0 -- show all files
 vim.g.netrw_liststyle = 3 -- netrw in details format when no vimfiler
-vim.g.netrw_browsex_viewer = "deux-open"
+vim.g.netrw_browsex_viewer = 'deux-open'
