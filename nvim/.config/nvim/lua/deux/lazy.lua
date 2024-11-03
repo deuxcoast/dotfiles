@@ -42,4 +42,4 @@ require("lazy").setup("deux.plugins", {
 	},
 })
 
-vim.cmd.colorscheme("oh-lucy-evening")
+vim.cmd.colorscheme("catppuccin")
