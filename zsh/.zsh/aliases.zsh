@@ -95,6 +95,8 @@ alias vim="nvim"
 alias v="nvim"
 alias rm_modules="find . -name "node_modules" -type d -prune -exec rm -rf '{}' +"
 
+alias py="python"
+
 # --- Config ---
 
 # alias config="vim ~/.zshrc"

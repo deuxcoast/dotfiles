@@ -141,6 +141,7 @@ vim.opt.listchars = {
   nbsp = '⣿',
   precedes = '«',
   trail = '·',
+  tab = '  ',
   -- space = "·",
   -- removed tab, it's too noisy
   -- tab = "»»", -- this must be two chars, see :h listchars
