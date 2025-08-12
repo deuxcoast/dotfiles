@@ -64,10 +64,9 @@ yabai -m rule --add app="^Google Chrome|Firefox$" space=^1
 yabai -m rule --add app="^Alacritty" space=^2 manage=off
 yabai -m rule --add app="^Anki" space=^3
 yabai -m rule --add app="^Preview" space=^4
-yabai -m rule --add app="^Brave Browser" space=^5
-yabai -m rule --add app="^PureVPN" space=^6
-
-YABAI_CERT=yabai-cert sh -c "$(curl -fsSL "https://git.io/update-yabai")" &
+yabai -m rule --add app="^Microsoft Outlook" space=^5
+yabai -m rule --add app="^Brave Browser" space=^6
+yabai -m rule --add app="^PureVPN" space=^7
 
 echo "yabai configuration loaded.."
 

@@ -11,6 +11,7 @@ M.setup = function()
       'astro',
       'bash',
       'c',
+      'cmake',
       'cpp',
       'css',
       'diff',

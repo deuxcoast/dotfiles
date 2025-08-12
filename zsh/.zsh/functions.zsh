@@ -1,3 +1,21 @@
+# Send audiobook to plex directory on deux-pi over the local network
+# scp-book() {
+# scp $1 coast@deux-pi.local:/home/coast/media/audiobooks
+#
+# }
+
+# Send p file to 
+scp-p() {
+# -- scp for rasberry-pi - deuxpi --
+    scp $1 coast@deux-pi.local:/home/coast/media/p
+}
+
+# Recursively send a directory of p files to appropriate deux-pi plex
+# directory
+scp-pr() {
+    scp -r $1 coast@deux-pi.local:/home/coast/media/p
+}
+
 # Create a symlink for the provided files in ~/.local/bin
 binify() {
   for arg; do

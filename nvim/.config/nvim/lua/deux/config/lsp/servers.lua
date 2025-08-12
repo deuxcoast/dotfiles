@@ -50,7 +50,7 @@ local servers = {
       },
     },
   },
-  -- cmake = (1 == vim.fn.executable("cmake-language-server")),
+  cmake = true,
   clangd = {
     -- additional config in ~/Library/Preferences/clangd/config.yaml
     -- This is where clangd looks for additional flags to be added
@@ -63,6 +63,7 @@ local servers = {
       '--clang-tidy',
       '--header-insertion=iwyu',
       '--offset-encoding=utf-16', --temporary fix for null-ls
+      '--compile-commands-dir=build',
     },
     init_options = {
       clangdFileStatus = true,

@@ -15,6 +15,7 @@ fi
 
 for file in "${HOME}/.zsh/prompts.zsh" \
             "${HOME}/.zsh/aliases.zsh" \
+            "${HOME}/.zsh/functions.zsh" \
             "${HOME}/.zsh/set_history.zsh" \
             "${HOME}/.zsh/zinit.zsh" \
             "${HOME}/.zsh/completions.zsh"

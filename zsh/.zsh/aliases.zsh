@@ -141,3 +141,6 @@ alias 'sduexpi'='ssh -i ~/.ssh/id_pi -p 2221 conorney@duex-pi.local'
 alias 'dcu'='docker compose up'
 alias 'dcub'='docker compose up --build'
 alias 'dcd'='docker compose down'
+
+# -- scp for rasberry-pi - deuxpi --
+alias scp-book="scp Structure\ of\ Scientific\ Revolutions\ \[Thomas\ S.\ Kuhn\].m4b coast@deux-pi.local:/home/coast/media/audiobooks"

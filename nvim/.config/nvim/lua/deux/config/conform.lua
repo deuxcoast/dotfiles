@@ -32,7 +32,8 @@ M.setup = function()
       typescriptreact = prettier,
       css = prettier,
       graphql = prettier,
-      html = prettier,
+      html = { 'djlint', 'prettierd', stop_after_first = true },
+      htmldjango = { 'djlint' },
       json = prettier,
       json5 = prettier,
       jsonc = prettier,
@@ -51,7 +52,17 @@ M.setup = function()
       ['clang-format'] = {
         prepend_args = {
           '--style',
-          '{BasedOnStyle: Chromium, IndentWidth: 4, ColumnLimit: 80, AlignTrailingComments: true, BraceWrapping: {AfterFunction: false}}',
+          [[{
+            BasedOnStyle: Chromium,
+            IndentWidth: 4, 
+            ColumnLimit: 80, 
+            AlignTrailingComments: true, 
+            BraceWrapping: {
+              AfterFunction: false
+            },
+            IncludeBlocks: Preserve,
+            SortIncludes: Never
+          }]],
         },
       },
     },
